@@ -39,8 +39,8 @@
 .la-hero__scrim {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background:
-    linear-gradient(to top, rgba(8,4,20,0.62) 0%, rgba(8,4,20,0.18) 38%, rgba(8,4,20,0.06) 100%),
-    linear-gradient(to right, rgba(10,5,24,0.28) 0%, rgba(10,5,24,0.04) 55%, rgba(10,5,24,0) 100%);
+    linear-gradient(to top, rgba(34,0,82,0.92) 0%, rgba(38,0,90,0.7) 14%, rgba(42,0,97,0.3) 34%, rgba(51,0,114,0.06) 60%, rgba(51,0,114,0) 100%),
+    linear-gradient(to right, rgba(34,0,82,0.32) 0%, rgba(51,0,114,0.06) 55%, rgba(51,0,114,0) 100%);
 }
 .la-hero__inner {
   position: relative; z-index: 2;

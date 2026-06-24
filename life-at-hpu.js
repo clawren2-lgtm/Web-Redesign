@@ -92,6 +92,8 @@
   function countUp(el) {
     if (el.__counted) { return; }
     el.__counted = true;
+    /* Only the explicitly opted-in stat animates; others stay static. */
+    if (!el.hasAttribute("data-count")) { return; }
     var raw = (el.getAttribute("data-final") || el.textContent).trim();
     var m = raw.match(/^(\D*?)([\d.,]+)(.*)$/);
     if (!m) { el.textContent = raw; return; }
@@ -206,40 +208,10 @@
       .fromTo(".la-sig__h",
         { y: 22, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.8, ease: "power3.out" }, 0.08);
 
-    var viewport = document.querySelector(".la-sig__viewport");
-    var track = document.getElementById("laSigTrack");
-
-    if (track && cond.isDesktop) {
-      /* Desktop: pin the viewport and translate the track horizontally.
-         Geometry is in functions so invalidateOnRefresh recomputes it on
-         every refresh — the pin therefore stays accurate scrolling up too.
-         padding-left (CSS) means scrollWidth already includes the centering
-         offset, so the distance is a clean scrollWidth - clientWidth. */
-      var distance = function () {
-        return Math.max(0, track.scrollWidth - viewport.clientWidth);
-      };
-
-      gsap.to(track, {
-        x: function () { return -distance(); },
-        ease: "none",
-        scrollTrigger: {
-          trigger: viewport,
-          start: "center center",
-          end: function () { return "+=" + distance(); },
-          pin: viewport,
-          pinSpacing: true,
-          scrub: SCRUB,
-          invalidateOnRefresh: true
-        }
-      });
-    } else if (track) {
-      /* Mobile: the strip is a native swipe; just fade the cards in. */
-      toArray(".la-sigcard").forEach(function (c) {
-        gsap.fromTo(c, { y: 26, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.7, ease: "power3.out",
-            scrollTrigger: { trigger: c, start: "top 88%", once: true, invalidateOnRefresh: true } });
-      });
-    }
+    /* The horizontal strip pin (desktop) and the card fades (mobile) are
+       registered as DEDICATED matchMedia queries below — NOT gated here with
+       cond.isDesktop. The combined conditions object was resolving to the
+       mobile branch at desktop width, so the pin never got built. */
 
     /* ---- 5 · RANKINGS (only if present) — badges meet from both sides ---- */
     if (document.querySelector(".la-rank")) {
@@ -262,6 +234,55 @@
       .fromTo(".la-cta__actions", { y: 16, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.7, ease: "power3.out" }, 0.28);
 
     // matchMedia handles teardown of everything above on condition change.
+  });
+
+  /* ============================================================
+     SIGNATURE STRIP — dedicated matchMedia registrations.
+     Kept OUT of the combined conditions object above, which was resolving to
+     the mobile branch at desktop width (so the pin was never created, and a
+     resize never rebuilt it). These single-query registrations mirror the
+     football page's working structure: gsap.matchMedia reverts + reruns the
+     matching one on every breakpoint cross, so the pin is correctly built on
+     desktop and torn down on mobile. Geometry is function-based with
+     invalidateOnRefresh, so resizing WITHIN desktop recomputes it cleanly.
+     ============================================================ */
+  mm.add("(min-width: 861px) and (prefers-reduced-motion: no-preference)", function () {
+    var viewport = document.querySelector(".la-sig__viewport");
+    var track = document.getElementById("laSigTrack");
+    if (!track || !viewport) { return; }
+
+    // padding-left (CSS) bakes the centering offset into scrollWidth, so the
+    // travel is a clean scrollWidth - clientWidth.
+    var travel = function () { return Math.max(0, track.scrollWidth - viewport.clientWidth); };
+
+    // A timeline OWNS the ScrollTrigger and a fromTo child (explicit x:0 origin)
+    // does the travel — the same proven, resize-safe shape as the football pin.
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: viewport,
+        start: "center center",
+        end: function () { return "+=" + travel(); },
+        pin: viewport,
+        pinSpacing: true,
+        anticipatePin: 1,
+        scrub: SCRUB,
+        invalidateOnRefresh: true
+      }
+    });
+    tl.fromTo(track,
+      { x: 0 },
+      { x: function () { return -travel(); }, ease: "none", duration: 1, immediateRender: true });
+  });
+
+  mm.add("(max-width: 860px) and (prefers-reduced-motion: no-preference)", function () {
+    var track = document.getElementById("laSigTrack");
+    if (!track) { return; }
+    /* Mobile: the strip is a native swipe; just fade the cards in. */
+    toArray(".la-sigcard").forEach(function (c) {
+      gsap.fromTo(c, { y: 26, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, duration: 0.7, ease: "power3.out",
+          scrollTrigger: { trigger: c, start: "top 88%", once: true, invalidateOnRefresh: true } });
+    });
   });
 
   /* ---- Reload-below guard -----------------------------------------------
@@ -299,5 +320,21 @@
       }
     });
   }, { once: true });
+
+  /* ---- Resize reset -----------------------------------------------------
+     ScrollTrigger auto-refreshes on resize, but during a continuous
+     drag-resize those mid-gesture refreshes can leave the pinned horizontal
+     strip in an intermediate (mis-measured) state. A debounced refresh AFTER
+     the gesture settles recomputes every trigger's geometry from scratch —
+     function-based start/end + invalidateOnRefresh mean the pin location and
+     the horizontal travel distance are re-derived together and stay in sync.
+  ----------------------------------------------------------------------- */
+  var resizeTimer;
+  function resetTriggers() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () { ScrollTrigger.refresh(); }, 200);
+  }
+  window.addEventListener("resize", resetTriggers);
+  window.addEventListener("orientationchange", resetTriggers);
 
 })();

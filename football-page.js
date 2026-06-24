@@ -196,8 +196,11 @@
         }
       });
       // the horizontal camera pan across the two panels (duration 1), then an
-      // empty hold (duration DWELL) keeps the panel centered before the release
-      tl.to(track, { x: panDist, ease: "none", duration: 1 }, 0)
+      // empty hold (duration DWELL) keeps the panel centered before the release.
+      // fromTo with explicit x:0 so invalidateOnRefresh always re-derives the
+      // pan from a fixed origin (a bare .to() would re-read its start from the
+      // live transform and corrupt the mapping when resized mid/after the pin).
+      tl.fromTo(track, { x: 0 }, { x: panDist, ease: "none", duration: 1, immediateRender: true }, 0)
         .to({}, { duration: DWELL });
     });
 
@@ -256,7 +259,9 @@
           onUpdate: focusCards, onRefresh: focusCards
         }
       });
-      tl.to(track, { x: function () { return -dist(); }, ease: "none", duration: 1 });
+      // fromTo with explicit x:0 origin so invalidateOnRefresh re-derives the
+      // pan from a fixed start (prevents the bare-.to() resize corruption).
+      tl.fromTo(track, { x: 0 }, { x: function () { return -dist(); }, ease: "none", duration: 1, immediateRender: true });
       tl.to({}, { duration: HOLD });   // hold on the last cards so they can be reached
       focusCards();
       return function () { gsap.set(cards, { clearProps: "opacity" }); };
