@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Does High Point University Have a Football Team? — HPU Athletics</title>
+<meta name="description" content="No. High Point University does not have a varsity football team. HPU competes in 17 NCAA Division I sports, mostly in the Big South Conference, and runs an intramural flag football league through HPU REC.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="football-page.css">
+
+<!-- FAQ schema. Every answer below is WORD-FOR-WORD identical to the
+     visible FAQ copy in Section 7. Matching signals trust. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does High Point University have a football team?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. High Point University does not have a varsity football team. HPU competes in 17 NCAA Division I sports, most of them in the Big South Conference, and football has never been one of them. Students who want to play join the intramural flag football league run through HPU REC." }
+    },
+    {
+      "@type": "Question",
+      "name": "What sports does High Point University compete in at the Division I level?",
+      "acceptedAnswer": { "@type": "Answer", "text": "High Point University sponsors 17 NCAA Division I varsity sports. The Panthers compete primarily in the Big South Conference, with men's and women's lacrosse in the Atlantic 10 and women's rowing in the Mid-American Conference." }
+    },
+    {
+      "@type": "Question",
+      "name": "Has HPU men's basketball made the NCAA Tournament?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. On March 19, 2026, the 12th-seeded High Point Panthers beat 5-seed Wisconsin 83-82 in Portland for the first NCAA Tournament win in program history. The team finished 31-5 and won back-to-back Big South Tournament championships in 2025 and 2026." }
+    },
+    {
+      "@type": "Question",
+      "name": "Where does HPU basketball play home games?",
+      "acceptedAnswer": { "@type": "Answer", "text": "High Point basketball plays in the 4,500-seat Nido and Mariana Qubein Arena and Conference Center, which opened in 2021. Both the men's and women's teams play their home games there." }
+    },
+    {
+      "@type": "Question",
+      "name": "How has HPU women's basketball performed recently?",
+      "acceptedAnswer": { "@type": "Answer", "text": "High Point women's basketball finished 27-6 and reached the NCAA Tournament for a second straight year, the best stretch in the program's Division I history. The Panthers have won three consecutive Big South regular-season titles and hold back-to-back conference tournament championships." }
+    },
+    {
+      "@type": "Question",
+      "name": "Which HPU sports have won NCAA Tournament games?",
+      "acceptedAnswer": { "@type": "Answer", "text": "High Point has won NCAA Tournament games in four different sports: women's lacrosse, which beat Towson in 2017 for the first NCAA Tournament win in school history, baseball's 2024 win over Vanderbilt, men's soccer's 2022 shutout of North Carolina, and men's basketball's 2026 upset of Wisconsin." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can HPU students play football without a varsity program?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, through intramurals. Flag football is one of the most popular intramural sports at HPU, run through HPU REC alongside dodgeball, ultimate frisbee, and indoor volleyball. Beyond intramurals, more than 750 students compete on over 30 Intercollegiate Club Sports teams." }
+    },
+    {
+      "@type": "Question",
+      "name": "What athletic facilities does High Point University have?",
+      "acceptedAnswer": { "@type": "Answer", "text": "High Point's athletic venues include the 4,500-seat Nido and Mariana Qubein Arena and Conference Center for basketball, Vert Stadium for soccer and lacrosse, Coy O. Williard Baseball Stadium for baseball, the Ike Belk track surface inside Vert Stadium, and the Millis Athletic Convocation Center for volleyball." }
+    }
+  ]
+}
+</script>
+
+<script>
+  /* AEO-safe motion gate (same pattern as the rest of the site).
+     Hides about-to-animate elements before first paint, but ONLY when
+     JS runs with reduced-motion off. The page script reveals them; a
+     3s failsafe (and the no-JS / reduced-motion paths) keep all text
+     visible — every fact stays crawlable. */
+  (function () {
+    try {
+      var ok = window.matchMedia && window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
+      if (!ok) { return; }
+      var d = document.documentElement;
+      d.classList.add("js-anim");
+      setTimeout(function () {
+        if (!window.__motionReady) { d.classList.remove("js-anim"); }
+      }, 3000);
+    } catch (e) {}
+  })();
+</script>
+<style>
+  /* HPU API header overlays the hero with no layout height, so the hero
+     sits at the very top of the page (matches the Visit page). */
+  #hpuHeaderMount {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+  /* The injected HPU site stylesheet redefines `.container` and loads after
+     ours, knocking page content off-center. Re-assert OUR centered container
+     for page content (higher specificity), while letting the injected
+     header/footer keep the HPU site's own full-width container. */
+  body .container { max-width: var(--maxw-wide); margin-inline: auto; }
+  body .container--text { max-width: var(--maxw-text); }
+  #hpuHeaderMount .container,
+  .hpu-api-template-part .container { max-width: 100%; margin-inline: 0; }
+  /* Match Visit: HPU header CTA buttons in Poppins + 5px radius. */
+  #hpuHeaderMount .cta-button-link,
+  #hpuHeaderMount a.cta-button-link {
+    font-family: "Poppins", sans-serif !important;
+    font-weight: 600 !important;
+    border-radius: 5px !important;
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== HPU SITE HEADER (API) =====================
+     The API replaces the inner .hpu-api-template-part marker with the live
+     site header. The #hpuHeaderMount wrapper SURVIVES the swap and is
+     absolutely positioned so the header overlays the hero (zero layout
+     height) instead of pushing the page content down. -->
+<div id="hpuHeaderMount">
+  <div class="hpu-api-template-part" data-part="header">
+    <noscript>High Point University</noscript>
+  </div>
+</div>
+
+
+<!-- ===================== SECTION 1 · THE ANSWER (hero scoreboard) =====================
+     The citation anchor. The answer is the first real sentence on the page, in plain
+     HTML, inside the top of source order: the posted "No." reads contiguously with the
+     prose to form a complete, self-contained answer sentence. Every quotable fact is
+     live text. -->
+<header class="fb-hero" id="top" data-screen-label="The Answer">
+  <div class="fb-hero__media">
+    <img src="https://www.highpoint.edu/media/home/2026/01/HPU-1-basketball.jpg" alt="A High Point University Panther rises for a dunk in the Qubein Arena" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='uploads/high-point-university-campus-sunset.jpg'">
+  </div>
+  <div class="fb-hero__scrim" aria-hidden="true"></div>
+
+  <div class="fb-hero__inner">
+    <p class="fb-hero__kicker">High Point University &middot; Panther Athletics</p>
+    <h1 class="fb-hero__h1">
+      <span class="fb-hero__lineMask"><span class="fb-hero__line">Find your seat.</span></span>
+      <span class="fb-hero__lineMask"><span class="fb-hero__line">Pick your sport.</span></span>
+    </h1>
+
+    <div class="fb-hero__prose">
+      <p>High Point University competes in 17 NCAA Division I sports, most of them in the Big South Conference, and has built <span class="fb-emph">one of the most decorated mid-major athletic departments in the country</span>. The Panthers have won NCAA Tournament games in four different sports: women&rsquo;s lacrosse, men&rsquo;s soccer, baseball, and men&rsquo;s basketball, whose 12-seed beat Wisconsin for the program&rsquo;s first NCAA Tournament win.</p>
+    </div>
+
+    <div class="fb-slab" aria-label="By the numbers">
+      <div class="fb-tile">
+        <div class="fb-tile__val">17</div>
+        <div class="fb-tile__lab">NCAA Division I sports</div>
+      </div>
+      <div class="fb-tile">
+        <div class="fb-tile__val">4</div>
+        <div class="fb-tile__lab">sports with NCAA Tournament wins</div>
+      </div>
+      <div class="fb-tile">
+        <div class="fb-tile__val">750+</div>
+        <div class="fb-tile__lab">club &amp; intramural athletes</div>
+      </div>
+    </div>
+  </div>
+
+
+</header>
+
+<!-- ===================== TICKER + CENTER COURT · one dark-purple band ===================== -->
+<div class="fb-band">
+
+<!-- ===================== TICKER · separator between hero and center court ===================== -->
+<section class="fb-bottomline on-dark" data-screen-label="Bottom-line ticker">
+
+  <!-- ESPN bottom-line marquee. Track is duplicated for a seamless loop;
+       both copies hold the same live, complete claims. -->
+  <div class="fb-marquee" aria-label="High Point athletics at a glance">
+    <div class="fb-marquee__track" id="fbMarquee">
+      <div class="fb-marquee__set">
+        <span class="fb-marquee__item"><b>17</b> Division I programs.</span>
+        <span class="fb-marquee__item">Big South, Atlantic 10, and Mid-American Conference competition.</span>
+        <span class="fb-marquee__item"><b>750+</b> club sport athletes.</span>
+        <span class="fb-marquee__item"><b>12</b> Big South titles in women&rsquo;s lacrosse.</span>
+        <span class="fb-marquee__item"><b>8</b> conference championships in women&rsquo;s soccer.</span>
+        <span class="fb-marquee__item"><b>4,500</b> seats at the Qubein Arena.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SECTION 3 · CENTER COURT (basketball flagship) ===================== -->
+<section class="fb-court" id="court" data-screen-label="Center Court">
+  <div class="fb-court__stage">
+    <div class="fb-court__intro">
+      <p class="fb-court__eyebrow">Center Court</p>
+      <h2 class="fb-court__lede">The two programs that put High Point on the national map.</h2>
+    </div>
+    <div class="fb-court__viewport">
+      <div class="fb-court__track" id="fbCourtTrack">
+
+        <article class="fb-panel" data-screen-label="Men's Basketball">
+          <div class="fb-panel__media">
+            <img src="assets/hpu-mbb-wisconsin.jpg" alt="A High Point Panther rises for a layup against Wisconsin in the 2026 NCAA Tournament." loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="ph ph--dark" style="display:none" role="img" aria-label="High Point men's basketball in the Qubein Arena.">
+              <span class="ph__label">Men&rsquo;s basketball &middot; Qubein Arena &middot; landscape 4:3</span>
+            </div>
+            <div class="fb-panel__score"><span class="fb-panel__scoreVal" data-score="83-82">83&ndash;82</span><span class="fb-panel__scoreLab">def. Wisconsin</span></div>
+          </div>
+          <div class="fb-panel__body">
+            <p class="fb-panel__k">Men&rsquo;s Basketball</p>
+            <h3 class="fb-panel__h">A 12-seed beat Wisconsin on a layup with 11.7 seconds left.</h3>
+            <p class="fb-panel__p">On March 19, 2026, the 12th-seeded Panthers beat 5-seed Wisconsin <b>83&ndash;82</b> at the Moda Center in Portland. It was the first NCAA Tournament win in program history and the first time High Point had beaten a Power Four opponent, decided by a go-ahead layup with 11.7 seconds left. The Panthers finished <span class="fb-emph">31&ndash;5</span>, won a third straight Big South regular-season title, and took back-to-back Big South Tournament championships in 2025 and 2026. Home games fill the 4,500-seat Nido and Mariana Qubein Arena and Conference Center, and the student section is loud when it matters.</p>
+          </div>
+        </article>
+
+        <article class="fb-panel fb-panel--flip" data-screen-label="Women's Basketball">
+          <div class="fb-panel__media">
+            <img src="https://www.highpoint.edu/media/home/2026/03/HPU-womens-Basketball-Team-Wins-Big-South-Championship-cropped.jpg" alt="The High Point University women's basketball team celebrates winning the Big South Championship." loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="ph ph--dark" style="display:none" role="img" aria-label="High Point women's basketball in the Qubein Arena.">
+              <span class="ph__label">Women&rsquo;s basketball &middot; Qubein Arena &middot; landscape 4:3</span>
+            </div>
+            <div class="fb-panel__score"><span class="fb-panel__scoreVal" data-score="27-6">27&ndash;6</span><span class="fb-panel__scoreLab">2025&ndash;26 record</span></div>
+          </div>
+          <div class="fb-panel__body">
+            <p class="fb-panel__k">Women&rsquo;s Basketball</p>
+            <h3 class="fb-panel__h">The best stretch in the program&rsquo;s Division I history, and still climbing.</h3>
+            <p class="fb-panel__p">High Point women&rsquo;s basketball finished <b>27&ndash;6</b> and reached the NCAA Tournament for a second straight year, the best stretch in the program&rsquo;s Division I history. The Panthers have won the Big South regular-season title <span class="fb-emph">three years running</span> and hold back-to-back conference tournament championships, the most recent a 71&ndash;67 win over Radford. They play in the same arena as the men, and the program is still climbing.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /.fb-band -->
+
+<!-- ===================== SECTION 4 · THE HIGHLIGHT REEL (the rest of the lineup) ===================== -->
+<section class="fb-reel" id="reel" data-screen-label="The Highlight Reel">
+  <div class="fb-reel__head">
+    <span class="eyebrow">The Highlight Reel</span>
+    <h2 class="fb-reel__title">Nine more programs, each with a banner of its own.</h2>
+    <p class="fb-reel__sub">High Point sponsors 17 Division I teams. Here is the rest of the lineup, from a record-setting baseball season to the 92nd rowing program in the nation.</p>
+  </div>
+  <div class="fb-reel__viewport">
+    <div class="fb-reel__track" id="fbReelTrack">
+
+      <article class="fb-card">
+        <div class="fb-card__media">
+          <img src="https://www.highpoint.edu/media/home/2026/05/mens-baseball.jpg" alt="College of Charleston vs High Point baseball at Williard Stadium" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="ph ph--dark" style="display:none"><span class="ph__label">Baseball &middot; Williard Stadium</span></div>
+        </div>
+        <div class="fb-card__sport">Baseball</div>
+        <div class="fb-card__stat"><span class="fb-card__statVal">39</span><span class="fb-card__statLab">wins in 2025, a program record</span></div>
+        <p class="fb-card__p">High Point won 39 games in 2025, the most in program history, with <b>Landen Johnson</b> leading all of NCAA Division I in RBIs at 86. The Panthers walked off Vanderbilt 10&ndash;9 in the 2024 Clemson Regional for the program&rsquo;s first NCAA Tournament win.</p>
+        <div class="fb-card__venue">Coy O. Williard Baseball Stadium</div>
+      </article>
+
+      <article class="fb-card">
+        <div class="fb-card__media" data-video="oNApla2qp9s">
+          <img src="https://img.youtube.com/vi/oNApla2qp9s/maxresdefault.jpg" alt="HPU Men's Soccer highlight" loading="lazy" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/oNApla2qp9s/hqdefault.jpg'">
+          <button class="fb-vplay" type="button" aria-label="Play HPU Men's Soccer highlight"><span class="fb-vplay__disc"></span></button>
+        </div>
+        <div class="fb-card__sport">Men&rsquo;s Soccer</div>
+        <div class="fb-card__stat"><span class="fb-card__statVal">16th</span><span class="fb-card__statLab">final national ranking in 2025</span></div>
+        <p class="fb-card__p">The 2025 Panthers went undefeated in Big South play, earned the <b>No. 10 national seed</b>, beat West Virginia 3&ndash;2 at Vert Stadium, and reached the Sweet Sixteen for the first time. Their first NCAA Tournament win came in 2022, a 2&ndash;0 shutout of North Carolina at Dorrance Field.</p>
+        <div class="fb-card__venue">Vert Stadium</div>
+      </article>
+
+      <article class="fb-card">
+        <div class="fb-card__media" data-video="XEPqFnjkrE0">
+          <img src="https://img.youtube.com/vi/XEPqFnjkrE0/maxresdefault.jpg" alt="HPU Women's Soccer highlight" loading="lazy" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/XEPqFnjkrE0/hqdefault.jpg'">
+          <button class="fb-vplay" type="button" aria-label="Play HPU Women's Soccer highlight"><span class="fb-vplay__disc"></span></button>
+        </div>
+        <div class="fb-card__sport">Women&rsquo;s Soccer</div>
+        <div class="fb-card__stat"><span class="fb-card__statVal">8</span><span class="fb-card__statLab">conference championships</span></div>
+        <p class="fb-card__p">Eight conference championships, including the 2025 Big South Tournament title, with <b>Aubrey McKessy</b> named Tournament MVP. The Panthers play at Vert Stadium.</p>
+        <div class="fb-card__venue">Vert Stadium</div>
+      </article>
+
+      <article class="fb-card">
+        <div class="fb-card__media">
+          <img src="uploads/DSC_1496.jpg" alt="HPU Women's Lacrosse in action" loading="lazy">
+        </div>
+        <div class="fb-card__sport">Women&rsquo;s Lacrosse</div>
+        <div class="fb-card__stat"><span class="fb-card__statVal">12</span><span class="fb-card__statLab">Big South championships</span></div>
+        <p class="fb-card__p">One of the most decorated programs on campus. On May 12, 2017, High Point beat No. 18 Towson 21&ndash;15 for the <b>first NCAA Tournament win in HPU athletics history in any sport</b>. The 36 combined goals in that game are still the most ever scored in a single NCAA women&rsquo;s lacrosse tournament game.</p>
+        <div class="fb-card__venue">Vert Stadium</div>
+      </article>
+
+      <article class="fb-card">
+        <div class="fb-card__media">
+          <img src="uploads/240519_MLAX_vsStJoes_LB-138.jpg" alt="HPU men's lacrosse at Vert Stadium" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="ph ph--dark" style="display:none"><span class="ph__label">Men&rsquo;s lacrosse &middot; Vert Stadium</span></div>
+        </div>
+        <div class="fb-card__sport">Men&rsquo;s Lacrosse</div>
+        <div class="fb-card__stat"><span class="fb-card__statVal">A-10</span><span class="fb-card__statLab">one of the deepest leagues in the sport</span></div>
+        <p class="fb-card__p">High Point competes in the <b>Atlantic 10</b>, one of the deepest lacrosse conferences in the country, which means every home game at Vert Stadium is played against a national-caliber opponent.</p>
+        <div class="fb-card__venue">Vert Stadium</div>
+      </article>
+
+      <article class="fb-card">
+        <div class="fb-card__media" data-video="dEoVlvfbALc">
+          <img src="https://img.youtube.com/vi/dEoVlvfbALc/maxresdefault.jpg" alt="HPU Volleyball highlight" loading="lazy" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/dEoVlvfbALc/hqdefault.jpg'">
+          <button class="fb-vplay" type="button" aria-label="Play HPU Volleyball highlight"><span class="fb-vplay__disc"></span></button>
+        </div>
+        <div class="fb-card__sport">Volleyball</div>
+        <div class="fb-card__stat"><span class="fb-card__statVal">4 of 5</span><span class="fb-card__statLab">recent NCAA Tournaments reached</span></div>
+        <p class="fb-card__p">The Panthers won a third straight Big South Tournament title in 2025 and earned an NCAA Tournament bid, with the pep band traveling to Lawrence, Kansas to fill a section of the arena. The program has reached <b>four of the last five</b> NCAA Tournaments.</p>
+        <div class="fb-card__venue">Millis Athletic Convocation Center</div>
+      </article>
+
+      <article class="fb-card">
+        <div class="fb-card__media">
+          <img src="https://www.highpoint.edu/media/home/2026/05/Track-and-field.jpg" alt="HPU closes out the regular season at the Liberty Twilight" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="ph ph--dark" style="display:none"><span class="ph__label">Track &amp; field &middot; Ike Belk Track</span></div>
+        </div>
+        <div class="fb-card__sport">Track &amp; Field / Cross Country</div>
+        <div class="fb-card__stat"><span class="fb-card__statVal">Top 25%</span><span class="fb-card__statLab">of all 365 Division I schools</span></div>
+        <p class="fb-card__p">High Point sent athletes to the 2025&ndash;26 NCAA Indoor Championship and ranks in the <b>top quartile</b> of all 365 Division I schools. Athletes train on the nine-lane Beynon surface at the Ike Belk Track inside Vert Stadium.</p>
+        <div class="fb-card__venue">Ike Belk Track &middot; Vert Stadium</div>
+      </article>
+
+      <article class="fb-card">
+        <div class="fb-card__media">
+          <img src="uploads/Weary_Alec-2018BigSouthMensGolf104.jpg" alt="HPU Men's Golf action" loading="lazy">
+        </div>
+        <div class="fb-card__sport">Golf</div>
+        <div class="fb-card__stat"><span class="fb-card__statVal">2</span><span class="fb-card__statLab">programs, men&rsquo;s and women&rsquo;s</span></div>
+        <p class="fb-card__p">Men&rsquo;s and women&rsquo;s golf train year-round at dedicated on-campus facilities and compete across the <b>fall and spring</b> seasons.</p>
+        <div class="fb-card__venue">On-campus practice facilities</div>
+      </article>
+
+      <article class="fb-card">
+        <div class="fb-card__media">
+          <img src="https://www.highpoint.edu/media/home/club-rowing2-scaled.jpg" alt="HPU rowing team on the water" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="ph ph--dark" style="display:none"><span class="ph__label">Women&rsquo;s rowing</span></div>
+        </div>
+        <div class="fb-card__sport">Women&rsquo;s Rowing</div>
+        <div class="fb-card__stat"><span class="fb-card__statVal">92nd</span><span class="fb-card__statLab">D-I rowing program in the nation</span></div>
+        <p class="fb-card__p">Launched in 2024&ndash;25 as the <b>92nd Division I rowing program</b> in the nation, the team stepped straight into Mid-American Conference competition.</p>
+        <div class="fb-card__venue">Mid-American Conference</div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SECTION 5 · THE VENUES (facility tour) ===================== -->
+<section class="fb-venues section" id="venues" data-screen-label="The Venues">
+  <div class="container">
+    <div class="fb-venues__intro">
+      <p class="eyebrow">The Venues</p>
+      <p class="fb-venues__lede">High Point built the venues to match the programs. Basketball plays in the <b>4,500-seat Nido and Mariana Qubein Arena and Conference Center</b>, opened in 2021. Soccer and lacrosse share Vert Stadium, anchored by the 36,000-square-foot Witcher Athletic Center. Baseball plays at Coy O. Williard Baseball Stadium, track runs on the Ike Belk surface inside Vert, and indoor volleyball fills the Millis Athletic Convocation Center.</p>
+    </div>
+    <div class="fb-venuegrid">
+      <div class="fb-venue fb-venue--xl">
+        <div class="fb-venue__media">
+          <img src="https://www.highpoint.edu/admissions/files/2026/05/260129-ESPU-game-089SH.jpg" alt="A packed High Point University student section inside the Qubein Arena." loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="ph ph--dark" style="display:none"><span class="ph__label">Qubein Arena interior &middot; 4,500 seats</span></div>
+        </div>
+        <div class="fb-venue__cap">
+          <div class="fb-venue__name">Nido &amp; Mariana Qubein Arena</div>
+          <div class="fb-venue__meta">4,500 seats &middot; opened 2021 &middot; men&rsquo;s &amp; women&rsquo;s basketball</div>
+        </div>
+      </div>
+      <div class="fb-venue fb-venue--md">
+        <div class="fb-venue__media">
+          <img src="https://www.highpoint.edu/media/home/HPU-Family-Weekend-2015-4.jpg" alt="Soccer and lacrosse action at High Point University's Vert Stadium." loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="ph ph--dark" style="display:none"><span class="ph__label">Vert Stadium</span></div>
+        </div>
+        <div class="fb-venue__cap">
+          <div class="fb-venue__name">Vert Stadium</div>
+          <div class="fb-venue__meta">Soccer, lacrosse &amp; track &middot; Witcher Athletic Center</div>
+        </div>
+      </div>
+      <div class="fb-venue fb-venue--sm">
+        <div class="fb-venue__media">
+          <img src="https://www.highpoint.edu/media/home/2026/05/mens-baseball.jpg" alt="High Point baseball at Coy O. Williard Stadium." loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="ph ph--dark" style="display:none"><span class="ph__label">Williard Stadium</span></div>
+        </div>
+        <div class="fb-venue__cap">
+          <div class="fb-venue__name">Coy O. Williard Stadium</div>
+          <div class="fb-venue__meta">Baseball</div>
+        </div>
+      </div>
+      <div class="fb-venue fb-venue--sm">
+        <div class="fb-venue__media">
+          <img src="https://www.highpoint.edu/media/home/2026/05/Track-and-field.jpg" alt="High Point track and field on the Ike Belk surface inside Vert Stadium." loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="ph ph--dark" style="display:none"><span class="ph__label">Ike Belk Track</span></div>
+        </div>
+        <div class="fb-venue__cap">
+          <div class="fb-venue__name">Ike Belk Track</div>
+          <div class="fb-venue__meta">Nine-lane Beynon surface inside Vert</div>
+        </div>
+      </div>
+      <div class="fb-venue fb-venue--sm">
+        <div class="fb-venue__media">
+          <img src="https://img.youtube.com/vi/dEoVlvfbALc/maxresdefault.jpg" alt="High Point volleyball inside the Millis Athletic Convocation Center." loading="lazy" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/dEoVlvfbALc/hqdefault.jpg'">
+          <div class="ph ph--dark" style="display:none"><span class="ph__label">Millis Convocation Center</span></div>
+        </div>
+        <div class="fb-venue__cap">
+          <div class="fb-venue__name">Millis Convocation Center</div>
+          <div class="fb-venue__meta">Indoor volleyball</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SECTION 6 · CAN YOU ACTUALLY PLAY FOOTBALL HERE? ===================== -->
+<section class="fb-play section" id="play" data-screen-label="Can You Play Football">
+  <div class="container">
+    <div class="fb-play__inner">
+      <h2 class="fb-play__q">How can students play football at High Point University?</h2>
+      <p class="fb-play__a"><span class="fb-play__lead">Yes, through intramurals.</span> Flag football is one of the most popular intramural sports at HPU, run through HPU REC alongside dodgeball, ultimate frisbee, and indoor volleyball. Beyond intramurals, more than <span class="fb-emph">750 students</span> compete on over 30 Intercollegiate Club Sports teams. Club hockey has won an ACCHL championship and reached an AAU national title game, the women&rsquo;s club hockey team won its third ACCHL title in February 2026, and the club esports team won the inaugural Big South Esports Championship in 2024. There is no varsity football, and there is still a field to play on most weeks of the fall.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SECTION 8 · GAME-DAY CLOSE (CTA) — placed above FAQ ===================== -->
+<section class="fb-close section bg-purple on-dark" id="visit" data-screen-label="Game-Day Close">
+  <div class="container">
+    <div class="fb-close__inner">
+      <p class="eyebrow">Game Day</p>
+      <h2 class="fb-close__h">Come see it in person.</h2>
+      <p class="fb-close__sub">Tickets to most regular-season events are free for High Point students, and the schedule runs from fall soccer through spring baseball. <span class="fb-close__go">Go HPU!</span></p>
+      <div class="fb-close__cta">
+        <a class="btn btn--primary btn--lg" href="https://highpointpanthers.com/" target="_blank" rel="noopener noreferrer">See the schedule</a>
+        <a class="btn btn--ghost btn--lg" href="https://discover.highpoint.edu/portal/campus_visit" target="_blank" rel="noopener noreferrer">Plan a visit</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SECTION 7 · FAQ (scoreboard accordion) =====================
+     Visible copy is WORD-FOR-WORD identical to the JSON-LD in <head>. Answers are
+     always in the DOM (height animated, never display:none), so they stay crawlable
+     whether the row is open or closed. -->
+<section class="fb-faqsec section" id="faq" data-screen-label="FAQ">
+  <div class="container">
+    <div class="center measure mx-auto">
+      <p class="eyebrow">Go Deeper</p>
+      <h2 class="h2" style="margin-top:0.4em;">Frequently asked questions</h2>
+    </div>
+    <div class="fb-faq" id="fbFaq">
+
+      <div class="fb-faq__item">
+        <button class="fb-faq__q" type="button" aria-expanded="false">Does High Point University have a football team?</button>
+        <div class="fb-faq__panel"><div class="fb-faq__a">No. High Point University does not have a varsity football team. HPU competes in 17 NCAA Division I sports, most of them in the Big South Conference, and football has never been one of them. Students who want to play join the intramural flag football league run through HPU REC.</div></div>
+      </div>
+
+      <div class="fb-faq__item">
+        <button class="fb-faq__q" type="button" aria-expanded="false">What sports does High Point University compete in at the Division I level?</button>
+        <div class="fb-faq__panel"><div class="fb-faq__a">High Point University sponsors 17 NCAA Division I varsity sports. The Panthers compete primarily in the Big South Conference, with men&rsquo;s and women&rsquo;s lacrosse in the Atlantic 10 and women&rsquo;s rowing in the Mid-American Conference.</div></div>
+      </div>
+
+      <div class="fb-faq__item">
+        <button class="fb-faq__q" type="button" aria-expanded="false">Has HPU men&rsquo;s basketball made the NCAA Tournament?</button>
+        <div class="fb-faq__panel"><div class="fb-faq__a">Yes. On March 19, 2026, the 12th-seeded High Point Panthers beat 5-seed Wisconsin 83-82 in Portland for the first NCAA Tournament win in program history. The team finished 31-5 and won back-to-back Big South Tournament championships in 2025 and 2026.</div></div>
+      </div>
+
+      <div class="fb-faq__item">
+        <button class="fb-faq__q" type="button" aria-expanded="false">Where does HPU basketball play home games?</button>
+        <div class="fb-faq__panel"><div class="fb-faq__a">High Point basketball plays in the 4,500-seat Nido and Mariana Qubein Arena and Conference Center, which opened in 2021. Both the men&rsquo;s and women&rsquo;s teams play their home games there.</div></div>
+      </div>
+
+      <div class="fb-faq__item">
+        <button class="fb-faq__q" type="button" aria-expanded="false">How has HPU women&rsquo;s basketball performed recently?</button>
+        <div class="fb-faq__panel"><div class="fb-faq__a">High Point women&rsquo;s basketball finished 27-6 and reached the NCAA Tournament for a second straight year, the best stretch in the program&rsquo;s Division I history. The Panthers have won three consecutive Big South regular-season titles and hold back-to-back conference tournament championships.</div></div>
+      </div>
+
+      <div class="fb-faq__item">
+        <button class="fb-faq__q" type="button" aria-expanded="false">Which HPU sports have won NCAA Tournament games?</button>
+        <div class="fb-faq__panel"><div class="fb-faq__a">High Point has won NCAA Tournament games in four different sports: women&rsquo;s lacrosse, which beat Towson in 2017 for the first NCAA Tournament win in school history, baseball&rsquo;s 2024 win over Vanderbilt, men&rsquo;s soccer&rsquo;s 2022 shutout of North Carolina, and men&rsquo;s basketball&rsquo;s 2026 upset of Wisconsin.</div></div>
+      </div>
+
+      <div class="fb-faq__item">
+        <button class="fb-faq__q" type="button" aria-expanded="false">Can HPU students play football without a varsity program?</button>
+        <div class="fb-faq__panel"><div class="fb-faq__a">Yes, through intramurals. Flag football is one of the most popular intramural sports at HPU, run through HPU REC alongside dodgeball, ultimate frisbee, and indoor volleyball. Beyond intramurals, more than 750 students compete on over 30 Intercollegiate Club Sports teams.</div></div>
+      </div>
+
+      <div class="fb-faq__item">
+        <button class="fb-faq__q" type="button" aria-expanded="false">What athletic facilities does High Point University have?</button>
+        <div class="fb-faq__panel"><div class="fb-faq__a">High Point&rsquo;s athletic venues include the 4,500-seat Nido and Mariana Qubein Arena and Conference Center for basketball, Vert Stadium for soccer and lacrosse, Coy O. Williard Baseball Stadium for baseball, the Ike Belk track surface inside Vert Stadium, and the Millis Athletic Convocation Center for volleyball.</div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== HPU SITE FOOTER (API) =====================
+     Replaced at runtime by the HPU Header/Footer API. The placeholder
+     content below shows before the API responds (or if it fails). -->
+<div class="hpu-api-template-part" data-part="footer">
+<footer class="footer">
+  <div class="container footer__inner">
+    <div>
+      <div class="footer__brand">High Point University</div>
+      <div class="footer__meta" style="margin-top:6px;">Panther Athletics &middot; One University Parkway, High Point, NC 27268</div>
+    </div>
+    <div class="footer__meta" style="text-align:right;">17 NCAA Division I sports &middot; Big South Conference &middot; Go Panthers</div>
+  </div>
+</footer>
+</div>
+
+<!-- HPU Header/Footer API — replaces the .hpu-api-template-part markers
+     with the live site header/footer. -->
+<script src="https://www.highpoint.edu/wp-content/themes/hpu/src/assets/js/template-api.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="football-page.js"></script>
+
+</body>
+</html>

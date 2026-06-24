@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visit — High Point University</title>
+<meta name="description" content="See it for yourself. Spend a day at the #1 Best-Run College in the Nation. Schedule a personalized campus visit.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="visit-hero.css">
+<style>
+  /* HPU API header overlays the hero with no layout height, so the hero
+     sits at the very top of the page. */
+  #hpuHeaderMount {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+  /* The injected HPU site stylesheet defines its own `.container`
+     (max-width:100%; margin:0) which loads after ours and wins at equal
+     specificity, knocking our page content off-center. Re-assert the
+     centered container ONLY on our own sections (higher specificity via
+     `.section > .container`), leaving the HPU header/footer untouched. */
+  .invite > .container,
+  .trust > .container,
+  .finalcta > .container {
+    max-width: var(--maxw-wide);
+    margin-inline: auto;
+  }
+  /* Override the injected header CTA buttons (e.g. "Request Info"):
+     Poppins type + a 5px radius. High specificity + !important to beat
+     the late-loading HPU site stylesheet. */
+  #hpuHeaderMount .cta-button-link,
+  #hpuHeaderMount a.cta-button-link {
+    font-family: "Poppins", sans-serif !important;
+    font-weight: 600 !important;
+    border-radius: 5px !important;
+  }
+</style>
+<script>
+  /* AEO-safe motion gate. Hides the about-to-animate hero elements
+     before first paint, but ONLY when JS runs with reduced-motion
+     off. The hero script reveals them; a 3s failsafe (and the
+     no-JS / reduced-motion paths) keep everything visible. */
+  (function () {
+    try {
+      var ok = window.matchMedia && window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
+      if (!ok) { return; }
+      var d = document.documentElement;
+      d.classList.add("js-anim");
+      setTimeout(function () {
+        if (!window.__motionReady) { d.classList.remove("js-anim"); }
+      }, 3000);
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+
+<!-- ===================== HPU SITE HEADER (API) =====================
+     The API replaces the inner .hpu-api-template-part marker with the live
+     site header. The #hpuHeaderMount wrapper SURVIVES the swap and is
+     absolutely positioned so the header overlays the hero (zero layout
+     height) instead of pushing the page content down. -->
+<div id="hpuHeaderMount">
+  <div class="hpu-api-template-part" data-part="header">
+    <noscript>High Point University</noscript>
+  </div>
+</div>
+
+<!-- Persistent scroll guide — a fixed, brand-purple "keep going" pill that
+     names what's next and glides there on click. It is BOTH the persistent
+     prompt-to-scroll and the per-step "there's more below" signal. Shows on
+     the hero and the trust beat; steps aside during the immersive campus-walk
+     film (which carries its own progress bar) and once you reach the closing
+     CTA (you've arrived). One element, mobile + desktop alike. -->
+<button class="scrollguide" id="scrollGuide" type="button" aria-label="Go to the next section">
+  <span class="scrollguide__label" id="scrollGuideLabel">Take a look around</span>
+  <span class="scrollguide__chev" aria-hidden="true">
+    <svg viewBox="0 0 16 16" width="13" height="13"><path d="M4 6L8 10L12 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+  </span>
+</button>
+
+<!-- Visit-request modal — opened by the scroll guide CTA in the card section.
+     Mirrors the project's existing modal + form conventions (scrim blur, card,
+     purple accents, success checkmark). -->
+<div class="vmodal" id="visitModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="visitModalTitle">
+  <div class="vmodal__scrim" id="visitModalScrim"></div>
+  <div class="vmodal__card" role="document">
+    <button class="vmodal__close" id="visitModalClose" type="button" aria-label="Close">&times;</button>
+    <div class="vmodal__body" id="visitModalForm">
+      <p class="vmodal__eyebrow">Plan your visit</p>
+      <h2 class="vmodal__title" id="visitModalTitle">Spend a day with us.</h2>
+      <p class="vmodal__sub">Tell us where to send the details and our team will help you choose a date.</p>
+      <form class="vform" id="visitForm" novalidate>
+        <div class="vform__row">
+          <label class="vform__field"><span>First name</span><input type="text" name="first" autocomplete="given-name" required></label>
+          <label class="vform__field"><span>Last name</span><input type="text" name="last" autocomplete="family-name" required></label>
+        </div>
+        <label class="vform__field"><span>Email</span><input type="email" name="email" autocomplete="email" required></label>
+        <label class="vform__field"><span>Expected start term</span>
+          <span class="vform__selectwrap">
+            <select name="term">
+              <option>Fall 2026</option>
+              <option>Spring 2027</option>
+              <option>Fall 2027</option>
+              <option>Still deciding</option>
+            </select>
+          </span>
+        </label>
+        <button class="btn btn--primary btn--lg vform__submit" type="submit">Request visit details</button>
+      </form>
+    </div>
+    <div class="vmodal__done" id="visitModalDone" hidden>
+      <div class="vmodal__mark" aria-hidden="true"></div>
+      <h2 class="vmodal__title">You&rsquo;re all set.</h2>
+      <p class="vmodal__sub">Check your inbox &mdash; we&rsquo;ll follow up with visit dates and a personalized itinerary.</p>
+      <button class="btn btn--primary btn--lg" type="button" id="visitModalDoneClose">Done</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<header class="fhero on-dark" id="top" aria-label="Visit High Point University" data-screen-label="Hero">
+
+  <div class="fhero__media">
+    <video class="fhero__video" loop muted playsinline preload="auto" id="heroVideo">
+      <source src="uploads/visit-hero-banner-ea0af20f.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="fhero__scrim" aria-hidden="true"></div>
+  <div class="fhero__deepen" aria-hidden="true"></div>
+
+  <button class="fhero__pause" id="heroPause" type="button" aria-label="Pause background video">
+    <span class="fhero__pauseIcon" aria-hidden="true"></span>
+  </button>
+
+  <div class="fhero__frame">
+    <div class="fhero__card">
+      <p class="fhero__kicker">You Were Meant to be Extraordinary&reg;</p>
+      <h1 class="fhero__h1">
+        <span class="fhero__lineMask"><span class="fhero__line">See it for yourself.</span></span>
+      </h1>
+      <p class="fhero__sub">Spend a day at the #1 Best-Run College in the Nation. No video quite captures it.</p>
+    </div>
+
+    <div class="fhero__baseline">
+      <a class="btn btn--primary btn--lg fhero__primary" href="https://discover.highpoint.edu/portal/campus_visit" target="_blank" rel="noopener noreferrer">Schedule a Tour</a>
+      <a class="fhero__alt" href="https://www.highpoint.edu/virtual-campus-experience/" target="_blank" rel="noopener noreferrer">Take a virtual tour <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </div>
+
+  <div class="fhero__cue" aria-hidden="true">
+    <span class="fhero__cueLabel">Take a look around</span>
+    <span class="fhero__cueLine"></span>
+  </div>
+
+</header>
+
+<!-- ===================== BEAT 2 · THE INVITATION ===================== -->
+<!-- The room goes quiet. One statement, one line, one button, on a
+     calm light field — the storytelling breath after the cinematic
+     hero. Reuses the hero's masked-line + blur-clear signature so the
+     page reads as one piece. -->
+<section class="invite" data-screen-label="The Invitation">
+  <div class="container">
+    <div class="invite__inner">
+      <h2 class="invite__h2">
+        <span class="invite__lineMask"><span class="invite__line">You&rsquo;ll know by</span></span>
+        <span class="invite__lineMask"><span class="invite__line">the end of the day.</span></span>
+      </h2>
+      <p class="invite__sub">Walk the campus, meet the faculty, see the dorms and the dining. The feeling is hard to mistake.</p>
+      <div class="invite__cta">
+        <a class="btn btn--primary btn--lg" href="https://discover.highpoint.edu/portal/campus_visit" target="_blank" rel="noopener noreferrer">Schedule a Tour</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BEAT 3 · THE CAMPUS WALK ===================== -->
+<!-- The trailer for the tour: one day on campus, morning to dusk. Six
+     scenes from the real day a family will have, each composed like a
+     film frame (quiet marker, confident line, secondary subtext), with
+     the composition varied scene to scene so no two read as the same
+     template. Lighting ARC for the photo-sourcing team: Arrival = early
+     morning, the middle moves through the day, Life = late-afternoon
+     golden, the saved moment = dusk. Surprising facts (the #2 dorms, a
+     real class, the steakhouse, the clubs) get a small beat of emphasis
+     as they land. Transform + opacity + per-scene scale only — no blur
+     on the scrub (blur is the entrance signature). Default / reduced-
+     motion / mobile: a static vertical sequence of the same scenes,
+     captions in reading order, ending on the saved moment + CTA.
+     ATHLETICS: the Game Day scene cites "NCAA Tournament two years
+     running." Confirm with Athletics before launch; keep it durable,
+     with no record or seed numbers that go stale every March. -->
+<section class="walk" data-screen-label="Campus Walk">
+  <div class="walk__stage">
+    <div class="walk__scenes">
+
+      <!-- Scene 1 · Arrival — early MORNING light. Placeholder: the sunset
+           aerial fought the morning arc, so this is set for re-shoot. -->
+      <figure class="walk__scene">
+        <div class="walk__media">
+          <div class="walk__imgwrap">
+            <img class="walk__img" src="assets/visit-arrival-movein.jpg" alt="A High Point University student leader in a tie-dye shirt greeting a parent at their car on move-in morning." loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="walk__img ph ph--dark" style="display:none" role="img" aria-label="Families arriving at the High Point University Welcome Center in early morning light, the team greeting them at the door.">
+              <span class="ph__label">Welcome Center check-in &middot; early morning light &middot; landscape 16:9</span>
+            </div>
+          </div>
+          <div class="walk__mediascrim" aria-hidden="true"></div>
+        </div>
+        <figcaption class="walk__cap walk__cap--bl">
+          <span class="walk__marker">Arrival</span>
+          <p class="walk__line">A tour guide will be there to walk you in.</p>
+          <p class="walk__sub">They&rsquo;ll help you park and take you to check-in. You&rsquo;ll feel taken care of from the first minute.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Scene 2 · Living — mid-morning. -->
+      <figure class="walk__scene">
+        <div class="walk__media">
+          <div class="walk__imgwrap">
+            <img class="walk__img" src="uploads/Panther Commons Lobby V1 (1).jpg" alt="The grand Panther Commons residence hall lobby at High Point University, with chandeliers, wood columns, and lounge seating." loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="walk__img ph ph--dark" style="display:none" role="img" aria-label="An apartment-style student suite at High Point University with a full kitchen, in bright mid-morning light.">
+              <span class="ph__label">Apartment-style suite, full kitchen &middot; mid-morning light &middot; landscape 16:9</span>
+            </div>
+          </div>
+          <div class="walk__mediascrim" aria-hidden="true"></div>
+        </div>
+        <figcaption class="walk__cap walk__cap--br">
+          <span class="walk__marker">Living</span>
+          <p class="walk__line">You&rsquo;ll see what student housing can be.</p>
+          <p class="walk__sub">Suite and apartment-style rooms, <span class="walk__emph">ranked #2 in the country</span> for dorms by the Princeton Review.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Scene 3 · Learning — midday. -->
+      <figure class="walk__scene">
+        <div class="walk__media">
+          <div class="walk__imgwrap"><img class="walk__img" src="assets/visit-learning-classroom.jpg" alt="A High Point University professor presenting to a class of students seated at desks, a valuation slide on the screen behind him." loading="lazy"></div>
+          <div class="walk__mediascrim" aria-hidden="true"></div>
+        </div>
+        <figcaption class="walk__cap walk__cap--bl">
+          <span class="walk__marker">Learning</span>
+          <p class="walk__line">You&rsquo;ll see where your major comes to life.</p>
+          <p class="walk__sub">Tour the academic buildings and labs, and meet faculty who teach classes that <span class="walk__emph">average 25 students</span>.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Scene 4 · Dining — afternoon. Placeholder for re-shoot. -->
+      <figure class="walk__scene">
+        <div class="walk__media">
+          <div class="walk__imgwrap">
+            <img class="walk__img" src="assets/visit-dining-butterfly.jpg" alt="Students and families talking over coffee in the bright, plant-filled Butterfly Café on the High Point University campus, live music in the background." loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="walk__img ph ph--dark" style="display:none" role="img" aria-label="The Butterfly Café dining room on the High Point University campus, full of students over coffee in bright daylight.">
+              <span class="ph__label">Butterfly Café interior &middot; bright daylight &middot; landscape 16:9</span>
+            </div>
+          </div>
+          <div class="walk__mediascrim" aria-hidden="true"></div>
+        </div>
+        <figcaption class="walk__cap walk__cap--bc">
+          <span class="walk__marker">Dining</span>
+          <p class="walk__line">Lunch is on us, and it’s extraordinary.</p>
+          <p class="walk__sub">Enjoy a complimentary meal at one of HPU&rsquo;s <span class="walk__emph">20+ award-winning dining locations</span>, ranked #1 for campus food in North Carolina.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Scene 5 · Game Day — late-afternoon GOLDEN light. Placeholder: this
+           lands right before dusk, so the photo should carry golden hour. -->
+      <figure class="walk__scene">
+        <div class="walk__media">
+          <div class="walk__imgwrap">
+            <img class="walk__img" src="https://www.highpoint.edu/admissions/files/2026/05/260129-ESPU-game-089SH.jpg" alt="The High Point University student section packed and cheering at a Panther basketball game in the Qubein Center." loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="walk__img ph ph--dark" style="display:none" role="img" aria-label="The High Point University student section packed and cheering at a Panther basketball game.">
+              <span class="ph__label">Packed student section, Panther basketball, Qubein Center &middot; landscape 16:9</span>
+            </div>
+          </div>
+          <div class="walk__mediascrim" aria-hidden="true"></div>
+        </div>
+        <figcaption class="walk__cap walk__cap--br">
+          <span class="walk__marker">Game Day</span>
+          <p class="walk__line">You&rsquo;ll see where the Panthers play.</p>
+          <!-- ATHLETICS: confirm with Athletics before launch. Keep this to "two years running" and the arena only. Do NOT add a record (e.g. 30-4) or a seed number; those date instantly and would need editing every March. -->
+          <p class="walk__sub">The tour walks through the Qubein Center, home court for the men&rsquo;s and women&rsquo;s teams that both made the <span class="walk__emph">NCAA Tournament two years running</span>.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Scene 6 · The saved moment — DUSK. The climax and the highest-
+           value CTA on the page. The only dark evening frame; it holds. -->
+      <figure class="walk__scene walk__scene--saved on-dark">
+        <div class="walk__media">
+          <div class="walk__imgwrap"><img class="walk__img" src="visit-img/saved.jpg" alt="The bronze Life Skills tree medallion in front of the domed Hayworth Fine Arts Center at dusk." loading="lazy"></div>
+          <div class="walk__mediascrim" aria-hidden="true"></div>
+        </div>
+        <figcaption class="walk__saved">
+          <p class="walk__savedline">You just have to see it in person.</p>
+          <p class="walk__savedline walk__savedline--two">Come spend a day with us.</p>
+          <div class="walk__savedcta">
+            <a class="btn btn--primary btn--lg" href="https://discover.highpoint.edu/portal/campus_visit" target="_blank" rel="noopener noreferrer">Schedule a Tour</a>
+          </div>
+        </figcaption>
+      </figure>
+
+    </div>
+
+    <!-- The cinematic handoff target: a clean light field that rises up
+         over the receding dusk frame, like walking out of a dark theater
+         into daylight. Desktop-motion only; mobile / reduced-motion cut
+         straight to the light section below. -->
+    <div class="walk__handoff" aria-hidden="true"></div>
+
+    <div class="walk__progress" aria-hidden="true"><span class="walk__progressbar"></span></div>
+  </div>
+</section>
+
+<!-- ===================== BEAT 4 · THE TRUST BEAT (lands on light) ===================== -->
+<!-- The daylight after the walk. The dusk frame recedes and dissolves
+     into this clean light field. Calm, spacious, sure of itself: the
+     numbers get room to breathe one at a time, then a real parent's
+     voice, then the trust-peak button. Asymmetry, not a stat row — the
+     99% dominates, the two rankings sit secondary beneath it. The
+     headline reuses beat 2's masked-line + blur entrance so the page's
+     two light beats share a treatment. Transform + opacity only; blur
+     animates once on the headline. Reduced-motion / no-JS show the full
+     content in reading order, with the 99% at its final value. -->
+<section class="trust" data-screen-label="The Trust Beat">
+  <div class="container">
+    <div class="trust__inner">
+      <h2 class="trust__h2">
+        <span class="trust__lineMask"><span class="trust__line">Extraordinary,</span></span>
+        <span class="trust__lineMask"><span class="trust__line">by the numbers.</span></span>
+      </h2>
+      <p class="trust__bridge">The campus makes the first impression. The outcomes make the case.</p>
+
+      <div class="trust__numbers">
+        <div class="trust__hero">
+          <span class="trust__figure" aria-hidden="true"><span class="trust__figval">99</span><span class="trust__figmark">%</span></span>
+          <p class="trust__heroline"><span class="trust__sr">99% </span>of graduates are employed or in grad school within six months.</p>
+        </div>
+
+        <div class="trust__rankcol">
+          <div class="trust__rank">
+            <span class="trust__rankfig">#1</span>
+            <p class="trust__rankline">Best-Run College in the nation, two years running.</p>
+            <p class="trust__src">The Princeton Review</p>
+          </div>
+          <div class="trust__rank">
+            <span class="trust__rankfig">#12</span>
+            <p class="trust__rankline">in the nation for its campus security team.</p>
+            <p class="trust__src">Security Magazine</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="trust__voice on-dark">
+        <blockquote class="trust__quote">
+          <span class="trust__quotemark" aria-hidden="true">&ldquo;</span>
+          <p class="trust__quotetext">The Life Skills promoted here are what I&rsquo;ve yearned for as someone who has hired people, interviewed people, and watched the younger generation. The communication techniques and the skills needed to get ahead are invaluable.</p>
+          <footer class="trust__cite">Michael Santoro, father of Christa Santoro, Class of 2028</footer>
+        </blockquote>
+        <div class="trust__close">
+          <p class="trust__leadin">Come see it for yourself.</p>
+          <a class="btn btn--primary btn--lg" href="https://discover.highpoint.edu/portal/campus_visit" target="_blank" rel="noopener noreferrer">Schedule a Tour</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FINAL CTA · WAYS TO VISIT ===================== -->
+<!-- The practical close. Light into light, calm into action. One
+     dominant primary (Schedule a Tour) for the ready, then two lighter
+     paths for the hesitant: the self-guided 360 virtual tour and the
+     residence-life Campus Life Quiz. Content + links mirror the Request
+     Information page so the site stays consistent. Gentle fade-ins on
+     scroll, no set piece. -->
+<section class="finalcta" data-screen-label="Ways to Visit">
+  <div class="container">
+    <header class="finalcta__head">
+      <p class="eyebrow">Ways to Visit</p>
+      <h2 class="finalcta__h2">Ready when you are.</h2>
+    </header>
+
+    <a class="finalcta__primary on-dark" href="https://discover.highpoint.edu/portal/campus_visit" target="_blank" rel="noopener noreferrer">
+      <div class="finalcta__primaryText">
+        <p class="finalcta__primaryK">Visit in person</p>
+        <h3 class="finalcta__primaryH">Schedule a tour.</h3>
+        <p class="finalcta__primaryP">Spend a day on campus. Walk it, sit in on a class, and meet the people you&rsquo;ll learn from.</p>
+      </div>
+      <span class="btn btn--primary btn--lg finalcta__primaryBtn">Schedule a Tour</span>
+    </a>
+
+    <div class="finalcta__altsHead">
+      <span class="finalcta__altsLabel">Not ready to visit yet?</span>
+    </div>
+
+    <div class="finalcta__alts">
+      <a class="finalcta__card" href="https://www.highpoint.edu/virtual-campus-experience/" target="_blank" rel="noopener noreferrer">
+        <div class="finalcta__cardMedia" style="background-image: url('virtual-tour-360.jpg');"></div>
+        <div class="finalcta__cardBody">
+          <p class="finalcta__cardK">Virtual Campus</p>
+          <h3 class="finalcta__cardH">Take the 360&deg; tour.</h3>
+          <p class="finalcta__cardP">Immersive 360&deg; scenes of campus buildings, residence halls, and landmarks. See it from anywhere.</p>
+          <span class="finalcta__cardLink">Explore Virtual Campus <span class="finalcta__arr" aria-hidden="true">&rarr;</span></span>
+        </div>
+      </a>
+      <a class="finalcta__card" href="https://discover.highpoint.edu/register/campus-life-quiz" target="_blank" rel="noopener noreferrer">
+        <div class="finalcta__cardMedia" style="background-image: url('campus-tour.jpg');"></div>
+        <div class="finalcta__cardBody">
+          <p class="finalcta__cardK">Campus Life Quiz &middot; 2 minutes</p>
+          <h3 class="finalcta__cardH">Yes, you really get to live here.</h3>
+          <p class="finalcta__cardP">There are 168 hours in a week. You&rsquo;ll be in class for about 20 of them. See what you&rsquo;ll do with the other 148.</p>
+          <span class="finalcta__cardLink">Take the Quiz <span class="finalcta__arr" aria-hidden="true">&rarr;</span></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== HPU SITE FOOTER (API) =====================
+     Replaced at runtime by the HPU Header/Footer API. The placeholder
+     content below shows before the API responds (or if it fails). -->
+<div class="hpu-api-template-part" data-part="footer">
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div>
+        <div class="footer__brand">High Point University</div>
+        <div class="footer__meta" style="margin-top:6px;">The Premier Life Skills University &middot; One University Parkway, High Point, NC 27268</div>
+      </div>
+      <div class="footer__meta" style="text-align:right;">FAFSA 002933 &middot; SAT 5293 &middot; ACT 3108</div>
+    </div>
+  </footer>
+</div>
+
+<!-- HPU Header/Footer API — finds the .hpu-api-template-part markers above
+     and replaces them with the live site header/footer. -->
+<script src="https://www.highpoint.edu/wp-content/themes/hpu/src/assets/js/template-api.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+<script>
+/* ============================================================
+   HERO — bespoke choreography
+   1) Entrance on load (~1.8s, heavy power4.out deceleration):
+      scrim → kicker (letter-spacing settle) → masked headline
+      lift with blur clearing → subhead → CTA row → scroll cue.
+   2) Slow continuous push-in on the video (looping).
+   3) Scroll recede: video pushes down/scales up into depth,
+      type + CTAs lift and dissolve faster, scrim deepens.
+   Blur is ENTRANCE-ONLY; scroll work stays pure transform/opacity.
+   Reduced-motion / no-JS get the calm version (poster + full type).
+   ============================================================ */
+(function () {
+  var video    = document.getElementById("heroVideo");
+  var pauseBtn = document.getElementById("heroPause");
+  var allowMotion = !window.matchMedia ||
+    window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
+
+  // Tell the head gate we're handling reveal (don't strip js-anim early).
+  window.__motionReady = true;
+
+  /* ---- Playback + the single quiet pause affordance ---- */
+  function setPlaying(play) {
+    if (!video) { return; }
+    if (play) {
+      video.play().catch(function () {});
+      pauseBtn.classList.remove("is-paused");
+      pauseBtn.setAttribute("aria-label", "Pause background video");
+    } else {
+      video.pause();
+      pauseBtn.classList.add("is-paused");
+      pauseBtn.setAttribute("aria-label", "Play background video");
+    }
+  }
+  if (pauseBtn && video) {
+    pauseBtn.addEventListener("click", function () { setPlaying(video.paused); });
+  }
+
+  // Autoplay only when motion is welcome; reduced-motion keeps the poster.
+  if (allowMotion) {
+    setPlaying(true);
+  } else if (pauseBtn) {
+    pauseBtn.classList.add("is-paused");
+    pauseBtn.setAttribute("aria-label", "Play background video");
+  }
+
+  if (!window.gsap || !window.ScrollTrigger || !allowMotion) { return; }
+  gsap.registerPlugin(ScrollTrigger);
+  // ScrollToPlugin lets the scroll guide GLIDE to GSAP-computed scene points
+  // with GSAP's own easing — a native-feeling, consistent move.
+  if (window.ScrollToPlugin) { gsap.registerPlugin(ScrollToPlugin); window.__scrollToReady = true; }
+
+  /* NATIVE SCROLL — no smooth-scroll library. This is how Apple actually
+     does it: the page scrolls natively (the OS/trackpad provides the
+     momentum) and the animation is tied DIRECTLY to the native scroll
+     position. A JS smoother (Lenis et al.) adds a lerp delay between your
+     input and the motion, which — stacked on the scrub — is what made
+     this feel sluggish. Native + a 1:1 scrub feels instant and crisp. */
+
+  /* ---- Slow continuous push-in, like a patient camera move ---- */
+  gsap.fromTo("#heroVideo", { scale: 1.0 },
+    { scale: 1.06, duration: 24, ease: "sine.inOut", repeat: -1, yoyo: true });
+
+  /* ---- Entrance choreography (plays once on load) ---- */
+  var tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+  tl.fromTo(".fhero__scrim",  { opacity: 0 }, { opacity: 1, duration: 1.0 }, 0.2)
+    .fromTo(".fhero__kicker",
+      { opacity: 0, y: 18, letterSpacing: "0.34em" },
+      { opacity: 1, y: 0, letterSpacing: "0.16em", duration: 0.9 }, 0.3)
+    // the signature move: line lifts out of the clipped edge, blur clearing
+    .fromTo(".fhero__line",
+      { yPercent: 110, y: 0, filter: "blur(10px)" },
+      { yPercent: 0, y: 0, filter: "blur(0px)", duration: 1.2, stagger: 0.12 }, 0.45)
+    .fromTo(".fhero__sub",
+      { opacity: 0, y: 20, filter: "blur(6px)" },
+      { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.9 }, 0.95)
+    .fromTo(".fhero__primary",
+      { opacity: 0, y: 18, scale: 0.96 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.8 }, 1.15)
+    .fromTo(".fhero__alt",
+      { opacity: 0, y: 18 },
+      { opacity: 1, y: 0, duration: 0.8 }, 1.22)
+    .fromTo(".fhero__cue",
+      { opacity: 0, y: -6 },
+      { opacity: 1, y: 0, duration: 0.7 }, 1.6);
+
+  /* ---- Scroll recede (scrubbed, transform + opacity only) ---- */
+  var st = { trigger: ".fhero", start: "top top", end: "bottom top", scrub: true };
+
+  // Video pushes down and scales up — past it, into depth.
+  gsap.fromTo(".fhero__media", { yPercent: 0, scale: 1 },
+    { yPercent: 10, scale: 1.08, ease: "none", immediateRender: false, scrollTrigger: st });
+
+  // Scrim deepens so the next section can emerge from underneath.
+  gsap.fromTo(".fhero__deepen", { opacity: 0 },
+    { opacity: 1, ease: "none", immediateRender: false, scrollTrigger: st });
+
+  // Type + CTAs lift and dissolve faster than the film — layered recede.
+  gsap.fromTo(".fhero__card", { yPercent: 0, opacity: 1 },
+    { yPercent: -26, opacity: 0, ease: "none", immediateRender: false,
+      scrollTrigger: { trigger: ".fhero", start: "top top", end: "56% top", scrub: true } });
+  gsap.fromTo(".fhero__baseline", { yPercent: 0, opacity: 1 },
+    { yPercent: -30, opacity: 0, ease: "none", immediateRender: false,
+      scrollTrigger: { trigger: ".fhero", start: "top top", end: "50% top", scrub: true } });
+  gsap.to(".fhero__cue", { opacity: 0, ease: "none",
+    scrollTrigger: { trigger: ".fhero", start: "top top", end: "12% top", scrub: true } });
+
+  /* ---- Beat 2 · The Invitation ----
+     Same masked line-lift + blur-clear as the hero, now triggered
+     on scroll-in (once) as the reader settles on the block. */
+  if (document.querySelector(".invite")) {
+    gsap.timeline({
+      defaults: { ease: "power4.out" },
+      scrollTrigger: { trigger: ".invite", start: "top 78%", once: true }
+    })
+      .fromTo(".invite__line",
+        { yPercent: 110, y: 0, filter: "blur(8px)" },
+        { yPercent: 0, y: 0, filter: "blur(0px)", duration: 1.1, stagger: 0.12 }, 0)
+      .fromTo(".invite__sub",
+        { opacity: 0, y: 20, filter: "blur(6px)" },
+        { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.9 }, 0.5)
+      .fromTo(".invite__cta",
+        { opacity: 0, y: 16, scale: 0.97 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.8 }, 0.75);
+  }
+
+  /* ---- Beat 3 · The Campus Walk ----
+     Pinned, scrub-driven master timeline on desktop; a static vertical
+     sequence with on-enter reveals on mobile / narrow. Transform +
+     opacity + per-scene scale only — no blur on the scrub. */
+  var walk = document.querySelector(".walk");
+  if (walk) {
+    var mm = gsap.matchMedia();
+
+    /* DESKTOP — the pinned film
+       Pacing philosophy (the Apple feel): LONG DWELL, SHORT TRANSITION.
+       Each scene holds perfectly still and readable for most of its
+       scroll budget; the cross-dissolve to the next happens only in the
+       last fifth. So at any rest point you are almost always parked on a
+       fully-resolved scene — there is no "between" to get lost in.
+       Crucially: NO scroll-snap and NO smooth-scroll library. The page
+       scrolls natively and the film is tied 1:1 to that native scroll,
+       so it tracks your wheel/trackpad instantly — exactly how Apple's
+       scroll sections feel. */
+    mm.add("(min-width: 900px)", function () {
+      var scenes = gsap.utils.toArray(".walk__scene");
+      var last = scenes.length - 1;
+      var lead = 1.4;   // beat 2 → beat 3 cross-dissolve lead-in
+      var seg  = 1.0;   // per-scene scroll budget (equal for every scene)
+      var tail = 0.9;   // closing-recede room after the saved-scene dwell
+
+      gsap.set(".walk__media", { autoAlpha: 0 });
+      gsap.set(scenes[0].querySelector(".walk__media"), { autoAlpha: 1 });
+      gsap.set(".walk__imgwrap", { scale: 1.06 });
+      gsap.set(".walk__cap", { autoAlpha: 0, y: 20 });
+      gsap.utils.toArray(".walk__emph").forEach(function (e) { e.classList.add("is-dim"); });   // resolves a beat after its line
+      gsap.set(".walk__savedline", { autoAlpha: 0, y: 20 });
+      gsap.set(".walk__savedcta", { autoAlpha: 0, y: 14, scale: 0.98 });
+      gsap.set(".walk__handoff", { yPercent: 100 });
+      gsap.set(".walk__progressbar", { scaleX: 0 });
+
+      /* EXPERIMENT: scrub 1 (1-second smoothing) instead of scrub:true
+         (1:1 native). With scrub:1 the film eases ~1s behind the scroll —
+         softer/floatier; with true it tracks the wheel instantly. Native
+         scroll, no snap. The long-dwell / short-transition pacing below
+         still lands you on a fully-resolved scene. */
+      var tl = gsap.timeline({
+        defaults: { ease: "none" },
+        scrollTrigger: {
+          trigger: ".walk", start: "top top", end: "bottom bottom",
+          scrub: 1, pin: ".walk__stage", anticipatePin: 1, invalidateOnRefresh: true
+        }
+      });
+
+      /* PHASE 0 — the cross-dissolve from beat 2.
+         The pin engages while beat 2 (held still by sticky, overlapping
+         this stage) still fills the screen, so nothing slides. The whole
+         light field fades out IN PLACE while scene 1, already pinned
+         beneath it, comes through. */
+      tl.to(".invite", { autoAlpha: 0, duration: lead, ease: "power1.inOut" }, 0);
+      tl.fromTo(".invite > .container", { scale: 1 },
+        { scale: 1.03, duration: lead, ease: "power1.inOut" }, 0);
+      tl.fromTo(scenes[0].querySelector(".walk__imgwrap"), { scale: 1.08 },
+        { scale: 1.06, duration: lead, ease: "power1.out" }, 0);
+
+      scenes.forEach(function (scene, i) {
+        var wrap = scene.querySelector(".walk__imgwrap");
+        var media = scene.querySelector(".walk__media");
+        var t = lead + i * seg;
+        // a slow, continuous push for the WHOLE scene — a living still
+        tl.fromTo(wrap, { scale: 1.06 }, { scale: 1.12, duration: seg, ease: "none" }, t);
+
+        if (i < last) {
+          var cap = scene.querySelector(".walk__cap");
+          // quick settle in (gentle, no overshoot) → long hold → quick lift out
+          tl.fromTo(cap, { y: 20, autoAlpha: 0 },
+            { y: 0, autoAlpha: 1, duration: seg * 0.16, ease: "power2.out" }, t + seg * 0.06);
+          tl.to(cap, { y: -16, autoAlpha: 0, duration: seg * 0.15, ease: "power2.in" }, t + seg * 0.83);
+          // cross-dissolve confined to the last fifth — most of the scene is a clean hold
+          var next = scenes[i + 1].querySelector(".walk__media");
+          tl.to(media, { autoAlpha: 0, duration: seg * 0.20 }, t + seg * 0.80);
+          tl.fromTo(next, { autoAlpha: 0 }, { autoAlpha: 1, duration: seg * 0.20 }, t + seg * 0.80);
+        } else {
+          // the climax: two lines settle in sequence, then the button a beat later
+          tl.fromTo(".walk__savedline", { y: 20, autoAlpha: 0 },
+            { y: 0, autoAlpha: 1, duration: seg * 0.30, stagger: 0.1, ease: "power2.out" }, t + seg * 0.10);
+          tl.fromTo(".walk__savedcta", { y: 14, autoAlpha: 0, scale: 0.98 },
+            { y: 0, autoAlpha: 1, scale: 1, duration: seg * 0.30, ease: "power3.out" }, t + seg * 0.44);
+        }
+      });
+
+      // progress line fills across the walk, settling by the saved-scene dwell
+      var lastStart = lead + last * seg;
+      tl.to(".walk__progressbar", { scaleX: 1, duration: (lastStart + seg * 0.6) - lead, ease: "none" }, lead);
+      tl.to(".walk__progress", { autoAlpha: 0, duration: seg * 0.3 }, lastStart + seg * 0.72);
+      // tail room so the closing recede has scroll to ease across
+      tl.to({}, { duration: tail }, lastStart + seg);
+
+      // The orange highlights resolve on a scroll TRIGGER (a real-time color
+      // pop), not by scrubbing — each fires as its scene's subtext settles.
+      var walkTotal = tl.duration();
+      scenes.forEach(function (scene, i) {
+        if (i >= last) return;
+        var emph = scene.querySelector(".walk__emph");
+        if (!emph) return;
+        var f = (lead + i * seg + seg * 0.16) / walkTotal;
+        ScrollTrigger.create({
+          trigger: ".walk",
+          start: function () {
+            var st = tl.scrollTrigger;
+            return st.start + f * (st.end - st.start);
+          },
+          onEnter: function () { emph.classList.remove("is-dim"); },
+          onLeaveBack: function () { emph.classList.add("is-dim"); }
+        });
+      });
+
+      // Drive the PERSISTENT scroll guide through the film: its label becomes
+      // the current scene's marker, so it changes as you move. The lead-in
+      // ("A day on campus") shows before scene 1; the final saved scene hands
+      // off to its own CTA, so the guide hides there.
+      // Expose the film's natural scene rest points so the persistent guide
+      // can GLIDE the page exactly there — the same positions the scrubbed
+      // film settles on, computed from GSAP's own timeline + ScrollTrigger.
+      window.__walk = {
+        count: scenes.length,
+        current: -1,
+        scrubbed: true,    // film visual is driven by a 1s scrub (see guide click)
+        scrollFor: function (idx) {
+          var st = tl.scrollTrigger;
+          var time = (idx < last) ? (lead + idx * seg + seg * 0.5)
+                                  : (lead + idx * seg + seg * 0.6);
+          return st.start + (time / tl.duration()) * (st.end - st.start);
+        }
+      };
+      function guideMarker(idx) {
+        // The pill names the NEXT scene (purely navigational). It skips
+        // "Arrival": while Arrival is on screen it already says "Living".
+        if (idx < 0) { return "A day on campus"; }
+        var n = idx + 1;
+        if (n > last) { return null; }            // on the saved finale → hide
+        if (n === last) { return "Come see it"; } // next is the saved finale
+        var m = scenes[n] && scenes[n].querySelector(".walk__marker");
+        return m ? m.textContent.replace(/\s+/g, " ").trim() : "A day on campus";
+      }
+      // Continuous, lag-free label: read the film's own time each frame and
+      // derive the dominant scene, switching exactly when the cross-dissolve
+      // flips. (Point triggers fired a beat late, so the previous scene's
+      // text lingered — this tracks the scrub directly.)
+      var lastGuideIdx = -2;
+      tl.eventCallback("onUpdate", function () {
+        var t = tl.time();
+        var idx = Math.floor((t - lead + seg * 0.1) / seg);
+        if (idx < -1) { idx = -1; }
+        if (idx > last) { idx = last; }
+        if (idx === lastGuideIdx) { return; }
+        lastGuideIdx = idx;
+        if (window.__walk) { window.__walk.current = idx; }
+        if (window.__guideFilm) { window.__guideFilm(guideMarker(idx), idx >= last); }
+      });
+
+      // THE FINISHING RECEDE — its own trigger with a heavier scrub so it
+      // eases/lags a touch more than the film. Begins as the CTA finishes
+      // settling and runs through the tail, so the slide-up and the recede
+      // read as one continuous move onto the white ground.
+      var closeStartF = (lastStart + seg * 0.72) / walkTotal;
+      var closeEndF   = (lastStart + seg + tail * 0.85) / walkTotal;
+      ScrollTrigger.create({
+        trigger: ".walk",
+        start: function () { var st = tl.scrollTrigger; return st.start + closeStartF * (st.end - st.start); },
+        end:   function () { var st = tl.scrollTrigger; return st.start + closeEndF   * (st.end - st.start); },
+        scrub: 1,
+        animation: gsap.fromTo(".walk__scenes",
+          { scale: 1, yPercent: 0, y: 0, borderRadius: 0, transformOrigin: "50% 68%" },
+          { scale: 0.88, borderRadius: 18, ease: "power2.inOut" })
+      });
+    });
+
+    /* MOBILE / NARROW — native-scroll, full-bleed story panels.
+       The phone keeps its OWN scroll: no pin, no snap, no smooth-scroll
+       library (those are what break touch). Each scene is a 100svh
+       panel; the photo gets a quiet parallax as the panel passes, and
+       the one-liner + subtext rise once as the panel arrives. Simple,
+       so it stays buttery on touch. */
+    mm.add("(max-width: 899px)", function () {
+      gsap.set(".walk__media", { autoAlpha: 1 });
+      gsap.set(".walk__progress", { autoAlpha: 0 });
+      // emph is orange by default on mobile (CSS) — clear any desktop dim
+      gsap.utils.toArray(".walk__emph").forEach(function (e) { e.classList.remove("is-dim"); });
+
+      function parallax(scene) {
+        var wrap = scene.querySelector(".walk__imgwrap");
+        if (!wrap) { return; }
+        gsap.set(wrap, { scale: 1.18 });   // overscan so the drift never bares an edge
+        gsap.fromTo(wrap, { yPercent: -5 }, {
+          yPercent: 5, ease: "none",
+          scrollTrigger: { trigger: scene, start: "top bottom", end: "bottom top", scrub: 1 }
+        });
+      }
+
+      gsap.utils.toArray(".walk__scene:not(.walk__scene--saved)").forEach(function (scene) {
+        var cap = scene.querySelector(".walk__cap");
+        parallax(scene);
+        gsap.timeline({ scrollTrigger: { trigger: scene, start: "top 60%", once: true } })
+          .fromTo(cap, { y: 26, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.8, ease: "power3.out" });
+      });
+
+      // Keep the PERSISTENT scroll guide in sync with the visible panel, and
+      // expose each panel's scroll position so the guide can glide there.
+      var mScenes = gsap.utils.toArray(".walk__scene");
+      window.__walk = {
+        count: mScenes.length,
+        current: -1,
+        scrubbed: false,   // native-scroll panels — glide smoothly
+        scrollFor: function (idx) {
+          var s = mScenes[idx];
+          return s ? s.getBoundingClientRect().top + (window.pageYOffset || 0) : 0;
+        }
+      };
+      var mLast = mScenes.length - 1;
+      function mNext(i) {
+        // pill names the NEXT panel (skips "Arrival")
+        var n = i + 1;
+        if (n > mLast) { return null; }
+        if (n === mLast) { return "Come see it"; }
+        var m = mScenes[n] && mScenes[n].querySelector(".walk__marker");
+        return m ? m.textContent.replace(/\s+/g, " ").trim() : "A day on campus";
+      }
+      mScenes.forEach(function (scene, i) {
+        function activate() {
+          var label = mNext(i);
+          if (window.__walk) { window.__walk.current = i; }
+          if (window.__guideFilm) { window.__guideFilm(label, label === null); }
+        }
+        ScrollTrigger.create({
+          trigger: scene, start: "top 55%", end: "bottom 45%",
+          onEnter: activate, onEnterBack: activate
+        });
+      });
+
+      var saved = document.querySelector(".walk__scene--saved");
+      if (saved) { parallax(saved); }
+      gsap.timeline({ scrollTrigger: { trigger: ".walk__scene--saved", start: "top 58%", once: true } })
+        .fromTo(".walk__savedline", { y: 26, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.85, stagger: 0.12, ease: "power3.out" }, 0)
+        .fromTo(".walk__savedcta", { y: 16, autoAlpha: 0, scale: 0.97 },
+          { y: 0, autoAlpha: 1, scale: 1, duration: 0.7, ease: "power4.out" }, 0.4);
+    });
+  }
+
+  /* ---- Beat 4 · The Trust Beat ----
+     Restraint, the opposite of the walk. The headline reveals with the
+     masked-line + blur signature; the numbers rise and fade one after
+     another; the quote fades in; the button rises last. Transform +
+     opacity only — blur clears once on the headline. The 99% counts up
+     as the hero figure enters. Fires once on scroll-in. */
+  if (document.querySelector(".trust")) {
+    var figval = document.querySelector(".trust__figval");
+    function trustCountUp() {
+      if (!figval) { return; }
+      var n = { v: 0 };
+      gsap.to(n, {
+        v: 99, duration: 1.3, ease: "power2.out",
+        onUpdate: function () { figval.textContent = Math.round(n.v); }
+      });
+    }
+
+    gsap.timeline({
+      defaults: { ease: "power4.out" },
+      scrollTrigger: { trigger: ".trust", start: "top 76%", once: true }
+    })
+      .fromTo(".trust__line",
+        { yPercent: 110, y: 0, filter: "blur(8px)" },
+        { yPercent: 0, y: 0, filter: "blur(0px)", duration: 1.1, stagger: 0.12 }, 0)
+      .fromTo(".trust__bridge",
+        { opacity: 0, y: 18 },
+        { opacity: 1, y: 0, duration: 0.8 }, 0.5)
+      .fromTo(".trust__hero",
+        { opacity: 0, y: 26 },
+        { opacity: 1, y: 0, duration: 0.85, onStart: trustCountUp }, 0.72)
+      .fromTo(".trust__rank",
+        { opacity: 0, y: 22 },
+        { opacity: 1, y: 0, duration: 0.7, stagger: 0.16 }, 1.02)
+      .fromTo(".trust__voice",
+        { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, duration: 0.95 }, 1.5);
+  }
+
+  /* ---- Final CTA · Ways to Visit ----
+     Gentle fade-ins, no set piece. Head, the primary, the label, then
+     the two option cards rise in sequence. Fires once on scroll-in. */
+  if (document.querySelector(".finalcta")) {
+    gsap.timeline({
+      defaults: { ease: "power3.out" },
+      scrollTrigger: { trigger: ".finalcta", start: "top 80%", once: true }
+    })
+      .fromTo(".finalcta__head",
+        { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.7 }, 0)
+      .fromTo(".finalcta__primary",
+        { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.85 }, 0.12)
+      .fromTo(".finalcta__altsHead",
+        { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6 }, 0.42)
+      .fromTo(".finalcta__card",
+        { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, stagger: 0.14 }, 0.52);
+  }
+
+  // Pinned triggers need accurate measurements once images + fonts settle.
+  window.addEventListener("load", function () { ScrollTrigger.refresh(); });
+})();
+</script>
+
+<!-- ===================== SCROLL GUIDE =====================
+     Standalone + framework-free so it runs for everyone. Picks the
+     "current zone" from native scroll position (robust to the desktop
+     invite/walk overlap by keying off section starts only). It stays
+     visible through the campus-walk too, where the walk drives its label
+     scene-by-scene via window.__guideFilm(). Hides only at the closing CTA. -->
+<script>
+(function () {
+  var guide = document.getElementById("scrollGuide");
+  var labelEl = guide && guide.querySelector(".scrollguide__label");
+  if (!guide || !labelEl) { return; }
+
+  var invite   = document.querySelector(".invite");    // film begins
+  var trust    = document.querySelector(".trust");      // film ends, trust begins
+  var finalcta = document.querySelector(".finalcta");   // arrived
+
+  // Film label state — set by the campus-walk (desktop timeline / mobile
+  // panels). Defaults to a lead-in so the pill teases the card section.
+  var film = { label: "A day on campus", hide: false };
+  window.__guideFilm = function (label, hide) {
+    film.label = label || "A day on campus";
+    film.hide = !!hide;
+    update();
+  };
+
+  var mode = "next";          // "next" → glide to nextTarget; "film" → advance through the film
+  var nextTarget = null;
+
+  // iOS-style understated label swap: fade the old text out, EASE the pill to
+  // the new text's measured width while it's hidden, then fade the new text in
+  // to an already-correct pill — so it never clips (no ellipsis).
+  var pendingLabel = null, swapTimer = null, releaseTimer = null, sizer = null;
+  function measureLabel(text) {
+    if (!sizer) {
+      sizer = document.createElement("span");
+      sizer.setAttribute("aria-hidden", "true");
+      sizer.style.cssText = "position:absolute;left:-9999px;top:-9999px;visibility:hidden;white-space:nowrap;pointer-events:none;";
+      document.body.appendChild(sizer);
+    }
+    var cs = window.getComputedStyle(labelEl);
+    sizer.style.fontFamily = cs.fontFamily;
+    sizer.style.fontSize = cs.fontSize;
+    sizer.style.fontWeight = cs.fontWeight;
+    sizer.style.letterSpacing = cs.letterSpacing;
+    sizer.textContent = text;
+    return sizer.getBoundingClientRect().width;
+  }
+  function setLabel(label) {
+    if (pendingLabel === label) { return; }
+    if (labelEl.textContent === label && pendingLabel === null) { return; }
+    pendingLabel = label;
+    clearTimeout(swapTimer); clearTimeout(releaseTimer);
+    // the pill's fixed chrome (padding + gap + chevron) = pill − label
+    var pillExtra = guide.getBoundingClientRect().width - labelEl.getBoundingClientRect().width;
+    var toW = Math.ceil(pillExtra + measureLabel(label)) + 1;
+    var fromW = Math.ceil(guide.getBoundingClientRect().width);
+    // lock current width, fade old text out, ease width to the target
+    guide.style.width = fromW + "px";
+    labelEl.classList.add("is-swapping");
+    void guide.offsetWidth;
+    guide.style.width = toW + "px";
+    swapTimer = setTimeout(function () {
+      labelEl.textContent = pendingLabel;       // swap while invisible + correctly sized
+      labelEl.classList.remove("is-swapping");  // fade new text in (no clip)
+      pendingLabel = null;
+      releaseTimer = setTimeout(function () {
+        guide.style.width = "auto";             // exact at rest → never ellipsizes
+      }, 200);
+    }, 200);
+  }
+  function show(label) {
+    guide.classList.remove("is-hidden");
+    setLabel(label);
+  }
+  function hide() { guide.classList.add("is-hidden"); }
+
+  var ticking = false;
+  function update() {
+    ticking = false;
+    var probe = (window.pageYOffset || document.documentElement.scrollTop || 0) + window.innerHeight * 0.45;
+    var inviteTop = invite ? invite.offsetTop : Infinity;
+    var trustTop  = trust ? trust.offsetTop : Infinity;
+    var finalTop  = finalcta ? finalcta.offsetTop : Infinity;
+
+    if (probe < inviteTop) {                 // hero — points into the film
+      mode = "next"; nextTarget = invite; show("Take a look around");
+    } else if (probe < trustTop) {           // the campus-walk film — purely navigational, names the NEXT scene
+      mode = "film"; nextTarget = trust;
+      if (film.hide) { hide(); } else { show(film.label); }
+    } else if (probe < finalTop) {           // trust beat → the closing
+      mode = "next"; nextTarget = finalcta; show("Ways to visit");
+    } else {                                 // closing CTA — arrived
+      hide(); nextTarget = null;
+    }
+  }
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+
+  // Glide via GSAP's ScrollToPlugin (consistent easing) when available,
+  // else native smooth scroll.
+  function glideTo(y) {
+    y = Math.max(0, Math.round(y));
+    if (window.gsap && window.__scrollToReady) {
+      window.gsap.to(window, { duration: 0.6, scrollTo: y, ease: "power2.out", overwrite: true });
+    } else {
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  }
+
+  guide.addEventListener("click", function () {
+    if (mode === "film") {
+      var w = window.__walk;
+      if (w && typeof w.scrollFor === "function") {
+        // advance to the NEXT scene's rest point (the name the pill is showing)
+        var next = Math.min((w.current | 0) + 1, w.count - 1);
+        var y = Math.max(0, Math.round(w.scrollFor(next)));
+        if (w.scrubbed) {
+          // The film is pinned and driven by a 1s scrub. A timed scroll tween
+          // makes the film ramp up from zero velocity (the "sticky" slow start).
+          // Instead, jump the scroll position NOW — the scrub's own lerp moves
+          // the film fastest at the start, so it responds the instant you press.
+          window.scrollTo(0, y);
+        } else {
+          glideTo(y);
+        }
+      } else {
+        glideTo((window.pageYOffset || document.documentElement.scrollTop || 0) + window.innerHeight * 0.9);
+      }
+      return;
+    }
+    if (!nextTarget) { return; }
+    glideTo(nextTarget.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop || 0));
+  });
+
+  /* ---- Visit-request modal (opened by the card-section CTA) ---- */
+  var vmodal = document.getElementById("visitModal");
+  function openModal() {
+    if (!vmodal) { return; }
+    vmodal.classList.add("is-open");
+    vmodal.setAttribute("aria-hidden", "false");
+    var f = vmodal.querySelector("input, select, button");
+    if (f) { try { f.focus({ preventScroll: true }); } catch (e) {} }
+  }
+  function closeModal() {
+    if (!vmodal) { return; }
+    vmodal.classList.remove("is-open");
+    vmodal.setAttribute("aria-hidden", "true");
+    // after the close transition, restore the form view for next time
+    setTimeout(function () {
+      var fw = document.getElementById("visitModalForm");
+      var dn = document.getElementById("visitModalDone");
+      var fm = document.getElementById("visitForm");
+      if (dn && !dn.hidden) { dn.hidden = true; if (fw) { fw.hidden = false; } if (fm) { fm.reset(); } }
+    }, 380);
+  }
+  // Inject a per-slide visit CTA under each day-scene caption, then wire all
+  // [data-visit-modal] triggers (these + any others) to open the form modal.
+  [].forEach.call(document.querySelectorAll(".walk__scene:not(.walk__scene--saved) .walk__cap"), function (cap) {
+    if (cap.querySelector(".walk__cta")) { return; }
+    var a = document.createElement("a");
+    a.className = "walk__cta";
+    a.href = "https://discover.highpoint.edu/portal/campus_visit";
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.innerHTML = 'Plan your visit <span aria-hidden="true">\u2192</span>';
+    cap.appendChild(a);
+  });
+  [].forEach.call(document.querySelectorAll("[data-visit-modal]"), function (el) {
+    el.addEventListener("click", function (e) { e.preventDefault(); openModal(); });
+  });
+  if (vmodal) {
+    var scrim = document.getElementById("visitModalScrim");
+    var closeBtn = document.getElementById("visitModalClose");
+    if (scrim) { scrim.addEventListener("click", closeModal); }
+    if (closeBtn) { closeBtn.addEventListener("click", closeModal); }
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && vmodal.classList.contains("is-open")) { closeModal(); }
+    });
+    var form = document.getElementById("visitForm");
+    var formWrap = document.getElementById("visitModalForm");
+    var done = document.getElementById("visitModalDone");
+    if (form) {
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        if (!form.checkValidity()) { form.reportValidity(); return; }
+        if (formWrap) { formWrap.hidden = true; }
+        if (done) { done.hidden = false; }
+      });
+    }
+    var doneClose = document.getElementById("visitModalDoneClose");
+    if (doneClose) { doneClose.addEventListener("click", closeModal); }
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", update, { passive: true });
+  window.addEventListener("load", update);
+  document.addEventListener("DOMContentLoaded", update);
+  update();
+})();
+</script>
+
+</body>
+</html>

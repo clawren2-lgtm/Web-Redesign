@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>High Point University — You Were Meant to be Extraordinary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="hpu-home.css">
+<link rel="stylesheet" href="hpu-home-v2.css">
+<script>
+  /* AEO-safe motion gate: hide about-to-animate elements before first
+     paint, but only when JS runs with reduced-motion off; failsafe
+     reveals within 3s. (Same pattern as the rest of the site.) */
+  (function () {
+    try {
+      var ok = window.matchMedia && window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
+      if (!ok) { return; }
+      var d = document.documentElement;
+      d.classList.add("js-anim");
+      setTimeout(function () {
+        if (!window.__motionReady) { d.classList.remove("js-anim"); }
+      }, 3000);
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+
+<!-- ===================== STICKY SUB-NAV ===================== -->
+<nav class="subnav subnav--home" aria-label="Section navigation">
+  <div class="subnav__inner">
+    <a class="subnav__brand" href="#top">High Point University <span>Admissions</span></a>
+    <div class="subnav__links">
+      <a href="#life-skills">Life Skills</a>
+      <a href="#innovators">Innovators</a>
+      <a href="#academics">Academics</a>
+      <a href="#outcomes">Outcomes</a>
+      <a href="#community">Community</a>
+      <a href="#visit" class="subnav__cta">Schedule a Visit</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===================== 1 · HERO ===================== -->
+<header class="hero hero--v2 on-dark" id="top" aria-label="Hero" data-screen-label="Hero">
+  <div class="hero__media">
+    <video class="hero__video hero__video--desktop" autoplay loop muted playsinline aria-hidden="true">
+      <source src="uploads/lifeskills banner video.mp4" type="video/mp4">
+    </video>
+    <video class="hero__video hero__video--mobile" autoplay loop muted playsinline aria-hidden="true">
+      <source src="uploads/lifeskills banner video.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero__scrim" aria-hidden="true"></div>
+  <div class="hero__content">
+    <p class="eyebrow">The Premier Life Skills University</p>
+    <h1 class="hero__h1">You Were Meant<br>to be Extraordinary<sup style="font-size:0.3em;vertical-align:super;font-weight:400;">&reg;</sup></h1>
+    <p class="hero__sub">HPU built its entire curriculum around the skills that decide what happens after graduation.</p>
+    <div class="btn-row">
+      <a href="#visit" class="btn btn--primary btn--lg">Schedule a Visit</a>
+      <a href="#visit" class="btn btn--ghost btn--lg">Request Info</a>
+      <a href="#visit" class="btn btn--text btn--lg">Apply</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== 2 · PREMIER LIFE SKILLS ===================== -->
+<section class="section" id="life-skills" aria-labelledby="life-skills-heading" data-screen-label="Premier Life Skills">
+  <div class="container">
+    <div class="lifeskills__intro reveal">
+      <p class="eyebrow">Premier Life Skills</p>
+      <h2 class="h2" id="life-skills-heading">The only sitting university president in the country who teaches your freshman class.</h2>
+      <p class="lead">Every incoming student takes the President's Seminar on Life Skills, taught by President Nido Qubein himself. It is where the skills employers cannot find &mdash; communicating, adapting, leading, solving problems without an answer key &mdash; get built into the curriculum, not added as an elective.</p>
+      <a href="#film" class="btn btn--primary" id="watchFilm">Watch the Film</a>
+    </div>
+    <div class="videofacade reveal" id="lifeSkillsFilm" role="button" tabindex="0" aria-label="Play the HPU Life Skills film">
+      <div class="videofacade__poster">
+        <img src="uploads/Presidents Seminar on Life Skills.jpg" alt="President Nido Qubein teaching the President's First-Year Seminar on Life Skills">
+      </div>
+      <div class="videofacade__play" aria-hidden="true"></div>
+      <p class="videofacade__cap">The President's Seminar on Life Skills</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 3 · RANKINGS AND OUTCOMES ===================== -->
+<section class="section bg-soft" aria-labelledby="stats-heading" data-screen-label="Rankings &amp; Outcomes">
+  <div class="container">
+    <h2 class="h2 center mx-auto measure reveal" id="stats-heading" style="margin-bottom:clamp(36px,4vw,56px);">The proof shows up in the numbers.</h2>
+    <div class="statgrid" id="statGrid">
+      <div class="statcard">
+        <span class="statcard__num" data-final="99%">99%</span>
+        <span class="statcard__lab">employed or in graduate school within 180 days</span>
+        <span class="statcard__src">14 points above the national average &middot; NACE First-Destination Survey</span>
+      </div>
+      <div class="statcard">
+        <span class="statcard__num">#1</span>
+        <span class="statcard__lab">Best-Run College in the Nation</span>
+        <span class="statcard__src">The Princeton Review, Best 390 Colleges</span>
+      </div>
+      <div class="statcard">
+        <span class="statcard__num">#1</span>
+        <span class="statcard__lab">Best Regional College in the South &mdash; 13 consecutive years</span>
+        <span class="statcard__src">U.S. News &amp; World Report</span>
+      </div>
+    </div>
+    <div class="section-cta reveal">
+      <a href="#visit" class="btn btn--primary">Schedule a Visit</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 4 · ACCESS TO INNOVATORS ===================== -->
+<section class="section" id="innovators" aria-labelledby="innovators-heading" data-screen-label="Access to Innovators">
+  <div class="container">
+    <div class="opener reveal">
+      <p class="eyebrow">Access to Innovators</p>
+      <h2 class="h2" id="innovators-heading" style="margin-top:0.4em;">Learn from the people who built what you use.</h2>
+    </div>
+    <p class="leadcap reveal" style="text-align:center;margin-top:28px;">More than 30 global leaders mentor HPU students &mdash; on campus, in the room, in conversation. Not a guest lecture. <b>Access.</b></p>
+    <div class="carousel">
+      <div class="carousel__track" id="innoTrack" role="region" tabindex="0" aria-label="Innovators in Residence"></div>
+      <div class="carousel__foot">
+        <div class="carousel__nav">
+          <button class="carousel__btn" id="innoPrev" type="button" aria-label="Previous">&#8249;</button>
+          <button class="carousel__btn" id="innoNext" type="button" aria-label="Next">&#8250;</button>
+        </div>
+      </div>
+    </div>
+    <div class="section-cta reveal">
+      <a href="#visit" class="btn btn--primary">Request Info</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 5 · THE TRANSFORMATION ===================== -->
+<section class="section bg-soft" aria-labelledby="transformation-heading" data-screen-label="The Transformation">
+  <div class="container">
+    <div class="opener reveal">
+      <p class="eyebrow">Since 2005</p>
+      <h2 class="h2" id="transformation-heading" style="margin-top:0.4em;">A university in motion.</h2>
+    </div>
+    <div class="xform">
+      <div class="xrow xrow--then reveal">
+        <div class="xrow__text">
+          <span class="xrow__era">2005</span>
+          <ul class="xstats" role="list">
+            <li><strong data-final="28">28</strong> buildings</li>
+            <li><strong data-final="3">3</strong> schools</li>
+            <li><strong data-final="$38M">$38M</strong> operating budget</li>
+            <li><strong data-final="650,000">650,000</strong> sq ft</li>
+            <li><strong data-final="385">385</strong> employees</li>
+          </ul>
+        </div>
+        <div class="xrow__media ph"><span class="ph__label">campus &middot; circa 2005</span></div>
+      </div>
+      <div class="xrow xrow--now reveal">
+        <div class="xrow__media ph"><span class="ph__label">campus &middot; today, 500-acre</span></div>
+        <div class="xrow__text">
+          <span class="xrow__era">Today</span>
+          <ul class="xstats" role="list">
+            <li><strong data-final="130">130</strong> buildings</li>
+            <li><strong data-final="14">14</strong> schools</li>
+            <li><strong data-final="$406M">$406M</strong> operating budget</li>
+            <li><strong data-final="4.5M">4.5M</strong> sq ft</li>
+            <li><strong data-final="2,318">2,318</strong> employees</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 6 · THE COMMUNITY ===================== -->
+<section class="section" id="community" aria-labelledby="community-heading" data-screen-label="The Community">
+  <div class="container">
+    <div class="opener reveal">
+      <p class="eyebrow">Campus Life</p>
+      <h2 class="h2" id="community-heading" style="margin-top:0.4em;">95% of students choose to live here. There is a reason.</h2>
+    </div>
+  </div>
+  <div class="container">
+    <div class="cluster" aria-hidden="true">
+      <div class="cluster__img cluster__img--side reveal ph"><span class="ph__label">Mariana H. Qubein Arboretum &middot; one of 31 gardens</span></div>
+      <div class="cluster__img cluster__img--center reveal ph"><span class="ph__label">students on Kester Promenade</span></div>
+      <div class="cluster__img cluster__img--side reveal ph"><span class="ph__label">residence hall &middot; #6 Best College Dorms</span></div>
+    </div>
+    <div class="community__body reveal">
+      <p class="lead">A 500-acre campus designed to make you want to be here. From the Mariana H. Qubein Arboretum and its 31 gardens to the residence halls that earned the #6 Best College Dorms ranking &mdash; the campus is the argument.</p>
+      <div class="section-cta">
+        <a href="#visit" class="btn btn--primary">Schedule a Visit</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 7 · ACADEMIC PORTFOLIO ===================== -->
+<section class="section bg-soft" id="academics" aria-labelledby="academics-heading" data-screen-label="Academic Portfolio">
+  <div class="container">
+    <div class="opener reveal">
+      <p class="eyebrow">Academics</p>
+      <h2 class="h2" id="academics-heading" style="margin-top:0.4em;">Find your school.</h2>
+      <p class="lead" style="margin-top:22px;">14 schools and a graduate college. 80+ programs. Step through them one at a time.</p>
+    </div>
+    <div class="closer reveal">
+      <div class="closer__nav">
+        <button class="closer__arrow" id="closerPrev" type="button" aria-label="Previous school">&#9650;</button>
+        <button class="closer__arrow" id="closerNext" type="button" aria-label="Next school">&#9660;</button>
+      </div>
+      <div class="closer__list" id="closerList" role="tablist" aria-label="HPU schools"></div>
+      <div class="closer__media" id="closerMedia"></div>
+    </div>
+    <div class="section-cta reveal">
+      <a href="#visit" class="btn btn--primary">Find Your Program</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 8 · GRADUATE OUTCOMES ===================== -->
+<section class="section" id="outcomes" aria-labelledby="outcomes-heading" data-screen-label="Graduate Outcomes">
+  <div class="container">
+    <div class="opener reveal">
+      <p class="eyebrow">Career Outcomes</p>
+      <h2 class="h2" id="outcomes-heading" style="margin-top:0.4em;">99% employed or in graduate school within 180 days.</h2>
+      <p class="lead" style="margin-top:18px;">14 points above the national average.<span class="flag-inline">data gate &middot; named profiles placeholder</span></p>
+    </div>
+    <div class="fieldgallery reveal">
+      <div class="fieldgallery__media" id="fieldMedia">
+        <div class="fieldchip">
+          <span class="fieldchip__fig" id="fieldChipFig"></span>
+          <span class="fieldchip__lab" id="fieldChipLab"></span>
+        </div>
+      </div>
+      <div class="pills" id="fieldPills" role="tablist" aria-label="Graduate outcomes by field"></div>
+      <div class="outcome">
+        <p class="outcome__name" id="outcomeName"></p>
+        <p class="outcome__dest" id="outcomeDest"></p>
+        <p class="outcome__prog" id="outcomeProg"></p>
+      </div>
+    </div>
+    <div class="section-cta reveal">
+      <a href="#visit" class="btn btn--primary btn--lg">Apply</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 9 · VALUE EQUATION ===================== -->
+<section class="section bg-soft" id="value" aria-labelledby="value-heading" data-screen-label="Value Equation">
+  <div class="container">
+    <div class="split">
+      <div class="split__text reveal">
+        <p class="eyebrow">For Families</p>
+        <h2 class="h2" id="value-heading" style="margin-top:0.4em;">An education built to return more than it costs.</h2>
+        <p class="lead split__body" style="margin-top:22px;">The total cost of attendance is $80,687. After aid and scholarships, the average direct investment is <b>$48,429</b> &mdash; roughly $11,000 less than peer private universities. HPU distributes more than $75 million in scholarship support every year.</p>
+        <div class="statcallout">
+          <div class="statcallout__fig" data-final="$48,429">$48,429</div>
+          <p class="statcallout__lab">average direct investment after aid</p>
+        </div>
+        <div style="margin-top:26px;"><a href="#visit" class="btn btn--primary">See Financial Planning</a></div>
+      </div>
+      <div class="ph split__media reveal"><img src="uploads/Career Outcomes.jpg" alt="A family visiting the HPU campus" style="width:100%;height:100%;object-fit:cover;object-position:center;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 10 · FINAL CTA BLOCK ===================== -->
+<section class="section bg-purple on-dark" id="visit" aria-labelledby="final-cta-heading" data-screen-label="Final CTA">
+  <div class="container">
+    <div class="center measure mx-auto reveal">
+      <p class="eyebrow">Where to next</p>
+      <h2 class="statement__h" id="final-cta-heading" style="margin-top:0.3em;font-size:clamp(2.2rem,4.8vw,3.8rem);">Two ways in.</h2>
+    </div>
+    <div class="audiencesplit">
+      <div class="audiencecol reveal">
+        <p class="audiencecol__k">Students</p>
+        <h3 class="audiencecol__h">Find your program.</h3>
+        <ul class="audiencecol__list" role="list">
+          <li><a href="#academics">Explore 80+ programs across 14 schools</a></li>
+          <li><a href="#visit">Meet your admissions counselor</a></li>
+          <li><a href="#visit">Plan your visit</a></li>
+        </ul>
+        <div class="audiencecol__cta"><a href="#academics" class="btn btn--primary">Find Your Program</a></div>
+      </div>
+      <div class="audiencecol reveal">
+        <p class="audiencecol__k">Parents</p>
+        <h3 class="audiencecol__h">See the value.</h3>
+        <ul class="audiencecol__list" role="list">
+          <li><a href="#value">Understand the investment and the aid</a></li>
+          <li><a href="#value">Explore financial planning</a></li>
+          <li><a href="#outcomes">Read the outcomes &mdash; 99%, first in North Carolina</a></li>
+        </ul>
+        <div class="audiencecol__cta"><a href="#value" class="btn btn--ghost">Explore Financial Planning</a></div>
+      </div>
+    </div>
+    <div class="btn-row finaltrio reveal">
+      <a href="#visit" class="btn btn--primary btn--lg">Schedule a Visit</a>
+      <a href="#visit" class="btn btn--ghost btn--lg">Request Info</a>
+      <a href="#visit" class="btn btn--text btn--lg">Apply</a>
+    </div>
+    <p class="fafsa-line">FAFSA 002933 &middot; SAT 5293 &middot; ACT 3108</p>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <div>
+      <div class="footer__brand">High Point University</div>
+      <div class="footer__meta" style="margin-top:6px;">The Premier Life Skills University &middot; One University Parkway, High Point, NC 27268</div>
+    </div>
+    <div class="footer__meta" style="text-align:right;">Career outcomes verified to NACE First-Destination Survey standards &middot; Class of 2025</div>
+  </div>
+</footer>
+
+<!-- ===================== STICKY MOBILE CTA ===================== -->
+<div class="stickycta" id="stickyCta" aria-label="Primary action">
+  <a href="#visit" class="btn btn--primary">Schedule a Visit</a>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="hpu-home-v2.js"></script>
+
+</body>
+</html>

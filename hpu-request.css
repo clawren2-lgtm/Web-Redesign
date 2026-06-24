@@ -1,0 +1,1177 @@
+/* ============================================================
+   HPU — Request Information page. Net-new components only.
+   Loads AFTER styles.css; reuses Bitter · Poppins · purple
+   (#330072) tokens, .btn, .ph, .bg-purple, .container, .footer.
+   The form is the conversion experience: a white card that
+   rises into the hero, expanding progressively as it is filled.
+   ============================================================ */
+
+:root {
+  /* fallback / no-FX overlap of the card into the hero */
+  --rq-overlap: clamp(64px, 9vh, 120px);
+  /* FX mode — the held scroll DISTANCE the card travels while the hero is
+     pinned. The card's BASE margin-top equals this, so on load the card sits
+     exactly at the viewport bottom (hidden) and rises the full distance purely
+     through the sticky hold — a LAYOUT move, not a transform. Keeping the entire
+     rise in layout means the page tail (footer included) stays in honest flow
+     with no stranded blank slack at the bottom of the document. */
+  --rq-scroll: 70vh;
+}
+
+/* button size add-on (lives in v2 css on the homepage; redefined
+   here so this page is self-contained) */
+.btn--lg { font-size: 1.08rem; padding: 0.95em 1.9em; }
+
+/* ============================================================
+   SLATE FORM OVERRIDES
+   These rules override Slate's default form styles to match
+   the HPU design language. Class names and specificity are
+   chosen to win against Slate's defaults without !important
+   wherever possible. In production, load after Slate's CSS.
+   ============================================================ */
+
+/* Hide Slate loading state + all conditionally hidden elements */
+.form_loading,
+.form_question.hidden,
+.form_page.hidden,
+[data-hidden-by-condition="1"],
+[data-invisible="1"] { display: none !important; }
+
+/* Reset Slate's float-based layout */
+.form_container,
+.form_pages { width: 100%; }
+.form_page { clear: none !important; width: 100%; float: none !important; }
+
+/* Each question row */
+.form_question {
+  clear: none !important;
+  float: none !important;
+  width: 100% !important;
+  margin-bottom: clamp(14px, 1.8vw, 18px);
+  box-sizing: border-box;
+}
+
+/* ============================================================
+   SECTION HEADERS
+   ============================================================ */
+.form_question.form_header {
+  margin-top: clamp(24px, 2.8vw, 34px);
+  margin-bottom: clamp(14px, 1.6vw, 18px);
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--ae-line);
+}
+.form_question.form_header .form_label {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 0.76rem !important;
+  letter-spacing: 0.13em !important;
+  text-transform: uppercase !important;
+  color: var(--ae-purple) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  display: block;
+}
+
+/* Notice paragraph */
+.form_question.form_p .form_label {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: var(--ae-text-secondary);
+  background: var(--ae-gray);
+  border: 1px solid var(--ae-line);
+  border-radius: var(--r-btn);
+  padding: 12px 16px;
+  display: block;
+}
+.form_question.form_p .form_label strong { color: var(--ae-text); font-weight: 600; }
+.form_question.form_p .form_label a { color: var(--ae-purple); }
+
+/* Field labels */
+.form_question .form_label {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 500 !important;
+  font-size: 0.84rem;
+  letter-spacing: 0.01em;
+  color: var(--ae-text);
+  display: block;
+  margin-bottom: 6px;
+}
+.form_optional { color: #9a9aa2; font-weight: 400; }
+.form_required { color: var(--ae-purple); }
+
+/* All text / email / tel inputs + textarea */
+.form_responses input[type="text"],
+.form_responses input[type="email"],
+.form_responses input[type="tel"],
+.form_responses textarea {
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--ae-text);
+  background: var(--ae-white);
+  border: 1.5px solid var(--ae-line);
+  border-radius: var(--r-btn);
+  padding: 0.8em 0.95em;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.form_responses input::placeholder { color: #a3a3ab; }
+.form_responses input[type="text"]:hover,
+.form_responses input[type="email"]:hover,
+.form_responses input[type="tel"]:hover,
+.form_responses textarea:hover { border-color: #bdbdc6; }
+.form_responses input[type="text"]:focus,
+.form_responses input[type="email"]:focus,
+.form_responses input[type="tel"]:focus,
+.form_responses textarea:focus {
+  outline: none;
+  border-color: var(--ae-purple);
+  box-shadow: 0 0 0 3px rgba(51,0,114,0.13);
+}
+.form_responses input[readonly="readonly"],
+.form_responses input[readonly] {
+  background: var(--ae-gray);
+  color: #8a8a90;
+  cursor: not-allowed;
+  border-color: var(--ae-line);
+}
+.form_responses textarea { resize: vertical; min-height: 62px; }
+
+/* All selects */
+.form_responses select {
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--ae-text);
+  background: var(--ae-white);
+  border: 1.5px solid var(--ae-line);
+  border-radius: var(--r-btn);
+  padding: 0.8em 2.4em 0.8em 0.95em;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath d='M3 5l4 4 4-4' fill='none' stroke='%23330072' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.95em center;
+  margin-left: 0 !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form_responses select:hover { border-color: #bdbdc6; }
+.form_responses select:focus {
+  outline: none;
+  border-color: var(--ae-purple);
+  box-shadow: 0 0 0 3px rgba(51,0,114,0.13);
+}
+
+/* Fieldset resets (used for birthdate, radio, checkbox, address) */
+.form_question fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.form_question fieldset legend {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+}
+
+/* Birthdate — three selects in a row */
+.form_question.form_birthdate .form_responses {
+  display: flex;
+  gap: 10px;
+}
+.form_question.form_birthdate .form_responses select {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Radio + checkbox rows */
+.form_question.form_radio .form_responses,
+.form_question.form_checkbox .form_responses {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.form_question.form_checkbox .form_responses {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 20px;
+}
+@media (max-width: 540px) {
+  .form_question.form_checkbox .form_responses { grid-template-columns: 1fr; }
+}
+.form_response {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.form_response input[type="radio"],
+.form_response input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  flex: none;
+  accent-color: var(--ae-purple);
+  cursor: pointer;
+  border-radius: 3px;
+}
+.form_response label {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 0.94rem;
+  line-height: 1.3;
+  color: var(--ae-text);
+  cursor: pointer;
+}
+
+/* Address sub-sections */
+.form_question.form_address fieldset > div {
+  margin-bottom: clamp(12px, 1.4vw, 16px);
+}
+.form_question.form_address fieldset > div:last-child { margin-bottom: 0; }
+.form_question.form_address .address-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 12px;
+  align-items: start;
+}
+@media (max-width: 460px) {
+  .form_question.form_address .address-row { grid-template-columns: 1fr; }
+}
+
+/* Two-column question row (e.g. First / Last Name, Mobile / Home Phone) */
+.form_question_row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(14px, 1.6vw, 18px);
+}
+.form_question_row .form_question { margin-bottom: 0; }
+@media (max-width: 460px) { .form_question_row { grid-template-columns: 1fr; } }
+
+/* Submit wrapper — centered, intrinsic width (not full-bleed across the wide card) */
+.rq-submit-wrap { margin-top: clamp(22px, 2.6vw, 30px); display: flex; justify-content: flex-end; }
+.rq-submit { width: auto; min-width: 0; }
+
+/* prevent layout shift while line cross-fades */
+.rq-form__line { min-height: 1.2em; display: block; }
+/* greeting stays at the big headline size; the reassurance drops to a
+   smaller subline so the personalized (longer) copy never blows out. */
+.rq-greet  { display: inline; }
+.rq-detail {
+  display: block;
+  font-family: "Poppins", sans-serif; font-weight: 400;
+  font-size: clamp(0.98rem, 1.4vw, 1.18rem);
+  line-height: 1.5; letter-spacing: 0;
+  color: var(--ae-text-secondary);
+  margin-top: 0.6em; text-wrap: pretty;
+}
+
+/* ============================================================
+   TOP BAR (slim, over the purple hero)
+   ============================================================ */
+.rq-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 20;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
+  max-width: var(--maxw-wide);
+  margin-inline: auto;
+  padding: 20px clamp(22px, 5vw, 48px);
+}
+.rq-bar__brand {
+  font-family: "Bitter", serif; font-weight: 700; font-size: 1.06rem;
+  color: #fff; text-decoration: none;
+  display: flex; align-items: baseline; gap: 0.5em; white-space: nowrap;
+}
+.rq-bar__brand span { font-family: "Poppins", sans-serif; font-weight: 400; font-size: 0.82rem; color: rgba(255,255,255,0.72); }
+.rq-bar__link {
+  font-family: "Poppins", sans-serif; font-size: 0.88rem; font-weight: 500;
+  color: rgba(255,255,255,0.86); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 0.4em;
+  transition: color 0.2s ease, gap 0.2s ease;
+}
+.rq-bar__link:hover { color: #fff; gap: 0.6em; }
+@media (max-width: 600px) { .rq-bar__link span { display: none; } }
+
+/* ============================================================
+   1 · HERO — full-bleed photo, focus on the meeting at center.
+   The text lives at the BOTTOM (left lead + right action); only the
+   lower band is darkened, fading smoothly upward into the image.
+   ============================================================ */
+.rq-pinwrap { position: relative; }
+
+.rq-hero {
+  position: relative;
+  min-height: clamp(560px, 90vh, 1000px);
+  overflow: hidden;
+  background: #160030;
+  display: block;
+}
+
+/* Full-bleed background image — keeps the handshake + faces in frame */
+.rq-hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 34%;
+  z-index: 0;
+  display: block;
+  transform-origin: 50% 38%;
+  will-change: transform;
+}
+
+/* Slim top scrim: legibility for the white bar over the bright wall */
+.rq-hero__topscrim {
+  position: absolute; top: 0; left: 0; right: 0; height: 32%;
+  z-index: 1; pointer-events: none;
+  background: linear-gradient(to bottom, rgba(10,0,28,0.46) 0%, rgba(10,0,28,0) 100%);
+}
+
+/* Bottom scrim: darkens only the lower band, fading to nothing by ~54% up */
+.rq-hero__scrim {
+  position: absolute; inset: 0;
+  z-index: 1; pointer-events: none;
+  background: linear-gradient(
+    to top,
+    rgba(11,0,32,0.88) 0%,
+    rgba(11,0,32,0.70) 11%,
+    rgba(11,0,32,0.42) 26%,
+    rgba(11,0,32,0.16) 40%,
+    rgba(11,0,32,0.02) 50%,
+    rgba(11,0,32,0) 58%
+  );
+}
+
+.rq-bar { z-index: 20; }
+
+/* Edge vignette: transparent center, darkened corners. Held at opacity 0
+   until the scroll FX fades it in (after the words have blurred away) to
+   draw the eye toward the form rising in the middle. */
+.rq-hero__vignette {
+  position: absolute; inset: 0;
+  z-index: 2; pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(ellipse 80% 74% at 50% 42%,
+    rgba(8,0,24,0) 40%,
+    rgba(8,0,24,0.30) 76%,
+    rgba(8,0,24,0.66) 100%);
+}
+
+/* bottom text row: lead (left) + action (right) */
+.rq-hero__textrow {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  z-index: 3;
+  max-width: 1720px;
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: clamp(24px, 5vw, 72px);
+  padding-top: 0;
+  padding-bottom: clamp(34px, 6vh, 76px);
+  will-change: opacity, transform, filter;
+}
+.rq-hero__lead { max-width: 880px; }
+.rq-hero__lead, .rq-hero__actionk { text-shadow: 0 1px 2px rgba(8,0,24,0.45), 0 2px 30px rgba(8,0,24,0.30); }
+.rq-hero__eyebrow { color: var(--ae-orange-bright); }
+.rq-hero__h1 {
+  font-family: "Bitter", serif; font-weight: 700;
+  font-size: clamp(2.7rem, 6.2vw, 4.2rem);
+  line-height: 0.98; letter-spacing: -0.035em; color: #fff;
+  margin: 0.22em 0 0; text-wrap: balance;
+}
+.rq-hero__h2 {
+  font-family: "Poppins", sans-serif; font-weight: 500;
+  font-size: clamp(0.98rem, 1.3vw, 1.2rem);
+  line-height: 1.5; letter-spacing: 0;
+  color: rgba(255,255,255,0.84);
+  margin: 0.85em 0 0; max-width: 620px;
+}
+.rq-hero__action {
+  flex: none; text-align: right; padding-bottom: 6px;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 11px;
+}
+.rq-hero__actionk {
+  font-family: "Poppins", sans-serif; font-weight: 400;
+  font-size: clamp(0.86rem, 1.1vw, 0.96rem);
+  color: rgba(255,255,255,0.78);
+}
+/* understated visit action — small ghost pill, secondary to the headline */
+.rq-hero__visit {
+  font-size: 0.92rem; font-weight: 500;
+  padding: 0.5em 1.15em;
+  border-color: rgba(255,255,255,0.45);
+}
+
+@media (max-width: 720px) {
+  /* Taller hero so wrapped copy + form-card overlap both fit without collision */
+  .rq-hero { min-height: max(96vh, 700px); }
+  .rq-hero__bg { object-position: 58% 26%; }
+  /* Layout only — no extra padding-bottom; JS lifts the text when the form slides in */
+  .rq-hero__textrow { flex-direction: column; align-items: flex-start; gap: 22px; }
+  .rq-hero__action { text-align: left; align-items: flex-start; }
+  .rq-hero__action .btn { width: auto; }
+
+  /* Scrim extended much higher — covers the larger text block on mobile */
+  .rq-hero__scrim {
+    background: linear-gradient(
+      to top,
+      rgba(11,0,32,0.92) 0%,
+      rgba(11,0,32,0.78) 14%,
+      rgba(11,0,32,0.58) 30%,
+      rgba(11,0,32,0.34) 48%,
+      rgba(11,0,32,0.14) 62%,
+      rgba(11,0,32,0.03) 74%,
+      rgba(11,0,32,0) 84%
+    );
+  }
+}
+
+/* Extra lift for very small phones (SE, older Android) */
+@media (max-width: 480px) {
+  .rq-hero { min-height: max(98vh, 640px); }
+}
+
+/* ------------------------------------------------------------
+   FX MODE (added by JS only on capable, motion-OK desktops):
+   the hero becomes sticky inside the taller .rq-pinwrap so it is
+   HELD while the form card rises over it; pin releases naturally
+   when the pinwrap scrolls past. No transforms drive layout, so
+   resize/orientation just re-evaluates the sticky box — robust.
+   ------------------------------------------------------------ */
+.rq-fx .rq-pinwrap { height: calc(100vh + var(--rq-scroll)); }
+.rq-fx .rq-hero {
+  position: sticky; top: 0;
+  height: 100vh; min-height: 0;
+}
+
+/* ============================================================
+   2 · FORM SECTION — a single, wide, centered card that rises
+   up to overlay the hero. .rq-main is transparent so only the
+   card sits over the held hero (the image stays visible around it).
+   ============================================================ */
+.rq-main {
+  background: transparent;
+  position: relative; z-index: 5;
+  margin-top: calc(-1 * var(--rq-overlap));   /* overlap into hero */
+}
+/* FX mode: base margin equals the scroll distance, so the card starts at the
+   viewport bottom on load (hidden) and rises 1:1 with scroll. The EXTRA lift
+   that anchors it higher is layered on via a scroll-driven transform in JS. */
+.rq-fx .rq-main { margin-top: calc(-1 * var(--rq-scroll)); }
+/* The footer's negative margin-bottom (which trims the blank slack the tail
+   transform leaves below it) is set in JS to the exact pixel value of the lift,
+   so it tracks the transform precisely and updates on resize. */
+
+.rq-grid {
+  position: relative; z-index: 5;
+  max-width: 860px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 5vw, 48px);
+  padding-bottom: var(--section-y);
+  display: block;
+}
+
+/* ---- the form card (the single main event) ---- */
+.rq-form {
+  background: var(--ae-white);
+  border: 1px solid rgba(51,0,114,0.10);
+  border-radius: 22px;
+  box-shadow:
+    0 1px 2px rgba(20,0,60,0.04),
+    0 44px 90px -34px rgba(26,0,78,0.46);
+  padding: clamp(26px, 3.4vw, 52px);
+  display: flex; flex-direction: column;
+}
+.rq-form__top { text-align: center; }
+.rq-form__eyebrow {
+  font-family: "Poppins", sans-serif; font-weight: 600; font-size: 0.82rem;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ae-purple);
+}
+.rq-form__line {
+  font-family: "Bitter", serif; font-weight: 700;
+  font-size: clamp(2.1rem, 4.2vw, 3.4rem); line-height: 1.06;
+  letter-spacing: -0.028em; color: var(--ae-text);
+  margin-top: 13px; text-wrap: balance;
+  transition: color 0.3s ease;
+}
+/* slim progress line under the header — fills as stages open */
+.rq-form__progress {
+  height: 3px; width: min(280px, 70%);
+  margin: clamp(18px, 2vw, 24px) auto 0;
+  background: var(--ae-gray-2);
+  border-radius: 99px; overflow: hidden;
+}
+.rq-form__progressfill {
+  display: block; height: 100%; width: 20%;
+  background: var(--ae-purple); border-radius: 99px;
+  transition: width 0.55s cubic-bezier(0.22,0.61,0.36,1);
+}
+.rq-form__body { margin-top: clamp(22px, 2.6vw, 30px); }
+
+/* quiet "what you'll get" line — a thank-you for connecting, subordinate to
+   the headline. Sits between the progress bar and the fields. */
+.rq-form__gift {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--ae-text-secondary);
+  max-width: 46ch;
+  margin: clamp(14px, 1.6vw, 18px) auto 0;
+  text-wrap: pretty;
+}
+.rq-form__gift strong { font-weight: 600; color: var(--ae-purple); }
+
+/* ---- progressive stages — GSAP owns height + opacity ---- */
+.formstage {
+  overflow: hidden;
+  margin-top: 0;
+  transition: margin-top 0.45s cubic-bezier(0.22,0.61,0.36,1);
+}
+.formstage.is-open { height: auto !important; opacity: 1 !important; margin-top: clamp(18px, 2.2vw, 24px); }
+.formstage:first-child.is-open { margin-top: 0; }
+
+/* Autofill detection: Chrome fires animationstart on :-webkit-autofill;
+   JS listens and instantly reveals all stages so Chrome can fill them. */
+@keyframes rq-autofill-detect { from { opacity: 1; } to { opacity: 1; } }
+.form_responses input:-webkit-autofill,
+.form_responses select:-webkit-autofill {
+  animation-name: rq-autofill-detect;
+  animation-duration: 1ms;
+}
+.formstage__inner {
+  display: flex; flex-direction: column; gap: clamp(16px, 1.9vw, 20px);
+}
+
+/* ============================================================
+   SCROLL-GATED REVEAL — "Required to continue" indicator
+   Applied by hpu-request.js (.is-missing on a .form_question) when
+   the user scrolls past a section's bottom with a required field
+   still empty. On-brand Web Orange, gentle, and only ever shown
+   AFTER the user has engaged with the form. Removed the moment the
+   field is filled. To disable, set GATE_ENABLED=false in the JS.
+   ============================================================ */
+.form_question.is-missing > .form_responses input[type="text"],
+.form_question.is-missing > .form_responses input[type="email"],
+.form_question.is-missing > .form_responses input[type="tel"],
+.form_question.is-missing > .form_responses textarea,
+.form_question.is-missing .form_responses select {
+  border-color: var(--ae-orange);
+  box-shadow: 0 0 0 3px rgba(194, 90, 10, 0.14);
+}
+.form_question.is-missing .seg label span {
+  border-color: var(--ae-orange);
+}
+.form_question.is-missing > .form_label,
+.form_question.is-missing fieldset > .form_label,
+.form_question.is-missing legend { color: var(--ae-orange); }
+.form_question.is-missing .form_required { color: var(--ae-orange); }
+
+/* Inline helper line under the flagged field */
+.rq-fieldmsg {
+  display: flex; align-items: center; gap: 7px;
+  margin-top: 8px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500; font-size: 0.78rem; letter-spacing: 0.01em;
+  color: var(--ae-orange);
+}
+.rq-fieldmsg::before {
+  content: "!"; flex: none;
+  width: 15px; height: 15px; border-radius: 50%;
+  background: var(--ae-orange); color: #fff;
+  font-size: 11px; font-weight: 700; line-height: 15px; text-align: center;
+}
+
+/* A single, gentle nudge when the flag first appears (motion-safe only) */
+@media (prefers-reduced-motion: no-preference) {
+  .form_question.rq-shake { animation: rq-shake 0.46s cubic-bezier(0.36, 0.07, 0.19, 0.97); }
+  @keyframes rq-shake {
+    10%, 90% { transform: translateX(-1px); }
+    20%, 80% { transform: translateX(2px); }
+    30%, 50%, 70% { transform: translateX(-3px); }
+    40%, 60% { transform: translateX(3px); }
+  }
+}
+
+/* ---- fields ---- */
+.field { display: flex; flex-direction: column; gap: 7px; }
+.field__label {
+  font-family: "Poppins", sans-serif; font-weight: 500; font-size: 0.84rem;
+  letter-spacing: 0.01em; color: var(--ae-text);
+}
+.field__label .opt { color: #9a9aa2; font-weight: 400; }
+.field__req { color: var(--ae-purple); margin-left: 1px; }
+.field input,
+.field select {
+  font-family: "Poppins", sans-serif; font-size: 1rem; font-weight: 400;
+  color: var(--ae-text); background: var(--ae-white);
+  border: 1.5px solid var(--ae-line); border-radius: var(--r-btn);
+  padding: 0.82em 0.95em; width: 100%;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.field input::placeholder { color: #a3a3ab; }
+.field input:hover, .field select:hover { border-color: #bdbdc6; }
+.field input:focus, .field select:focus {
+  outline: none; border-color: var(--ae-purple);
+  box-shadow: 0 0 0 3px rgba(51,0,114,0.13);
+}
+.field input.is-error, .field select.is-error {
+  border-color: var(--ae-orange); box-shadow: 0 0 0 3px rgba(194,90,10,0.14);
+}
+.field select {
+  appearance: none; -webkit-appearance: none; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath d='M3 5l4 4 4-4' fill='none' stroke='%23330072' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 0.95em center;
+  padding-right: 2.4em;
+}
+.field select:invalid, .field select[data-empty="true"] { color: #a3a3ab; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 1.6vw, 18px); }
+@media (max-width: 460px) { .field-row { grid-template-columns: 1fr; } }
+
+/* ---- button choice pair (segmented selector for 2-option fields) ----
+   The visible button surface is the <span>, driven entirely by the
+   reliable `input:checked + span` sibling selector (no :has() — keeps
+   the checked state working across every rendering engine). */
+.seg { display: flex; gap: clamp(10px, 1.4vw, 14px); }
+.seg label {
+  position: relative; cursor: pointer; flex: 1; display: flex; min-width: 0;
+}
+.seg input {
+  position: absolute; width: 1px; height: 1px;
+  opacity: 0; pointer-events: none; margin: 0;
+}
+.seg label span {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  font-family: "Poppins", sans-serif; font-weight: 500; font-size: 0.94rem;
+  color: var(--ae-text-secondary);
+  padding: 0.72em 1.1em; border-radius: var(--r-btn);
+  border: 1.5px solid var(--ae-line); background: var(--ae-white);
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.seg label:hover span { border-color: #bdbdc6; color: var(--ae-text); }
+.seg input:checked + span,
+.seg label.is-sel span {
+  color: var(--ae-purple); font-weight: 600;
+  border-color: var(--ae-purple); box-shadow: 0 0 0 3px rgba(51,0,114,0.13);
+}
+.seg input:focus-visible + span { box-shadow: 0 0 0 3px rgba(51,0,114,0.28); }
+@media (max-width: 460px) { .seg { flex-direction: column; } }
+
+/* ---- parent note inside the form ---- */
+.rq-parentnote {
+  display: flex; gap: 12px; align-items: flex-start;
+  background: var(--ae-purple-tint); border: 1px solid var(--ae-purple-light);
+  border-radius: var(--r-btn); padding: 14px 16px;
+  font-size: 0.9rem; line-height: 1.5; color: var(--ae-text-secondary);
+}
+.rq-parentnote b { color: var(--ae-text); font-weight: 600; }
+.rq-parentnote::before {
+  content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--ae-purple); margin-top: 7px;
+}
+
+/* ---- submit + fineprint ---- */
+.rq-submit-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: clamp(22px, 2.6vw, 30px);
+}
+.rq-submit-note {
+  padding: 12px 16px;
+  background: rgba(31, 138, 91, 0.08);
+  border: 1.5px solid #1f8a5b;
+  border-radius: var(--r-btn);
+  text-align: center;
+}
+.rq-submit-note p {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.94rem;
+  font-weight: 500;
+  color: #1a5c42;
+  margin: 0;
+  line-height: 1.4;
+}
+.rq-submit-note strong {
+  font-weight: 600;
+  color: #0f3d2a;
+}
+.rq-submit { width: auto; min-width: 0; }
+.rq-submit.is-submitted {
+  background: #1f8a5b;
+  border-color: #1f8a5b;
+  color: #fff;
+}
+.rq-submit.is-submitted:hover {
+  background: #187348;
+  border-color: #187348;
+}
+.rq-fineprint {
+  margin-top: 16px; text-align: center;
+  font-size: 0.78rem; color: #8a8a90; line-height: 1.5;
+}
+
+/* ---- note at the bottom of the card ---- */
+.rq-formfoot {
+  margin-top: clamp(20px, 2.4vw, 28px);
+  padding-top: clamp(16px, 2vw, 22px);
+  border-top: 1px solid var(--ae-line);
+}
+.rq-formfoot__fine {
+  font-size: 0.82rem; line-height: 1.6; color: #8a8a90; margin: 0;
+}
+.rq-formfoot__fine strong { color: var(--ae-text); font-weight: 600; }
+.rq-formfoot__fine a { color: var(--ae-purple); text-decoration: underline; }
+
+/* ---- success state ---- */
+.rq-form.is-done .rq-form__top,
+.rq-form.is-done .rq-formfoot,
+.rq-form.is-done .rq-form__body { display: none; }
+.rq-success { display: none; text-align: center; padding: clamp(12px, 2vw, 24px) 0; }
+.rq-form.is-done .rq-success { display: block; animation: rqRise 0.6s cubic-bezier(0.22,0.61,0.36,1) both; }
+.rq-success__mark {
+  width: 64px; height: 64px; margin: 0 auto; border-radius: 50%;
+  background: var(--ae-purple); display: flex; align-items: center; justify-content: center;
+}
+.rq-success__mark::after {
+  content: ""; width: 16px; height: 28px; margin-top: -5px;
+  border: solid #fff; border-width: 0 3px 3px 0; transform: rotate(43deg);
+}
+.rq-success__h {
+  font-family: "Bitter", serif; font-weight: 700;
+  font-size: clamp(1.6rem, 3vw, 2.3rem); line-height: 1.12;
+  color: var(--ae-text); margin-top: 22px; text-wrap: balance;
+}
+.rq-success__p { color: var(--ae-text-secondary); font-size: 1.05rem; line-height: 1.65; max-width: 440px; margin: 14px auto 0; }
+.rq-success__cta { margin-top: 26px; }
+
+/* ============================================================
+   RIGHT RAIL — "The HPU Difference" stat cards.
+   White container with soft border and rounded corners holding
+   white bordered stat cards, exactly like the Life Skills
+   research band. Fixed minimum width on desktop, responsive scale.
+   ============================================================ */
+.rq-rail {
+  position: sticky; top: clamp(20px, 3vh, 30px); align-self: start;
+  background: var(--ae-white);
+  border: 1px solid var(--ae-line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-soft);
+  display: flex; flex-direction: column;
+
+}
+.rq-rail__k {
+  font-family: "Poppins", sans-serif; font-weight: 600; font-size: 0.74rem;
+  letter-spacing: 0.13em; text-transform: uppercase; color: var(--ae-purple);
+}
+
+/* stats container fills the whole panel */
+.rq-stats { flex: 1; display: flex; flex-direction: column; padding: clamp(24px, 2.8vw, 32px); }
+.rq-stats__head { padding: 2px 2px 0; }
+.rq-stats__title {
+  font-family: "Bitter", serif; font-weight: 700;
+  font-size: clamp(1.2rem, 1.6vw, 1.5rem); line-height: 1.2;
+  letter-spacing: -0.015em; color: var(--ae-text);
+  margin-top: 8px; text-wrap: balance;
+}
+
+/* the grid grows to fill remaining height: 2 × 2 white cards */
+.rq-statgrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(10px, 1.1vw, 14px);
+  margin-top: clamp(14px, 1.6vw, 20px);
+}
+.rq-statcard {
+  background: var(--ae-white); border: 1px solid var(--ae-line);
+  border-radius: var(--r-lg);
+  padding: clamp(11px, 1.2vw, 14px) clamp(14px, 1.5vw, 18px);
+  display: flex; flex-direction: column; gap: 4px;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.4s cubic-bezier(0.22,0.61,0.36,1);
+}
+.rq-statcard:hover { box-shadow: var(--shadow-soft); border-color: rgba(51,0,114,0.22); transform: translateY(-2px); }
+.rq-statcard__fig {
+  font-family: "Bitter", serif; font-weight: 700; white-space: nowrap;
+  font-size: clamp(2.1rem, 2.8vw, 2.9rem); line-height: 1;
+  letter-spacing: -0.03em; color: var(--ae-purple);
+  font-variant-numeric: tabular-nums;
+}
+.rq-statcard__fig i {
+  font-style: normal; font-weight: 700; font-size: 0.56em; margin: 0 0.01em;
+}
+.rq-statcard__lab {
+  font-family: "Poppins", sans-serif; font-weight: 600;
+  font-size: 0.95rem; line-height: 1.3; letter-spacing: -0.005em;
+  color: var(--ae-text); text-wrap: pretty;
+}
+.rq-statcard__src {
+  margin-top: auto; padding-top: 10px;
+  font-family: "Poppins", sans-serif; font-weight: 400;
+  font-size: 0.76rem; line-height: 1.35; color: #8a8a90;
+}
+
+@media (max-width: 900px) {
+  .rq-grid { grid-template-columns: 1fr; }
+  .rq-rail { display: none; }     /* spec: rail not shown on mobile */
+}
+
+/* ============================================================
+   3 · COUNSELOR FINDER STRIP
+   ============================================================ */
+.rq-counselor { 
+  background: var(--ae-gray); 
+  border-block: 1px solid var(--ae-line);
+  margin-top: var(--rq-overlap);
+  position: relative;
+  z-index: 6;
+}
+.rq-counselor__inner {
+  max-width: var(--maxw-wide); margin-inline: auto;
+  padding: clamp(26px, 3.2vw, 40px) clamp(22px, 5vw, 48px);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: clamp(18px, 3vw, 40px); flex-wrap: wrap;
+}
+.rq-counselor__text {
+  font-family: "Bitter", serif; font-weight: 600;
+  font-size: clamp(1.2rem, 2vw, 1.65rem); line-height: 1.2;
+  letter-spacing: -0.01em; color: var(--ae-text);
+}
+@media (max-width: 600px) {
+  .rq-counselor__inner { flex-direction: column; align-items: flex-start; }
+  .rq-counselor .btn { width: 100%; }
+}
+
+/* ============================================================
+   4 · NOT-READY STRIP — two next-best-action cards
+   ============================================================ */
+.rq-next-head { text-align: center; max-width: 640px; margin: 0 auto clamp(34px, 4vw, 52px); }
+.rq-next-head .eyebrow { color: var(--ae-purple); }
+.rq-next {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(18px, 2.4vw, 28px);
+  max-width: var(--maxw-wide); margin-inline: auto;
+  padding-inline: clamp(22px, 5vw, 48px);
+}
+.rq-card {
+  background: var(--ae-white);
+  border: 1px solid var(--ae-line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  text-decoration: none; color: inherit;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.4s cubic-bezier(0.22,0.61,0.36,1);
+}
+.rq-card:hover { box-shadow: var(--shadow-lift); border-color: rgba(51,0,114,0.22); transform: translateY(-3px); }
+.rq-card__media { aspect-ratio: 16 / 10; border-radius: 0; border: none; }
+
+/* Virtual campus card — slow image zoom on hover only */
+.rq-next .rq-card:first-child .rq-card__media {
+  overflow: hidden;
+  position: relative;
+}
+.rq-next .rq-card:first-child .rq-card__media::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: inherit;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1);
+  transform-origin: center center;
+  transition: transform 2s ease;
+  will-change: transform;
+}
+.rq-next .rq-card:first-child:hover .rq-card__media::before {
+  transform: scale(1.1);
+}
+.rq-card__media .ph__label { font-size: 0.7rem; }
+.rq-card__body { padding: clamp(24px, 2.6vw, 34px); display: flex; flex-direction: column; flex: 1; }
+.rq-card__k {
+  font-family: "Poppins", sans-serif; font-weight: 600; font-size: 0.76rem;
+  letter-spacing: 0.13em; text-transform: uppercase; color: var(--ae-purple);
+}
+.rq-card__h { font-family: "Bitter", serif; font-weight: 700; font-size: clamp(1.3rem, 2vw, 1.7rem); line-height: 1.16; margin-top: 11px; color: var(--ae-text); }
+.rq-card__p { margin-top: 11px; font-size: 0.98rem; line-height: 1.6; color: var(--ae-text-secondary); }
+.rq-card__link { margin-top: auto; padding-top: 20px; }
+.rq-card__link .link::after { content: none; }
+@media (max-width: 700px) { .rq-next { grid-template-columns: 1fr; } }
+
+/* ============================================================
+   STICKY MOBILE BAR
+   ============================================================ */
+.rq-sticky {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 100;
+  padding: 12px clamp(16px, 4vw, 24px) calc(12px + env(safe-area-inset-bottom, 0px));
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-top: 1px solid var(--ae-line);
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  transform: translateY(120%);
+  transition: transform 0.38s cubic-bezier(0.22,0.61,0.36,1);
+}
+.rq-sticky.is-on { transform: translateY(0); }
+.rq-sticky__text { font-family: "Poppins", sans-serif; font-weight: 500; font-size: 0.92rem; line-height: 1.3; color: var(--ae-text); }
+.rq-sticky .btn { white-space: nowrap; flex: none; }
+@media (min-width: 769px) { .rq-sticky { display: none !important; } }
+@media (max-width: 380px) { .rq-sticky__text { display: none; } .rq-sticky .btn { width: 100%; } }
+
+/* ============================================================
+   ENTRANCE MOTION (load only — no scroll libs on this page).
+   Default state is visible; animation only runs when motion is
+   allowed, so reduced-motion / no-JS users see content normally.
+   ============================================================ */
+/* ============================================================
+   ENTRANCE MOTION — no-flash pre-paint gate.
+   When JS runs AND motion is allowed, the head script adds
+   html.rq-js, which hides the entrance targets BEFORE first paint.
+   GSAP then fades them in and clears the class. With no JS or
+   reduced-motion, .rq-js is never added, so everything shows.
+   The scroll dissolve animates the PARENT .rq-hero__textrow, while
+   entrance animates its CHILDREN — different targets, no conflict.
+   ============================================================ */
+@media (prefers-reduced-motion: no-preference) {
+  html.rq-js .rq-hero__lead,
+  html.rq-js .rq-hero__action,
+  html.rq-js .rq-form { opacity: 0; }
+}
+
+/* used by the success-state reveal */
+@keyframes rqRise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+/* ============================================================
+   SUCCESS MODAL — replaces the form on submit. GSAP drives the
+   entrance; CSS sets the resting (visible) end-state so reduced
+   motion / no-JS still reads correctly.
+   ============================================================ */
+.rq-modal {
+  position: fixed; inset: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: center;
+  padding: clamp(18px, 4vw, 44px);
+  visibility: hidden;
+}
+.rq-modal.is-open { visibility: visible; }
+.rq-modal__scrim {
+  position: absolute; inset: 0;
+  background: rgba(14, 0, 38, 0.55);
+  backdrop-filter: blur(9px) saturate(150%);
+  -webkit-backdrop-filter: blur(9px) saturate(150%);
+  opacity: 0; cursor: pointer;
+}
+.rq-modal__card {
+  position: relative; z-index: 1;
+  width: 100%; max-width: 540px;
+  max-height: calc(100vh - 36px); overflow-y: auto;
+  background: var(--ae-white);
+  border-radius: 22px;
+  box-shadow: 0 40px 110px -34px rgba(20, 0, 60, 0.62);
+  padding: clamp(30px, 4vw, 50px);
+  text-align: center;
+  opacity: 0;
+}
+.rq-modal__mark {
+  width: 62px; height: 62px; margin: 0 auto;
+  border-radius: 50%; background: var(--ae-purple);
+  display: flex; align-items: center; justify-content: center;
+}
+.rq-modal__mark::after {
+  content: ""; width: 15px; height: 27px; margin-top: -5px;
+  border: solid #fff; border-width: 0 3px 3px 0; transform: rotate(43deg);
+}
+.rq-modal__eyebrow {
+  font-family: "Poppins", sans-serif; font-weight: 600; font-size: 0.78rem;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ae-purple);
+  margin-top: 22px;
+}
+.rq-modal__title {
+  font-family: "Bitter", serif; font-weight: 700;
+  font-size: clamp(1.8rem, 3.4vw, 2.5rem); line-height: 1.08;
+  letter-spacing: -0.02em; color: var(--ae-text);
+  margin-top: 8px; text-wrap: balance;
+}
+.rq-modal__sub {
+  font-size: 1.02rem; line-height: 1.6; color: var(--ae-text-secondary);
+  max-width: 430px; margin: 13px auto 0; text-wrap: pretty;
+}
+.rq-modal__sub strong { color: var(--ae-text); font-weight: 600; }
+
+.rq-modal__next { margin-top: clamp(24px, 3vw, 32px); text-align: left; }
+.rq-modal__nextk {
+  font-family: "Poppins", sans-serif; font-weight: 600; font-size: 0.74rem;
+  letter-spacing: 0.13em; text-transform: uppercase; color: #8a8a90;
+  margin-bottom: 12px;
+}
+.rq-nextopt {
+  display: flex; align-items: center; gap: 16px;
+  padding: 15px 18px;
+  border: 1px solid var(--ae-line); border-radius: var(--r-lg);
+  text-decoration: none; color: inherit;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease,
+              transform 0.4s cubic-bezier(0.22,0.61,0.36,1), background 0.25s ease;
+}
+.rq-nextopt + .rq-nextopt { margin-top: 10px; }
+.rq-nextopt:hover {
+  border-color: rgba(51,0,114,0.28);
+  box-shadow: var(--shadow-soft);
+  transform: translateY(-2px);
+  background: var(--ae-purple-tint);
+}
+.rq-nextopt__icon {
+  flex: none; width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ae-purple);
+}
+.rq-nextopt__body { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+.rq-nextopt__h {
+  font-family: "Poppins", sans-serif; font-weight: 600; font-size: 1rem;
+  line-height: 1.2; color: var(--ae-text);
+}
+.rq-nextopt__p { font-size: 0.88rem; line-height: 1.45; color: var(--ae-text-secondary); }
+.rq-nextopt__arrow {
+  flex: none; font-size: 1.2rem; color: var(--ae-purple);
+  transition: transform 0.25s ease;
+}
+.rq-nextopt:hover .rq-nextopt__arrow { transform: translateX(4px); }
+
+.rq-modal__dismiss {
+  margin-top: clamp(22px, 2.6vw, 28px);
+  background: transparent; border: none;
+  font-family: "Poppins", sans-serif; font-size: 0.9rem; font-weight: 500;
+  color: #8a8a90; cursor: pointer; transition: color 0.2s ease;
+}
+.rq-modal__dismiss:hover { color: var(--ae-text); }
+
+
+/* ============================================================
+   PROOF CARDS — decoupled scroll flourish (engaged + wide only)
+   ------------------------------------------------------------
+   Four standalone outcome proof points in the side gutters of
+   the form region. The .rq-proof track is a direct child of
+   <body>: absolutely positioned from the TOP OF THE DOCUMENT and
+   spanning the hero + the white form section. It is deliberately
+   OUTSIDE .rq-main so it is never touched by the hero scrub
+   transform and never re-measured as the form grows — its
+   ScrollTriggers are fully independent of every other animation.
+   JS sets its height in px exactly once, when it arms (absolute +
+   pointer-events:none, so it never adds page height or blocks
+   clicks). Cards sit at fixed offsets — first centre 200px from
+   the track top, last 200px from its bottom, equidistant between
+   — and simply ride normal page scroll, fading + un-blurring in
+   near the viewport middle and back out as they pass.
+   TWO gates, both required to show (classes live on <html>):
+     .rq-proof-on    — wide screen (≥1440) + motion-OK
+     .rq-proof-armed — the form is FULLY expanded (every stage
+                        open). Until BOTH are set the layer is
+                        display:none and JS has built no triggers,
+                        so the cards do not exist on the page.
+   ============================================================ */
+.rq-proof { display: none; }
+
+.rq-proof-on.rq-proof-armed .rq-proof {
+  display: block;
+  position: absolute;             /* anchored to the document, NOT .rq-main */
+  top: 0; left: 0; right: 0;      /* height is set in px by JS when it arms */
+  z-index: 6;            /* above the form region, below sticky bar (100) / modal (200) */
+  pointer-events: none;  /* purely decorative — never intercepts clicks on the form */
+}
+
+/* CLIP WRAPPER — JS wraps .rq-proof in this at arm time. The track inside is
+   sized to the FULLY-EXPANDED form height (so every card takes its final
+   full-open position immediately), but this wrapper is clipped to the LIVE
+   layout bottom of .rq-main (offsetTop + offsetHeight — immune to GSAP
+   transforms). Any card whose centre sits below the current form bottom stays
+   hidden and adds no blank scroll space until the form expands down to reach
+   it. Once fully expanded the live height exceeds the track → clips nothing,
+   and the original fully-open behaviour is preserved exactly. */
+.rq-proof-clip {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 0;             /* JS: mainEl.offsetTop + mainEl.offsetHeight */
+  overflow: clip;
+  pointer-events: none;
+  z-index: 6;
+}
+
+/* Each card sits in a side gutter, vertically anchored to a fixed point in the
+   track (whose height is fixed at arm time — the form is already fully expanded,
+   so nothing ever moves these anchors again). GSAP owns ONLY opacity + blur at
+   runtime; translateY(-50%) (centering on the anchor) stays in CSS so the two
+   never fight over `transform`. opacity:0 is the pre-paint safety state so
+   nothing flashes before the timelines bind. */
+.rq-proofcard {
+  position: absolute;
+  width: clamp(168px, calc(50vw - 470px), 268px);
+  box-sizing: border-box;
+  padding: clamp(22px, 1.7vw, 30px) clamp(22px, 1.6vw, 28px) clamp(18px, 1.3vw, 23px);
+  background: var(--ae-white);
+  border: 1px solid rgba(51, 0, 114, 0.12);
+  border-radius: 20px;
+  box-shadow:
+    0 1px 2px rgba(20, 0, 60, 0.05),
+    0 34px 72px -34px rgba(26, 0, 78, 0.44);
+  display: flex; flex-direction: column;
+  opacity: 0;
+  transform: translateY(-50%);
+  /* only opacity + blur ever animate — blur is the one repaint cost, kept cheap
+     (small card, and the fade windows mean ≤2 are active at any moment) */
+  will-change: opacity, filter;
+}
+/* gutter anchoring (track is full viewport width): 50% = 50vw = viewport
+   centre; + 402px lands each card ~20px clear of the centred 764px form edge.
+   Paired with the width clamp above (50vw − 430px), the card's OUTER edge sits
+   ~28px in from the viewport edge at the 1440 laptop width — so it has real
+   breathing room and never gets pushed off-screen. */
+.rq-proofcard--left  { right: calc(50% + 402px); }
+.rq-proofcard--right { left:  calc(50% + 402px); }
+
+/* vertical band (card CENTRE, via translateY(-50%)): first centre 200px from the
+   top of the track, last 200px from its bottom, the four spread equidistant.
+   100% = the track's fixed px height (hero + fully-expanded white section), so
+   these positions are measured once and never drift. */
+.rq-proofcard:nth-of-type(1) { top: 200px; }
+.rq-proofcard:nth-of-type(2) { top: calc(200px + (100% - 400px) / 3); }
+.rq-proofcard:nth-of-type(3) { top: calc(200px + (100% - 400px) * 2 / 3); }
+.rq-proofcard:nth-of-type(4) { top: calc(100% - 200px); }
+
+/* kicker — a short category label with a slim purple rule for standalone identity */
+.rq-proofcard__kicker {
+  font-family: "Poppins", sans-serif; font-weight: 600;
+  font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ae-purple);
+  display: inline-flex; align-items: center; gap: 9px;
+}
+.rq-proofcard__fig {
+  font-family: "Bitter", serif; font-weight: 700; white-space: nowrap;
+  font-size: clamp(2.9rem, 3.7vw, 3.8rem); line-height: 0.94;
+  letter-spacing: -0.038em; color: var(--ae-purple);
+  font-variant-numeric: tabular-nums;
+  margin-top: 16px;
+}
+.rq-proofcard__fig i { font-style: normal; font-weight: 700; font-size: 0.5em; margin: 0 0.02em; }
+.rq-proofcard__lab {
+  font-family: "Poppins", sans-serif; font-weight: 600;
+  font-size: clamp(1rem, 1.1vw, 1.12rem); line-height: 1.3;
+  letter-spacing: -0.005em; color: var(--ae-text);
+  margin-top: 13px; text-wrap: pretty;
+}
+.rq-proofcard__src {
+  margin-top: 15px; padding-top: 13px;
+  border-top: 1px solid var(--ae-line);
+  font-family: "Poppins", sans-serif; font-weight: 400;
+  font-size: 0.78rem; line-height: 1.4; color: #8a8a90;
+}
+
+

@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request Information — High Point University</title>
+<meta name="description" content="Get the full story on High Point University. Share a few details and your personal admissions counselor will follow up with real answers, usually within a day.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="hpu-request.css">
+<script>
+  (function () {
+    try {
+      if (!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: no-preference)").matches)) { return; }
+      var d = document.documentElement;
+      d.classList.add("rq-js");
+      setTimeout(function () { d.classList.remove("rq-js"); }, 2500);
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+
+<!-- ===================== HERO ===================== -->
+<!-- .rq-pinwrap is the scroll "stage": in FX mode it is taller than the hero,
+     giving the sticky hero a window to stay held while the form card rises over it. -->
+<div class="rq-pinwrap" id="top">
+<header class="rq-hero on-dark" data-screen-label="Hero">
+  <img class="rq-hero__bg" src="Advisor Meeting 2.JPG" alt="An HPU admissions counselor welcoming a prospective student with a handshake">
+  <!-- top scrim keeps the white bar legible over the bright wall; bottom scrim
+       darkens only the lower band where the text sits, fading smoothly into the image
+       so the handshake and faces at center stay in focus. -->
+  <div class="rq-hero__topscrim" aria-hidden="true"></div>
+  <div class="rq-hero__scrim" aria-hidden="true"></div>
+  <!-- Edge vignette — stays at 0 until the scroll FX closes it in, pushing
+       focus to the form once the words have blurred away. -->
+  <div class="rq-hero__vignette" aria-hidden="true"></div>
+  <div class="rq-bar">
+    <a class="rq-bar__brand" href="HPU Homepage v2.html">High Point University <span>Admissions</span></a>
+    <a class="rq-bar__link" href="https://discover.highpoint.edu/portal/find-your-counselor">Find your counselor <span>&rarr;</span></a>
+  </div>
+  <div class="rq-hero__textrow container">
+    <div class="rq-hero__lead">
+      <p class="eyebrow rq-hero__eyebrow">Request Information</p>
+      <h1 class="rq-hero__h1">Connect with your admissions counselor.</h1>
+      <p class="rq-hero__h2">A real person, ready with real answers</p>
+    </div>
+    <!-- Secondary "visit instead" action removed for now — preserved for later.
+    <div class="rq-hero__action">
+      <p class="rq-hero__actionk">Rather see it in person?</p>
+      <a class="btn btn--ghost rq-hero__visit" href="https://www.highpoint.edu/visit/">Schedule a Visit &rarr;</a>
+    </div>
+    -->
+  </div>
+</header>
+</div>
+
+<!-- ===================== FORM SECTION ===================== -->
+<main class="rq-main">
+  <div class="rq-grid">
+
+    <!-- ---------- THE FORM (single wide centered card) ---------- -->
+    <section class="rq-form" id="request-form" aria-labelledby="form-line" data-screen-label="Request Form">
+      <div class="rq-form__top">
+        <p class="rq-form__eyebrow">Request Information</p>
+        <p class="rq-form__line" id="form-line">Start something extraordinary.</p>
+        <div class="rq-form__progress" aria-hidden="true"><span class="rq-form__progressfill" id="rqProgress"></span></div>
+      </div>
+
+      <!--
+        PRODUCTION NOTE:
+        Load in this order before this block:
+          1. jQuery (FW.$)
+          2. Slate FormFiller.js
+          3. Slate Suggest.js
+          4. Slate address.js
+        Then uncomment the Slate init <script> below.
+        All field IDs, name attrs, and data-export values are preserved verbatim.
+      -->
+      <div class="rq-form__body" id="rqFormBody">
+        <!-- In production Slate wraps form_container in a <form> element.
+             This wrapper enables Chrome autofill in the prototype. -->
+        <form autocomplete="on" onsubmit="return false;" novalidate>
+        <div class="form_container">
+          <div id="form_page_e0507628-37e0-4199-85fa-33e41955455b">
+            <div class="form_loading hidden" aria-hidden="true">Loading&hellip;</div>
+            <div class="form_pages" aria-hidden="false">
+
+              <!-- ══════════════════════════════════════════════════════════
+                   STAGE 0 — Name + Email (always visible)
+                   Gates: First Name, Last Name, Email
+                   ══════════════════════════════════════════════════════════ -->
+              <div class="formstage is-open" data-stage="0">
+                <div class="formstage__inner">
+
+                  <div class="form_question_row">
+                    <div class="form_question form_text form_layout_stacked" style="clear:left;" data-id="9a1886c5-a2f1-49b1-ad15-2895c17b47fc" data-type="text" data-export="sys:first" data-required="1">
+                      <label for="form_9a1886c5-a2f1-49b1-ad15-2895c17b47fc" class="form_label">First Name <span class="form_required">*</span></label>
+                      <div class="form_responses"><input type="text" id="form_9a1886c5-a2f1-49b1-ad15-2895c17b47fc" name="form_9a1886c5-a2f1-49b1-ad15-2895c17b47fc" value="" autocomplete="given-name" spellcheck="false" required="required" data-req></div>
+                    </div>
+                    <div class="form_question form_text form_layout_stacked" style="clear:left;" data-id="f0f40d02-c093-4008-bbf0-d41c5c30fa41" data-type="text" data-export="sys:last" data-required="1">
+                      <label for="form_f0f40d02-c093-4008-bbf0-d41c5c30fa41" class="form_label">Last Name <span class="form_required">*</span></label>
+                      <div class="form_responses"><input type="text" id="form_f0f40d02-c093-4008-bbf0-d41c5c30fa41" name="form_f0f40d02-c093-4008-bbf0-d41c5c30fa41" value="" autocomplete="family-name" spellcheck="false" required="required" data-req></div>
+                    </div>
+                  </div>
+
+                  <div class="form_question form_text form_layout_stacked" style="clear:left;" data-id="88bf477a-7350-4492-9a95-c7777296192b" data-type="text" data-export="sys:email" data-required="1">
+                    <label for="form_88bf477a-7350-4492-9a95-c7777296192b" class="form_label">Email Address <span class="form_required">*</span></label>
+                    <div class="form_responses"><input type="email" id="form_88bf477a-7350-4492-9a95-c7777296192b" name="form_88bf477a-7350-4492-9a95-c7777296192b" value="" autocomplete="email" spellcheck="false" required="required" data-req placeholder="you@email.com"></div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- ══════════════════════════════════════════════════════════
+                   STAGE 1 — Contact Details
+                   Gates: Gender, "I am a:"
+                   ══════════════════════════════════════════════════════════ -->
+              <div class="formstage" data-stage="1">
+                <div class="formstage__inner">
+
+                  <div class="form_question form_header form_layout_stacked" style="clear:left;" data-type="header">
+                    <div class="form_label">Contact Information</div>
+                  </div>
+
+                  <div class="form_question form_text form_layout_stacked" style="clear:left;" data-id="586a4489-401b-4f6f-8f29-684afa91531c" data-type="text" data-export="sys:middle">
+                    <label for="form_586a4489-401b-4f6f-8f29-684afa91531c" class="form_label">Middle Name <span class="form_optional">(optional)</span></label>
+                    <div class="form_responses"><input type="text" id="form_586a4489-401b-4f6f-8f29-684afa91531c" name="form_586a4489-401b-4f6f-8f29-684afa91531c" value="" autocomplete="additional-name" spellcheck="false"></div>
+                  </div>
+
+                  <div class="form_question_row">
+                    <div class="form_question form_text form_layout_stacked" style="clear:left;" data-id="415b4f62-12da-4ac9-adb6-79b9062b6d24" data-type="text" data-export="sys:mobile">
+                      <label for="form_415b4f62-12da-4ac9-adb6-79b9062b6d24" class="form_label">Mobile Phone <span class="form_optional">(optional)</span></label>
+                      <div class="form_responses"><input type="tel" id="form_415b4f62-12da-4ac9-adb6-79b9062b6d24" name="form_415b4f62-12da-4ac9-adb6-79b9062b6d24" value="" placeholder="(555) 123-4567" autocomplete="tel" spellcheck="false"></div>
+                    </div>
+                    <div class="form_question form_text form_layout_stacked" style="clear:left;" data-id="314dfc53-7738-4b56-8500-d1cf2fa7c280" data-type="text" data-export="sys:phone">
+                      <label for="form_314dfc53-7738-4b56-8500-d1cf2fa7c280" class="form_label">Home Phone <span class="form_optional">(optional)</span></label>
+                      <div class="form_responses"><input type="tel" id="form_314dfc53-7738-4b56-8500-d1cf2fa7c280" name="form_314dfc53-7738-4b56-8500-d1cf2fa7c280" value="" placeholder="(555) 123-4567" autocomplete="tel" spellcheck="false"></div>
+                    </div>
+                  </div>
+
+                  <!-- 2-option field rendered as a segmented button selector (data-export preserved for Slate mapping) -->
+                  <div class="form_question form_seg form_layout_stacked" style="clear:left;" data-id="806b94a7-511a-4a9e-961a-d61cafa1458d" data-type="select" data-export="sys:sex" data-required="1">
+                    <fieldset>
+                      <legend>Gender</legend>
+                      <div class="form_label" id="lbl_sex">Gender <span class="form_required">*</span></div>
+                      <div class="form_responses">
+                        <div class="seg" role="radiogroup" aria-labelledby="lbl_sex">
+                          <label><input type="radio" name="form_806b94a7-511a-4a9e-961a-d61cafa1458d" value="F" autocomplete="sex" data-req><span>Female</span></label>
+                          <label><input type="radio" name="form_806b94a7-511a-4a9e-961a-d61cafa1458d" value="M" autocomplete="sex"><span>Male</span></label>
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
+
+                  <div class="form_question form_birthdate form_layout_stacked" style="clear:left;" data-id="c1a8e33b-5dbd-4f63-b927-29f36303fd21" data-type="birthdate" data-export="sys:birthdate" data-required="1">
+                    <fieldset>
+                      <legend>Birthdate</legend>
+                      <div class="form_label">Birthdate <span class="form_required">*</span></div>
+                      <div class="form_responses">
+                        <select aria-label="Month" id="form_c1a8e33b-5dbd-4f63-b927-29f36303fd21_m" name="form_c1a8e33b-5dbd-4f63-b927-29f36303fd21_m" autocomplete="bday-month" required="required">
+                          <option value="">Month</option>
+                          <option value="01">January</option><option value="02">February</option><option value="03">March</option>
+                          <option value="04">April</option><option value="05">May</option><option value="06">June</option>
+                          <option value="07">July</option><option value="08">August</option><option value="09">September</option>
+                          <option value="10">October</option><option value="11">November</option><option value="12">December</option>
+                        </select>
+                        <select aria-label="Day" id="form_c1a8e33b-5dbd-4f63-b927-29f36303fd21_d" name="form_c1a8e33b-5dbd-4f63-b927-29f36303fd21_d" autocomplete="bday-day" required="required">
+                          <option value="">Day</option>
+                          <option value="01">1</option><option value="02">2</option><option value="03">3</option><option value="04">4</option><option value="05">5</option>
+                          <option value="06">6</option><option value="07">7</option><option value="08">8</option><option value="09">9</option><option value="10">10</option>
+                          <option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option>
+                          <option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option>
+                          <option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option>
+                          <option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option>
+                          <option value="31">31</option>
+                        </select>
+                        <select aria-label="Year" id="form_c1a8e33b-5dbd-4f63-b927-29f36303fd21_y" name="form_c1a8e33b-5dbd-4f63-b927-29f36303fd21_y" autocomplete="bday-year" required="required">
+                          <option value="">Year</option>
+                          <option value="2026">2026</option><option value="2025">2025</option><option value="2024">2024</option>
+                          <option value="2010">2010</option><option value="2009">2009</option><option value="2008">2008</option>
+                          <option value="2007">2007</option><option value="2006">2006</option><option value="2005">2005</option>
+                          <option value="2004">2004</option><option value="2003">2003</option><option value="2002">2002</option>
+                          <option value="2001">2001</option><option value="2000">2000</option><option value="1999">1999</option>
+                          <option value="1998">1998</option><option value="1997">1997</option><option value="1996">1996</option>
+                        </select>
+                      </div>
+                    </fieldset>
+                  </div>
+
+                  <!-- 2-option field rendered as a segmented button selector (data-export preserved for Slate mapping) -->
+                  <div class="form_question form_seg form_layout_stacked" style="clear:left;" data-id="030f2305-e9a7-4fa3-8b40-447f80f88df7" data-type="select" data-export="sys:field:prospect_type" data-required="1">
+                    <fieldset>
+                      <legend>I am a</legend>
+                      <div class="form_label" id="lbl_prospect">I am a <span class="form_required">*</span></div>
+                      <div class="form_responses">
+                        <div class="seg" role="radiogroup" aria-labelledby="lbl_prospect">
+                          <label><input type="radio" name="form_030f2305-e9a7-4fa3-8b40-447f80f88df7" value="10e6dbbe-5f6b-4c71-adf0-edb499991139" data-req><span>High School Student</span></label>
+                          <label><input type="radio" name="form_030f2305-e9a7-4fa3-8b40-447f80f88df7" value="a299d81d-7248-4716-9550-0f0494158bfa"><span>College Student</span></label>
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
+
+                  <!-- Optional text permission (shows when mobile entered — Slate JS handles) -->
+                  <div class="form_question form_radio hidden form_layout_stacked" id="form_question_b4c8fe0f-44bb-4271-b9b6-19a22c423336" style="clear:left;" data-id="b4c8fe0f-44bb-4271-b9b6-19a22c423336" data-type="radio" data-export="sys:field:text_permission" data-required="1" data-hidden-by-condition="1" aria-hidden="true">
+                    <fieldset id="form_b4c8fe0f-44bb-4271-b9b6-19a22c423336">
+                      <legend>Receive text reminders?</legend>
+                      <div class="form_label">Receive text reminders about important dates? <span class="form_required">*</span></div>
+                      <div class="form_responses">
+                        <div class="form_response"><input id="form_b4c8fe0f_1" type="radio" name="form_b4c8fe0f-44bb-4271-b9b6-19a22c423336" value="1" autocomplete="off"><label for="form_b4c8fe0f_1">Yes</label></div>
+                        <div class="form_response"><input id="form_b4c8fe0f_2" type="radio" name="form_b4c8fe0f-44bb-4271-b9b6-19a22c423336" value="0" autocomplete="off"><label for="form_b4c8fe0f_2">No</label></div>
+                      </div>
+                    </fieldset>
+                  </div>
+
+                  <!-- Hidden system/conditional selects — preserved for Slate JS -->
+                  <div class="form_question hidden" data-id="b2e368eb-65aa-4efa-aa2a-a3563206c465" data-invisible="1" aria-hidden="true" style="clear:left;"><div class="form_responses"><select id="form_b2e368eb-65aa-4efa-aa2a-a3563206c465" name="form_b2e368eb-65aa-4efa-aa2a-a3563206c465" autocomplete="off"><option value="ccc21b18-c8cc-452f-81e2-4d6e34714f71" selected="selected">Freshman</option></select></div></div>
+                  <div class="form_question hidden" data-id="fe999d51-b798-48e4-aebd-6416efe21c57" data-hidden-by-condition="1" aria-hidden="true" style="clear:left;"><div class="form_responses"><select id="form_fe999d51-b798-48e4-aebd-6416efe21c57" name="form_fe999d51-b798-48e4-aebd-6416efe21c57" autocomplete="off"></select></div></div>
+                  <div class="form_question hidden" data-id="4a8bf4a7-7365-4593-8e62-38d89ae05bc3" data-hidden-by-condition="1" aria-hidden="true" style="clear:left;"><div class="form_responses"><select id="form_4a8bf4a7-7365-4593-8e62-38d89ae05bc3" name="form_4a8bf4a7-7365-4593-8e62-38d89ae05bc3" autocomplete="off"></select></div></div>
+                  <div class="form_question hidden" data-id="9caf9fbf-1eca-4741-b6ed-f250a3ba31c8" data-hidden-by-condition="1" aria-hidden="true" style="clear:left;"><div class="form_responses"><select id="form_9caf9fbf-1eca-4741-b6ed-f250a3ba31c8" name="form_9caf9fbf-1eca-4741-b6ed-f250a3ba31c8" autocomplete="off"></select></div></div>
+                  <div class="form_question hidden" data-id="ceb6d6f9-4cbe-47ac-ab63-9b32cc0379aa" data-hidden-by-condition="1" aria-hidden="true" style="clear:left;"><div class="form_responses"><select id="form_ceb6d6f9-4cbe-47ac-ab63-9b32cc0379aa" name="form_ceb6d6f9-4cbe-47ac-ab63-9b32cc0379aa" autocomplete="off"></select></div></div>
+                  <div class="form_question hidden" data-id="a74369ea-4157-4492-8138-8314012b9036" data-invisible="1" aria-hidden="true" style="clear:left;"><div class="form_responses"><select id="form_a74369ea-4157-4492-8138-8314012b9036" name="form_a74369ea-4157-4492-8138-8314012b9036" autocomplete="off"><option value="99318ef0-649b-4c90-afa7-884f0508be6d" selected="selected">UG</option></select></div></div>
+
+                </div>
+              </div>
+
+              <!-- ══════════════════════════════════════════════════════════
+                   STAGE 2 — Academic Intent
+                   Gates: Intended Start Term, Intended Major
+                   ══════════════════════════════════════════════════════════ -->
+              <div class="formstage" data-stage="2">
+                <div class="formstage__inner">
+
+                  <div class="form_question form_header form_layout_stacked" style="clear:left;" data-type="header">
+                    <div class="form_label">Academic Intent</div>
+                  </div>
+
+                  <div class="form_question form_select form_layout_stacked" style="clear:left;" data-id="5e72d4e2-89c2-4329-9d7f-7bd9bc515983" data-type="select" data-export="sys:field:ugstart_term" data-required="1">
+                    <label for="form_5e72d4e2-89c2-4329-9d7f-7bd9bc515983" class="form_label">Intended Start Term <span class="form_required">*</span></label>
+                    <div class="form_responses">
+                      <select id="form_5e72d4e2-89c2-4329-9d7f-7bd9bc515983" name="form_5e72d4e2-89c2-4329-9d7f-7bd9bc515983" autocomplete="off" required="required" data-req data-empty="true">
+                        <option value="" disabled selected hidden></option>
+                        <option value="bab6acbc-9ff6-41af-8971-1c59137c34f9">Fall 2026</option>
+                        <option value="70f64f7c-7c13-4e65-be95-461e8b69174b">Spring 2027</option>
+                        <option value="7c307041-cfbe-478f-8009-12218c145d21">Fall 2027</option>
+                        <option value="6a96d4b2-0ce7-4fb4-8822-de82eb481650">Spring 2028</option>
+                        <option value="0932f002-30dc-4b8c-8f11-d836e8937cf9">Fall 2028</option>
+                        <option value="0965778f-241a-4a6c-8744-126f0ddcf2d8">Spring 2029</option>
+                        <option value="badd86a4-b86f-4e7d-9f42-295d9bcb346f">Fall 2029</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form_question form_select form_layout_stacked" style="clear:left;" data-id="47ab8157-396c-464f-b204-e2c8dc390fe0" data-type="select" data-export="sys:field:ug_major" data-required="1">
+                    <label for="form_47ab8157-396c-464f-b204-e2c8dc390fe0" class="form_label">Intended Major <span class="form_required">*</span></label>
+                    <div class="form_responses">
+                      <select id="form_47ab8157-396c-464f-b204-e2c8dc390fe0" name="form_47ab8157-396c-464f-b204-e2c8dc390fe0" autocomplete="off" required="required" data-req data-empty="true">
+                        <option value="" disabled selected hidden></option>
+                        <option value="bc86a73c-f6b8-4412-b486-df362574d68c">Business - Accounting</option>
+                        <option value="1c12badd-4fb3-4ad5-af9c-76b761fc8dcd">Business - Analytics &amp; Economics</option>
+                        <option value="89866b34-d107-402b-a0ad-2b9534310685">Business - Finance</option>
+                        <option value="48daf6a8-9773-43f3-a44f-bb82ba670c15">Business - Marketing</option>
+                        <option value="91e90f56-dfbe-4014-bcb8-238f1b36c5c0">Computer Science</option>
+                        <option value="de84e986-cd2e-4637-97cb-522955bfb3c2">Communications - Advertising &amp; PR</option>
+                        <option value="28bb9bc5-022d-435a-87a0-bccf396f9a03">Communications - Media Production</option>
+                        <option value="cf25066e-8de2-482c-a931-8024b70c5f9b">Education - Elementary (K-6)</option>
+                        <option value="798382e9-ec57-4886-8ca7-0b3932a5f22f">Engineering - General</option>
+                        <option value="dbc74ac6-21cf-428b-8714-ecc76abd2295">Exercise Science</option>
+                        <option value="77efe245-3e9b-4959-90a7-cb49ae8e25e2">Biology - General</option>
+                        <option value="a7839294-b56c-427f-bc24-2ef226bffbf6">Biology - Health Science</option>
+                        <option value="ed5f0f07-296e-4482-b39c-65c01398cab6">Nursing - Pre-Nursing</option>
+                        <option value="bb714250-c5e9-4983-97e3-78d70ce8aa78">Pre-Pharmacy</option>
+                        <option value="430e0d5b-c931-4672-9635-84bef6957963">Psychology</option>
+                        <option value="722539a8-def7-4b78-b806-aebbfd120719">Political Science</option>
+                        <option value="204be7d0-1da7-4c42-b8c0-f838a131b926">Entrepreneurship</option>
+                        <option value="57df42a2-f323-43cc-9740-34c8cb279f7a">Cybersecurity</option>
+                        <option value="852b728f-9e71-4e3d-bee3-bd4bd613a926">Data Science</option>
+                        <option value="dd495644-dab8-4a96-9263-3d81a81cec4c">Undeclared</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form_question form_checkbox form_layout_stacked" style="clear:left;" data-id="f22c0923-c4e3-4aad-96a5-9d6678c53f8c" data-type="checkbox" data-export="sys:field:ug_preprofessional">
+                    <fieldset>
+                      <legend>Pre-Professional Programs</legend>
+                      <div class="form_label">Pre-Professional Programs <span class="form_optional">(optional)</span></div>
+                      <div class="form_responses">
+                        <div class="form_response"><input id="form_f22c0923_1" type="checkbox" name="form_f22c0923-c4e3-4aad-96a5-9d6678c53f8c" value="e731488d-3797-4ec9-bfe6-53a71cb1fa64"><label for="form_f22c0923_1">Pre-Dentistry</label></div>
+                        <div class="form_response"><input id="form_f22c0923_2" type="checkbox" name="form_f22c0923-c4e3-4aad-96a5-9d6678c53f8c" value="d8535e8d-68a1-4a6e-8adb-dbbdd24f5036"><label for="form_f22c0923_2">Pre-Engineering</label></div>
+                        <div class="form_response"><input id="form_f22c0923_3" type="checkbox" name="form_f22c0923-c4e3-4aad-96a5-9d6678c53f8c" value="8f4e2a47-ff39-46cd-815b-d3f034c4a777"><label for="form_f22c0923_3">Pre-Law</label></div>
+                        <div class="form_response"><input id="form_f22c0923_4" type="checkbox" name="form_f22c0923-c4e3-4aad-96a5-9d6678c53f8c" value="68b0f034-16cf-422f-9dfe-4f9f30aec418"><label for="form_f22c0923_4">Pre-Medicine</label></div>
+                        <div class="form_response"><input id="form_f22c0923_6" type="checkbox" name="form_f22c0923-c4e3-4aad-96a5-9d6678c53f8c" value="98c438a7-372c-49e3-80e4-f316840f04d7"><label for="form_f22c0923_6">Pre-Nursing</label></div>
+                        <div class="form_response"><input id="form_f22c0923_7" type="checkbox" name="form_f22c0923-c4e3-4aad-96a5-9d6678c53f8c" value="735b4df5-f02f-4995-b019-370e59fef14d"><label for="form_f22c0923_7">Pre-Occupational Therapy</label></div>
+                        <div class="form_response"><input id="form_f22c0923_8" type="checkbox" name="form_f22c0923-c4e3-4aad-96a5-9d6678c53f8c" value="08966b2d-15eb-4ffa-a574-6a5b3cf24d27"><label for="form_f22c0923_8">Pre-Optometry</label></div>
+                        <div class="form_response"><input id="form_f22c0923_9" type="checkbox" name="form_f22c0923-c4e3-4aad-96a5-9d6678c53f8c" value="741e0693-082e-4f4b-9e21-6aac4e742a3c"><label for="form_f22c0923_9">Pre-Pharmacy</label></div>
+                        <div class="form_response"><input id="form_f22c0923_10" type="checkbox" name="form_f22c0923-c4e3-4aad-96a5-9d6678c53f8c" value="5d8a3c02-78c7-4692-ad6f-cae0ba558068"><label for="form_f22c0923_10">Pre-Physical Therapy</label></div>
+                        <div class="form_response"><input id="form_f22c0923_11" type="checkbox" name="form_f22c0923-c4e3-4aad-96a5-9d6678c53f8c" value="040b3f52-7d8d-4bc0-9612-2132a6ead1ac"><label for="form_f22c0923_11">Pre-Physician Assistant</label></div>
+                        <div class="form_response"><input id="form_f22c0923_12" type="checkbox" name="form_f22c0923-c4e3-4aad-96a5-9d6678c53f8c" value="a31ebacf-3832-457f-bcbe-bda18a8e032f"><label for="form_f22c0923_12">Pre-Veterinary</label></div>
+                      </div>
+                    </fieldset>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- ══════════════════════════════════════════════════════════
+                   STAGE 3 — Education / School Info
+                   Gates: High School Name
+                   ══════════════════════════════════════════════════════════ -->
+              <div class="formstage" data-stage="3">
+                <div class="formstage__inner">
+
+                  <div class="form_question form_header form_layout_stacked" style="clear:left;" data-id="ce840c3c-ba78-42f7-adbe-99c756fc934f" data-type="header">
+                    <div class="form_label">Education Information</div>
+                  </div>
+
+                  <div class="form_question form_text form_layout_stacked" style="clear:left;" data-id="7bedd3cc-3218-42b2-87ac-98d45d359ab9" data-type="text" data-export="sys:school:name" data-required="1">
+                    <label for="form_7bedd3cc-3218-42b2-87ac-98d45d359ab9" class="form_label">High School Name <span class="form_required">*</span></label>
+                    <div class="form_responses"><input type="text" id="form_7bedd3cc-3218-42b2-87ac-98d45d359ab9" name="form_7bedd3cc-3218-42b2-87ac-98d45d359ab9" value="" autocomplete="off" spellcheck="false" required="required" placeholder="Begin typing to search&hellip;" data-req></div>
+                  </div>
+
+                  <div class="form_question form_text form_layout_stacked" style="clear:left;" data-id="11ad9526-8b9f-42f3-b8d3-ab22147ce140" data-type="text" data-export="sys:school:key" data-readonly="1">
+                    <label for="form_11ad9526-8b9f-42f3-b8d3-ab22147ce140" class="form_label">High School CEEB Code <span class="form_optional">(auto-filled)</span></label>
+                    <div class="form_responses"><input type="text" id="form_11ad9526-8b9f-42f3-b8d3-ab22147ce140" name="form_11ad9526-8b9f-42f3-b8d3-ab22147ce140" value="" autocomplete="off" spellcheck="false" readonly="readonly"></div>
+                  </div>
+
+                  <!-- College info hidden section (Slate JS manages) -->
+                  <div id="form_page_3" data-id="78dcce41-fb4e-4743-987d-5dd5323edfb5" data-page="1" class="form_page form_page_3 hidden" style="clear:left;" data-hidden-by-condition="1" aria-hidden="true">
+                    <div class="form_question form_text form_layout_stacked" style="clear:left;" data-id="be0f01ae-e006-4e6d-8134-6782bf68e774">
+                      <label for="form_be0f01ae-e006-4e6d-8134-6782bf68e774" class="form_label">College Name</label>
+                      <div class="form_responses"><input type="text" id="form_be0f01ae-e006-4e6d-8134-6782bf68e774" name="form_be0f01ae-e006-4e6d-8134-6782bf68e774" value="" autocomplete="off" disabled=""></div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- ══════════════════════════════════════════════════════════
+                   STAGE 4 — Address + Family + Submit
+                   ══════════════════════════════════════════════════════════ -->
+              <div class="formstage" data-stage="4">
+                <div class="formstage__inner">
+
+                  <div class="form_question form_address form_layout_stacked" style="clear:left;" data-id="c19cc7e8-f04a-4d21-b020-455c402dd084" data-type="address" data-export="sys:address" data-required="1">
+                    <fieldset>
+                      <legend>Mailing Address</legend>
+                      <div class="form_label">Mailing Address <span class="form_required">*</span></div>
+                      <div>
+                        <label class="form_label" for="form_c19cc7e8_country">Country</label>
+                        <div class="form_responses"><select id="form_c19cc7e8_country" name="form_c19cc7e8-f04a-4d21-b020-455c402dd084_country" autocomplete="country" required="required"><option value="US" selected="selected">United States</option><option value="CA">Canada</option><option value="GB">United Kingdom</option><option value="AU">Australia</option><option value="MX">Mexico</option></select></div>
+                      </div>
+                      <div>
+                        <label class="form_label" for="form_c19cc7e8_street">Street</label>
+                        <div class="form_responses"><textarea id="form_c19cc7e8_street" name="form_c19cc7e8-f04a-4d21-b020-455c402dd084_street" rows="2" spellcheck="false" autocomplete="street-address" required="required"></textarea></div>
+                      </div>
+                      <div>
+                        <label class="form_label" for="form_c19cc7e8_city">City</label>
+                        <div class="form_responses"><input id="form_c19cc7e8_city" name="form_c19cc7e8-f04a-4d21-b020-455c402dd084_city" type="text" value="" autocomplete="address-level2" spellcheck="false" required="required"></div>
+                      </div>
+                      <div class="address-row">
+                        <div>
+                          <label class="form_label" for="form_c19cc7e8_region">State</label>
+                          <div class="form_responses">
+                            <select id="form_c19cc7e8_region" name="form_c19cc7e8-f04a-4d21-b020-455c402dd084_region" autocomplete="address-level1" required="required">
+                              <option value="">Select State</option>
+                              <option value="AL">Alabama</option><option value="AK">Alaska</option><option value="AZ">Arizona</option><option value="AR">Arkansas</option><option value="CA">California</option><option value="CO">Colorado</option><option value="CT">Connecticut</option><option value="DE">Delaware</option><option value="FL">Florida</option><option value="GA">Georgia</option><option value="HI">Hawaii</option><option value="ID">Idaho</option><option value="IL">Illinois</option><option value="IN">Indiana</option><option value="IA">Iowa</option><option value="KS">Kansas</option><option value="KY">Kentucky</option><option value="LA">Louisiana</option><option value="ME">Maine</option><option value="MD">Maryland</option><option value="MA">Massachusetts</option><option value="MI">Michigan</option><option value="MN">Minnesota</option><option value="MS">Mississippi</option><option value="MO">Missouri</option><option value="MT">Montana</option><option value="NE">Nebraska</option><option value="NV">Nevada</option><option value="NH">New Hampshire</option><option value="NJ">New Jersey</option><option value="NM">New Mexico</option><option value="NY">New York</option><option value="NC">North Carolina</option><option value="ND">North Dakota</option><option value="OH">Ohio</option><option value="OK">Oklahoma</option><option value="OR">Oregon</option><option value="PA">Pennsylvania</option><option value="RI">Rhode Island</option><option value="SC">South Carolina</option><option value="SD">South Dakota</option><option value="TN">Tennessee</option><option value="TX">Texas</option><option value="UT">Utah</option><option value="VT">Vermont</option><option value="VA">Virginia</option><option value="WA">Washington</option><option value="WV">West Virginia</option><option value="WI">Wisconsin</option><option value="WY">Wyoming</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div>
+                          <label class="form_label" for="form_c19cc7e8_postal">ZIP Code</label>
+                          <div class="form_responses"><input id="form_c19cc7e8_postal" name="form_c19cc7e8-f04a-4d21-b020-455c402dd084_postal" type="text" value="" autocomplete="postal-code" required="required"></div>
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
+
+                  <div class="form_question form_header form_layout_stacked" style="clear:left;" data-id="279e25ea-5fff-492c-a902-3b666e3d92a9" data-type="header">
+                    <div class="form_label">Family Information</div>
+                  </div>
+
+                  <div class="form_question form_select form_layout_stacked" style="clear:left;" data-id="12edf582-ac1a-43d2-9f9f-6a576458c4b5" data-type="select" data-export="sys:relationship:type">
+                    <label for="form_12edf582-ac1a-43d2-9f9f-6a576458c4b5" class="form_label">Parent / Guardian 1 <span class="form_optional">(optional)</span></label>
+                    <div class="form_responses">
+                      <select id="form_12edf582-ac1a-43d2-9f9f-6a576458c4b5" name="form_12edf582-ac1a-43d2-9f9f-6a576458c4b5" autocomplete="off">
+                        <option value=""></option>
+                        <option value="d79e78fa-55b6-4cef-9f85-31c8e725a001">Father</option>
+                        <option value="a55e10a0-3692-4307-a9df-acaaf28f59bc">Mother</option>
+                        <option value="0d9ebc90-7d0c-4648-a60e-d301d52fd0a9">Step-Father</option>
+                        <option value="e01b5f44-5492-408c-b27e-6418ae7def36">Step-Mother</option>
+                        <option value="803c2561-2655-475c-b4a5-5344f7b7dea8">Legal Guardian</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form_question_row">
+                    <div class="form_question form_text form_layout_stacked" style="clear:left;" data-id="5b1964ef-ab32-432e-8be7-77366f8a2e06" data-export="sys:relationship:first">
+                      <label for="form_5b1964ef-ab32-432e-8be7-77366f8a2e06" class="form_label">Parent First Name <span class="form_optional">(optional)</span></label>
+                      <div class="form_responses"><input type="text" id="form_5b1964ef-ab32-432e-8be7-77366f8a2e06" name="form_5b1964ef-ab32-432e-8be7-77366f8a2e06" value="" autocomplete="off" spellcheck="false"></div>
+                    </div>
+                    <div class="form_question form_text form_layout_stacked" style="clear:left;" data-id="032fdefb-de22-433c-9566-dd81db3d1d5b" data-export="sys:relationship:last">
+                      <label for="form_032fdefb-de22-433c-9566-dd81db3d1d5b" class="form_label">Parent Last Name <span class="form_optional">(optional)</span></label>
+                      <div class="form_responses"><input type="text" id="form_032fdefb-de22-433c-9566-dd81db3d1d5b" name="form_032fdefb-de22-433c-9566-dd81db3d1d5b" value="" autocomplete="off" spellcheck="false"></div>
+                    </div>
+                  </div>
+
+                  <div class="form_question form_text form_layout_stacked" style="clear:left;" data-id="af15c5f3-9795-4f90-a3c4-310637b674ca" data-export="sys:relationship:email">
+                    <label for="form_af15c5f3-9795-4f90-a3c4-310637b674ca" class="form_label">Parent Email Address <span class="form_optional">(optional)</span></label>
+                    <div class="form_responses"><input type="text" id="form_af15c5f3-9795-4f90-a3c4-310637b674ca" name="form_af15c5f3-9795-4f90-a3c4-310637b674ca" value="" autocomplete="off" spellcheck="false"></div>
+                  </div>
+
+                  <div class="form_question form_radio form_layout_stacked" style="clear:left;" data-id="9007f0d0-7ab4-42ab-b372-e78d64c70976" data-type="radio">
+                    <fieldset id="form_9007f0d0-7ab4-42ab-b372-e78d64c70976">
+                      <legend>Additional Parent</legend>
+                      <div class="form_label">Add a second parent or guardian? <span class="form_optional">(optional)</span></div>
+                      <div class="form_responses">
+                        <div class="form_response"><input id="form_9007f0d0_1" type="radio" name="form_9007f0d0-7ab4-42ab-b372-e78d64c70976" value="Yes" autocomplete="off"><label for="form_9007f0d0_1">Yes</label></div>
+                        <div class="form_response"><input id="form_9007f0d0_2" type="radio" name="form_9007f0d0-7ab4-42ab-b372-e78d64c70976" value="No" autocomplete="off"><label for="form_9007f0d0_2">No</label></div>
+                      </div>
+                    </fieldset>
+                  </div>
+
+                  <!-- Parent 2 (hidden by default) -->
+                  <div id="form_page_5" data-id="48a43450-f679-4247-be48-598b1ca2423e" class="form_page form_page_5 hidden" style="clear:left;" aria-hidden="true" data-hidden-by-condition="1">
+                    <div class="form_question form_text form_layout_stacked" style="clear:left;"><label class="form_label">Parent 2 First Name</label><div class="form_responses"><input type="text" name="form_8e72eb60-04cc-43c3-b37a-f99c74b6cf1c" value="" autocomplete="off" disabled=""></div></div>
+                  </div>
+
+                  <div class="rq-submit-wrap">
+                    <div class="rq-submit-note" id="rqSubmitNote" style="display: none;">
+                      <p><strong>✓ Form submitted successfully!</strong> If you need to make any changes, edit the fields above and resubmit.</p>
+                    </div>
+                    <div style="text-align: right;">
+                      <button class="btn btn--primary btn--lg rq-submit" type="submit" id="rqSubmitBtn">Submit &rarr;</button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div><!-- /.form_pages -->
+          </div>
+        </div><!-- /.form_container -->
+        </form>
+      </div><!-- /.rq-form__body -->
+
+      <!-- Note replaces previous reassurance line -->
+      <div class="rq-formfoot">
+        <p class="rq-formfoot__fine"><strong>Please note:</strong> This form is for undergraduate freshmen and transfer students. For graduate and professional programs, complete the <a href="https://graduate.highpoint.edu/register/?id=3a19b0cc-5390-4dca-93e3-67fa67812937" target="_blank">Graduate Request More Information</a> form.</p>
+      </div>
+
+    </section>
+
+    <!-- ---------- RIGHT RAIL — "The HPU Difference" ----------
+         COMMENTED OUT FOR NOW. The form is the single, centered focus of the page.
+         We'll reintroduce these outcome stats later, woven in around the centered
+         container where they look amazing (e.g. a band below the form, or as the
+         hero un-pins). Markup preserved verbatim so we can drop it back in.
+    <aside class="rq-rail" aria-label="High Point University outcomes" data-screen-label="Right Rail">
+      <div class="rq-stats">
+        <div class="rq-stats__head">
+          <p class="rq-rail__k">The HPU Difference</p>
+          <h2 class="rq-stats__title">Why families are glad they reached out.</h2>
+        </div>
+        <div class="rq-statgrid">
+          <div class="rq-statcard">
+            <span class="rq-statcard__fig">#1</span>
+            <span class="rq-statcard__lab">For Undergraduate Teaching</span>
+            <span class="rq-statcard__src">U.S. News &amp; World Report</span>
+          </div>
+          <div class="rq-statcard">
+            <span class="rq-statcard__fig">99<i>%</i></span>
+            <span class="rq-statcard__lab">Employed or in grad school</span>
+            <span class="rq-statcard__src">within 180 days of graduation</span>
+          </div>
+          <div class="rq-statcard">
+            <span class="rq-statcard__fig"><i>$</i>75<i>M</i></span>
+            <span class="rq-statcard__lab">Awarded in scholarships</span>
+            <span class="rq-statcard__src">to students every year</span>
+          </div>
+          <div class="rq-statcard">
+            <span class="rq-statcard__fig">15<i>:</i>1</span>
+            <span class="rq-statcard__lab">Student-to-faculty ratio</span>
+            <span class="rq-statcard__src">professors know your name</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+    -->
+
+  </div>
+</main>
+
+<!-- ===================== PROOF CARDS (wide-screen scroll flourish) =====================
+     The four "HPU Difference" outcomes, re-cast as standalone proof points. They live in
+     a fully DECOUPLED track: a direct child of <body>, absolutely positioned from the
+     top of the document and spanning the hero + the white form section. It is never
+     transformed by the hero scrub and never resizes with the form, so its ScrollTriggers
+     can't interfere with (or be invalidated by) anything else on the page.
+     The track stays display:none — zero height impact, zero triggers — until BOTH:
+       • the viewport is roomy (≥1440 + motion-OK), and
+       • the form is FULLY expanded (every stage open).
+     Only then does JS measure the track once (height = bottom of the white section as
+     rendered), pin the first card 200px from the track top / last 200px from its bottom,
+     and build one simple scrubbed fade-blur per card. Cards just sit on the page and
+     ride normal scrolling — in as they near the viewport, out as they pass. -->
+<div class="rq-proof" aria-hidden="true">
+    <figure class="rq-proofcard rq-proofcard--left">
+      <span class="rq-proofcard__kicker">Recognized</span>
+      <span class="rq-proofcard__fig">#1</span>
+      <span class="rq-proofcard__lab">in the nation for Undergraduate Teaching</span>
+      <span class="rq-proofcard__src">U.S. News &amp; World Report</span>
+    </figure>
+    <figure class="rq-proofcard rq-proofcard--right">
+      <span class="rq-proofcard__kicker">Outcomes</span>
+      <span class="rq-proofcard__fig">99<i>%</i></span>
+      <span class="rq-proofcard__lab">employed or in grad school</span>
+      <span class="rq-proofcard__src">within 180 days of graduation</span>
+    </figure>
+    <figure class="rq-proofcard rq-proofcard--left">
+      <span class="rq-proofcard__kicker">Investment</span>
+      <span class="rq-proofcard__fig"><i>$</i>75<i>M</i></span>
+      <span class="rq-proofcard__lab">awarded in scholarships every year</span>
+      <span class="rq-proofcard__src">need and merit-based aid</span>
+    </figure>
+    <figure class="rq-proofcard rq-proofcard--right">
+      <span class="rq-proofcard__kicker">Mentorship</span>
+      <span class="rq-proofcard__fig">15<i>:</i>1</span>
+      <span class="rq-proofcard__lab">student-to-faculty ratio</span>
+      <span class="rq-proofcard__src">professors who know your name</span>
+    </figure>
+</div>
+
+<!-- ===================== COUNSELOR FINDER STRIP ===================== -->
+<section class="rq-counselor" data-screen-label="Counselor Finder">
+  <div class="rq-counselor__inner">
+    <p class="rq-counselor__text">Ready to speak to someone now?</p>
+    <a href="https://discover.highpoint.edu/portal/find-your-counselor" class="btn btn--ghost btn--lg">Connect With Your Counselor &rarr;</a>
+  </div>
+</section>
+
+<!-- ===================== NOT-READY STRIP ===================== -->
+<section class="section" data-screen-label="Next Best Action">
+  <div class="rq-next-head">
+    <p class="eyebrow">More Ways to Explore</p>
+    <h2 class="h2" style="margin-top:0.4em;font-size:clamp(1.7rem,3.4vw,2.7rem);">See it for yourself.</h2>
+  </div>
+  <div class="rq-next">
+    <a class="rq-card" href="https://www.highpoint.edu/virtual-campus-experience/">
+      <div class="rq-card__media ph"><span class="ph__label">virtual campus &middot; 360&deg; experience</span></div>
+      <div class="rq-card__body">
+        <p class="rq-card__k">Virtual Campus</p>
+        <h3 class="rq-card__h">Experience it from anywhere.</h3>
+        <p class="rq-card__p">Immersive 360&deg; scenes of every building, residence hall, and landmark on campus.</p>
+        <span class="rq-card__link"><span class="link">Explore Virtual Campus &rarr;</span></span>
+      </div>
+    </a>
+    <a class="rq-card" href="https://discover.highpoint.edu/register/campus-life-quiz" id="footerCardLink">
+      <div class="rq-card__media ph"><span class="ph__label" id="footerCardLabel">quiz &middot; campus life &middot; 2 minutes</span></div>
+      <div class="rq-card__body">
+        <p class="rq-card__k" id="footerCardTitle">Campus Life Quiz</p>
+        <h3 class="rq-card__h" id="footerCardHeading">Yes, you really get to live here.</h3>
+        <p class="rq-card__p" id="footerCardDesc">There are 168 hours in a week. You&rsquo;ll be in class for about 20 of them. See what you&rsquo;ll do with the other 148.</p>
+        <span class="rq-card__link"><span class="link">Take the Quiz &rarr;</span></span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <div>
+      <div class="footer__brand">High Point University</div>
+      <div class="footer__meta" style="margin-top:6px;">The Premier Life Skills University &middot; One University Parkway, High Point, NC 27268</div>
+    </div>
+    <div class="footer__meta" style="text-align:right;">FAFSA 002933 &middot; SAT 5293 &middot; ACT 3108</div>
+  </div>
+</footer>
+
+<!-- ===================== STICKY MOBILE BAR ===================== -->
+<div class="rq-sticky" id="rqSticky" aria-label="Connect with your counselor">
+  <span class="rq-sticky__text">Talk to your HPU counselor.</span>
+  <a href="#request-form" class="btn btn--primary" id="rqStickyBtn">Fill Out the Form</a>
+</div>
+
+<!-- ===================== SUCCESS MODAL ===================== -->
+<div class="rq-modal" id="rqModal" role="dialog" aria-modal="true" aria-labelledby="rqModalTitle" aria-hidden="true">
+  <div class="rq-modal__scrim" id="rqModalScrim"></div>
+  <div class="rq-modal__card" role="document">
+    <div class="rq-modal__mark" aria-hidden="true"></div>
+    <p class="rq-modal__eyebrow">Request received</p>
+    <h2 class="rq-modal__title" id="rqModalTitle">You&rsquo;re all set.</h2>
+    <p class="rq-modal__sub" id="rqModalSub">Your personal admissions counselor will reach out within one business day &mdash; with answers made just for you.</p>
+
+    <div class="rq-modal__next">
+      <p class="rq-modal__nextk">Keep exploring HPU</p>
+      <a class="rq-nextopt" href="https://www.highpoint.edu/virtual-campus-experience/">
+        <span class="rq-nextopt__icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="4"/><path d="M12 2C7.03 2 3 6.03 3 10c0 5.25 9 13 9 13s9-7.75 9-13c0-3.97-3.03-7-9-8z" fill="rgba(51,0,114,0.08)"/><circle cx="12" cy="10" r="4"/></svg>
+        </span>
+        <span class="rq-nextopt__body">
+          <span class="rq-nextopt__h">Explore the virtual campus</span>
+          <span class="rq-nextopt__p">Walk the Promenade, see residence halls, and tour every corner &mdash; in 360&deg;.</span>
+        </span>
+        <span class="rq-nextopt__arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="rq-nextopt" href="https://discover.highpoint.edu/register/campus-life-quiz" id="modalLink">
+        <span class="rq-nextopt__icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" fill="rgba(51,0,114,0.08)"/><polyline points="8,12.5 11,15.5 16,9"/></svg>
+        </span>
+        <span class="rq-nextopt__body">
+          <span class="rq-nextopt__h" id="modalTitle">Take the Campus Life Quiz</span>
+          <span class="rq-nextopt__p" id="modalDesc">168 hours in a week, only 20 in class. See what you&rsquo;ll do with the other 148.</span>
+        </span>
+        <span class="rq-nextopt__arrow" aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
+
+    <button class="rq-modal__dismiss" id="rqModalClose" type="button">Back to the page</button>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="hpu-request (backup greedy-reveal).js"></script>
+
+<!-- ===================== TWEAKS (subtext review sidebar) ===================== -->
+<div id="rq-tweaks-root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+
+<script>
+(function () {
+  const submitBtn = document.getElementById('rqSubmitBtn');
+  const submitNote = document.getElementById('rqSubmitNote');
+  const formBody = document.getElementById('rqFormBody');
+  const majorSelect = document.getElementById('form_47ab8157-396c-464f-b204-e2c8dc390fe0');
+  const STORAGE_KEY = 'rq-form-submitted';
+  const UNDECLARED_VALUE = 'dd495644-dab8-4a96-9263-3d81a81cec4c';
+
+  // Quiz content configurations
+  const quizzes = {
+    campusLife: {
+      label: "quiz · campus life · 2 minutes",
+      title: "Campus Life Quiz",
+      heading: "Yes, you really get to live here.",
+      desc: "There are 168 hours in a week. You'll be in class for about 20 of them. See what you'll do with the other 148.",
+      url: "https://discover.highpoint.edu/register/campus-life-quiz"
+    },
+    majorDiscovery: {
+      label: "quiz · major discovery · 2 minutes",
+      title: "Discover Your Perfect Major",
+      heading: "Find your path to success.",
+      desc: "Uncover your strengths and discover which major aligns with your goals and passions.",
+      url: "https://discover.highpoint.edu/register/perfect-major"
+    }
+  };
+
+  // Update quiz content based on major selection
+  function updateQuizContent() {
+    if (!majorSelect) return;
+    
+    const isUndeclared = majorSelect.value === UNDECLARED_VALUE;
+    const quiz = isUndeclared ? quizzes.majorDiscovery : quizzes.campusLife;
+
+    // Update footer card
+    const footerLabel = document.getElementById('footerCardLabel');
+    const footerTitle = document.getElementById('footerCardTitle');
+    const footerHeading = document.getElementById('footerCardHeading');
+    const footerDesc = document.getElementById('footerCardDesc');
+    const footerLink = document.getElementById('footerCardLink');
+
+    if (footerLabel) footerLabel.textContent = quiz.label;
+    if (footerTitle) footerTitle.textContent = quiz.title;
+    if (footerHeading) footerHeading.textContent = quiz.heading;
+    if (footerDesc) footerDesc.textContent = quiz.desc;
+    if (footerLink) footerLink.href = quiz.url;
+
+    // Update modal
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalLink = document.getElementById('modalLink');
+
+    if (modalTitle) modalTitle.textContent = isUndeclared ? "Discover Your Perfect Major" : "Take the Campus Life Quiz";
+    if (modalDesc) modalDesc.textContent = quiz.desc;
+    if (modalLink) modalLink.href = quiz.url;
+  }
+
+  // Restore submission state on page load
+  function restoreSubmissionState() {
+    const isSubmitted = localStorage.getItem(STORAGE_KEY) === 'true';
+    if (isSubmitted) {
+      setSubmittedState();
+    }
+  }
+
+  // Set the form to submitted state
+  function setSubmittedState() {
+    submitBtn.classList.add('is-submitted');
+    submitBtn.textContent = '✓ Submitted';
+    submitNote.style.display = 'block';
+  }
+
+  // Reset the form to unsubmitted state
+  function setUnsubmittedState() {
+    submitBtn.classList.remove('is-submitted');
+    submitBtn.textContent = 'Submit →';
+    submitNote.style.display = 'none';
+    localStorage.removeItem(STORAGE_KEY);
+  }
+
+  // Listen for changes to any form input
+  function setupEditListener() {
+    const inputs = formBody.querySelectorAll('input, select, textarea');
+    inputs.forEach(input => {
+      input.addEventListener('change', () => {
+        // Only revert if we're currently in submitted state
+        if (submitBtn.classList.contains('is-submitted')) {
+          setUnsubmittedState();
+        }
+        // Update quiz content if major selection changed
+        if (input === majorSelect) {
+          updateQuizContent();
+        }
+      });
+      input.addEventListener('input', () => {
+        // Only revert if we're currently in submitted state
+        if (submitBtn.classList.contains('is-submitted')) {
+          setUnsubmittedState();
+        }
+      });
+    });
+  }
+
+  // Handle form submission
+  if (submitBtn) {
+    submitBtn.addEventListener('click', function (e) {
+      // Mark as submitted (in a real app, this would happen after successful server submission)
+      setSubmittedState();
+      localStorage.setItem(STORAGE_KEY, 'true');
+    });
+  }
+
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', function () {
+    restoreSubmissionState();
+    setupEditListener();
+    updateQuizContent();
+  });
+
+  // Fallback if DOM is already ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () {
+      setupEditListener();
+      updateQuizContent();
+    });
+  } else {
+    setupEditListener();
+    updateQuizContent();
+  }
+})();
+</script>
+
+</body>
+</html>

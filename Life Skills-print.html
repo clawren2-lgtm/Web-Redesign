@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Life Skills in the AI Economy High Point University</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style id="print-overrides">
+  /* ===== Print / PDF export overrides ===== */
+  @page { size: portrait; margin: 1.4cm; }
+
+  @media print {
+    html, body {
+      background: #fff !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    /* Freeze any animations/transitions at their end state */
+    *, *::before, *::after {
+      animation-delay: -99s !important;
+      animation-duration: .001s !important;
+      animation-iteration-count: 1 !important;
+      animation-fill-mode: both !important;
+      animation-play-state: running !important;
+      transition-duration: 0s !important;
+    }
+
+    /* Everything visible (no scroll-reveal hiding) */
+    .reveal, .post, .skillcard, .teaser, .inres,
+    .proofbar__cell, .statrow > div, #researchGrid .statcard,
+    .tl__entry, .tl__colhead { opacity: 1 !important; }
+    .tl__axis { transform: none !important; }
+
+    /* Drop interactive chrome that has no meaning on paper */
+    .subnav, .chips, .feed__more, .showmore { display: none !important; }
+
+    /* Show every quote card, including those a filter would hide */
+    #voiceFeed .post.is-hidden { display: block !important; }
+
+    /* Hero: replace the video with the solid brand background so text reads */
+    .hero { min-height: 0 !important; height: auto !important; }
+    .hero__video { display: none !important; }
+    .hero__content { padding-top: 64px !important; padding-bottom: 64px !important; }
+
+    /* Expand FAQ answers */
+    .faq__a { display: block !important; }
+
+    /* Keep cohesive blocks from splitting across pages */
+    .post, .skillcard, .teaser, .inres, .statcard,
+    .proofbar__cell, .tl__entry, .faq__item, .presfeature,
+    .otherhalf, .moment, .statrow > div, figure { break-inside: avoid; }
+    h1, h2, h3 { break-after: avoid; }
+    .section { break-inside: auto; }
+
+    a { text-decoration: none !important; }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "What the world’s leaders and researchers say about human (life) skills in the AI economy",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@type": "Quotation",
+        "text": "Learn your EQ, learn how to be good in a meeting, how to communicate, how to write.",
+        "creator": {
+          "@type": "Person",
+          "name": "Jamie Dimon",
+          "jobTitle": "Chairman & CEO, JPMorgan Chase"
+        },
+        "citation": "Fox News Sunday Morning Futures Dec 7, 2025"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@type": "Quotation",
+        "text": "If you just have IQ without EQ, it’s just a waste of IQ.",
+        "creator": {
+          "@type": "Person",
+          "name": "Satya Nadella",
+          "jobTitle": "CEO, Microsoft"
+        },
+        "citation": "Axel Springer MD Meets Nov 29, 2025"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "@type": "Quotation",
+        "text": "Greatness is not intelligence. Greatness comes from character, and character isn’t formed out of smart people — it’s formed out of people who suffered.",
+        "creator": {
+          "@type": "Person",
+          "name": "Jensen Huang",
+          "jobTitle": "Founder & CEO, NVIDIA"
+        },
+        "citation": "Stanford SIEPR Economic Summit Mar 2024"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "@type": "Quotation",
+        "text": "The people who will do well are the people who learn how to use these tools whether you want to be a teacher or a doctor.",
+        "creator": {
+          "@type": "Person",
+          "name": "Sundar Pichai",
+          "jobTitle": "CEO, Google & Alphabet"
+        },
+        "citation": "BBC Interview via Fortune Dec 2, 2025"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "item": {
+        "@type": "Quotation",
+        "text": "Our most resilient skills are distinctly human: compassion, creativity, communication, courage, and curiosity. Human skills are becoming the new ‘hard skills.’",
+        "creator": {
+          "@type": "Person",
+          "name": "Aneesh Raman",
+          "jobTitle": "Chief Economic Opportunity Officer, LinkedIn"
+        },
+        "citation": "LinkedIn CNBC Converge 2025"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 6,
+      "item": {
+        "@type": "Quotation",
+        "text": "They’re not soft skills. They’re human skills, behavioural skills, character skills. I don’t care what we call them I care that we build them.",
+        "creator": {
+          "@type": "Person",
+          "name": "Adam Grant",
+          "jobTitle": "Organizational Psychologist, Wharton"
+        },
+        "citation": "WEF Meet the Leader Feb 2025"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 7,
+      "item": {
+        "@type": "Quotation",
+        "text": "We have to be more mindful about training them along multiple dimensions.",
+        "creator": {
+          "@type": "Person",
+          "name": "Brian Moynihan",
+          "jobTitle": "CEO, Bank of America"
+        },
+        "citation": "Bloomberg TV Sep 18, 2025"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 8,
+      "item": {
+        "@type": "Quotation",
+        "text": "Emotional intelligence represents a set of human abilities that AI cannot replace.",
+        "creator": {
+          "@type": "Person",
+          "name": "Daniel Goleman",
+          "jobTitle": "Psychologist & Author, ‘Emotional Intelligence’"
+        },
+        "citation": "LinkedIn EI in the Age of AI 2024"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 9,
+      "item": {
+        "@type": "Quotation",
+        "text": "There’s no such thing as soft skills. Empathy, patience, effective confrontation these are human skills, and they must be learned.",
+        "creator": {
+          "@type": "Person",
+          "name": "Simon Sinek",
+          "jobTitle": "Author & Optimist"
+        },
+        "citation": "LinkedIn 2023"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 10,
+      "item": {
+        "@type": "Quotation",
+        "text": "The quintessential human skill that’s going to remain important is metacognition the ability to synthesize information and make good decisions.",
+        "creator": {
+          "@type": "Person",
+          "name": "David Autor",
+          "jobTitle": "Economist, MIT"
+        },
+        "citation": "OpenAI Forum 2024"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 11,
+      "item": {
+        "@type": "Quotation",
+        "text": "Empathy is about standing in someone else’s shoes, feeling with their heart. It is hard to outsource and automate and it makes the world a better place.",
+        "creator": {
+          "@type": "Person",
+          "name": "Daniel Pink",
+          "jobTitle": "Author, ‘A Whole New Mind’"
+        },
+        "citation": "A Whole New Mind 2005"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 12,
+      "item": {
+        "@type": "Quotation",
+        "text": "By harnessing our natural human advantages curiosity, adaptability, and empathy we can scale organizations that don’t just respond to change but shape it.",
+        "creator": {
+          "@type": "Person",
+          "name": "Heather McGowan",
+          "jobTitle": "Future-of-Work Strategist"
+        },
+        "citation": "The Empathy Advantage 2023"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 13,
+      "item": {
+        "@type": "Quotation",
+        "text": "That term ‘soft skills’ has to be retired. These are complex, behavioral, uniquely human skills that cannot be done by machines.",
+        "creator": {
+          "@type": "Person",
+          "name": "Josh Bersin",
+          "jobTitle": "Global Industry Analyst, HR"
+        },
+        "citation": "HR Executive 2024"
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Innovators in Residence at High Point University",
+  "description": "Global business, media, and technology leaders who hold formal In-Residence appointments at High Point University, mentoring students directly.",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "item": { "@type": "Person", "name": "Steve Wozniak", "jobTitle": "Innovator in Residence", "affiliation": { "@type": "Organization", "name": "Apple" }, "description": "Co-Founder of Apple" } },
+    { "@type": "ListItem", "position": 2, "item": { "@type": "Person", "name": "Marc Randolph", "jobTitle": "Entrepreneur in Residence", "affiliation": { "@type": "Organization", "name": "Netflix" }, "description": "Co-Founder and first CEO of Netflix" } },
+    { "@type": "ListItem", "position": 3, "item": { "@type": "Person", "name": "Cynt Marshall", "jobTitle": "Sports Executive in Residence", "affiliation": { "@type": "Organization", "name": "Dallas Mavericks" }, "description": "Former CEO of the Dallas Mavericks" } },
+    { "@type": "ListItem", "position": 4, "item": { "@type": "Person", "name": "Dee Ann Turner", "jobTitle": "Talent Acquisition Expert in Residence", "affiliation": { "@type": "Organization", "name": "Chick-fil-A" }, "description": "Former Vice President of Talent at Chick-fil-A" } },
+    { "@type": "ListItem", "position": 5, "item": { "@type": "Person", "name": "Byron Pitts", "jobTitle": "Journalist in Residence", "affiliation": { "@type": "Organization", "name": "ABC News" }, "description": "Co-Anchor of ABC's Nightline" } },
+    { "@type": "ListItem", "position": 6, "item": { "@type": "Person", "name": "Joe Michaels", "jobTitle": "Broadcaster in Residence", "affiliation": { "@type": "Organization", "name": "NBC" }, "description": "Former Director of NBC's Today Show" } }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- ===================== STICKY SUBNAV ===================== -->
+<nav class="subnav">
+  <div class="subnav__inner">
+    <a class="subnav__brand" href="#top">High Point University <span>Life Skills</span></a>
+    <div class="subnav__links">
+      <a href="#outcomes">The 99%</a>
+      <a href="#evidence">The Evidence</a>
+      <a href="#pillars">Eight Skills</a>
+      <a href="#curriculum">Curriculum</a>
+      <a href="#innovators">Innovators</a>
+      <a href="#faq">FAQ</a>
+      <a href="#outcomes" class="subnav__cta">View Career Outcomes</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero on-dark" id="top">
+  <div class="hero__media">
+    <video autoplay loop muted playsinline class="hero__video">
+      <source src="uploads/lifeskills banner video.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero__scrim"></div>
+  <div class="hero__content">
+    <p class="eyebrow">High Point University The Premier Life Skills University</p>
+    <h1 class="hero__h1">Life Skills in the<br>AI Economy</h1>
+    <p class="hero__sub">The skills employers say they cannot find are the ones HPU has been teaching since 2005.</p>
+    <div class="btn-row">
+      <a href="#outcomes" class="btn btn--primary">View Career Outcomes</a>
+      <a href="#curriculum" class="btn btn--ghost">Explore the Curriculum</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== LEAD + PROOF BAR ===================== -->
+<section class="section">
+  <div class="container">
+    <div class="presfeature reveal">
+      <div class="presfeature__head">
+        <p class="eyebrow">The President’s Seminar EXP 1101</p>
+        <h2 class="h2 presfeature__title">A required course, taught by the president himself.</h2>
+      </div>
+      <div class="presfeature__body">
+        <div class="ph ph--round presfeature__photo"><img src="uploads/Nido-Qubein-1200-1024x1024.jpg" alt="President Nido Qubein" style="width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%;"></div>
+        <div class="presfeature__text">
+          <p class="lead">EXP 1101 is a required course President Nido Qubein teaches personally to every incoming class since 2006. He is the only sitting university president in the country who does so.</p>
+          <p class="lead" style="margin-top:1em;">From there, the Life Skills curriculum grows across four years <strong style="color:var(--ae-text);font-weight:600;">eight skill categories, eleven tuition-free microcredentials, and access to forty-plus global leaders</strong> In-Residence on campus.</p>
+          <div style="margin-top:24px;"><a href="#curriculum" class="link">Explore the four-year curriculum</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="proofbar">
+      <div class="proofbar__cell">
+        <div class="proofbar__val">99%</div>
+        <div class="proofbar__unit">career outcome rate</div>
+        <div class="proofbar__label">Class of 2025, NACE-verified, #1 in North Carolina</div>
+        <div class="proofbar__src">84% knowledge rate vs. 55% national average</div>
+      </div>
+      <div class="proofbar__cell">
+        <div class="proofbar__val">89%</div>
+        <div class="proofbar__unit">of C-suite executives</div>
+        <div class="proofbar__label">say Life Skills drive new-hire success or failure</div>
+        <div class="proofbar__src">HPU C-Suite Survey, 503 executives</div>
+      </div>
+      <div class="proofbar__cell">
+        <div class="proofbar__val">11</div>
+        <div class="proofbar__unit">tuition-free</div>
+        <div class="proofbar__label">Life Skills microcredentials</div>
+        <div class="proofbar__src">Only institution in the nation</div>
+      </div>
+      <div class="proofbar__cell">
+        <div class="proofbar__val">40+</div>
+        <div class="proofbar__unit">formal In-Residence</div>
+        <div class="proofbar__label">Named global leaders with HPU appointments</div>
+        <div class="proofbar__src">Full roster: Innovators in Residence</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== THE 99% MOMENT ===================== -->
+<section class="section bg-purple on-dark moment" id="outcomes">
+  <div class="container reveal">
+    <div class="moment__num">99<span class="moment__pct">%</span></div>
+    <p class="moment__label">of the Class of 2025 were working or in grad school within six months of graduating.</p>
+    <p class="moment__body" style="font-weight: 400">First in North Carolina, and thirteen points above the national average. A direct outcome of High Point University's Premier Life Skills curriculum.</p>
+    <p class="moment__attr"><a class="cite-link" href="https://www.highpoint.edu/blog/2026/05/high-point-university-ranks-1-north-carolina-career-placement-class-of-2025/" target="_blank" rel="noopener noreferrer">NACE First-Destination Survey Class of 2025 HPU Career and Professional Development</a></p>
+    <div style="margin-top:28px;"><a href="https://www.highpoint.edu/career-outcomes/" target="_blank" rel="noopener noreferrer" class="link">View the full career outcomes data</a></div>
+  </div>
+</section>
+
+<!-- ===================== 2006 vs NOW TIMELINE ===================== -->
+<section class="section bg-gray" id="evidence">
+  <div class="container">
+    <div class="center measure mx-auto reveal">
+      <p class="eyebrow">Why Life Skills Matter More in an AI Economy</p>
+      <h2 class="h2" style="margin-top: 0.4em;">What HPU Said in 2005. 
+What the World Is Saying Now.</h2>
+    </div>
+    <p class="lead measure mx-auto center reveal" style="margin-top:28px;">In 2005, President Qubein told his first incoming class they were not being prepared for the world as it is. They were being prepared for the world as it is going to be. He did not know that twenty years later the World Economic Forum would name the skills gap the number one barrier to business transformation, or that the CEOs of JPMorgan Chase and Microsoft would say the same thing in nearly the same language. He built the curriculum anyway.</p>
+
+    <div class="tl">
+      <div class="tl__col tl__col--left">
+        <div class="tl__colhead">HPU</div>
+        <div class="tl__entries">
+        <div class="tl__entry">
+          <div class="tl__year">2005</div>
+          <p class="tl__text"><strong>Nido R. Qubein becomes the seventh president of High Point University</strong> and requires every incoming freshman to take a Life Skills course he teaches personally. Communication, leadership, fiscal literacy, ethical judgment, and relational capital. No other sitting university president in the country does this.</p>
+        </div>
+        <div class="tl__entry">
+          <div class="tl__year">2013</div>
+          <p class="tl__text"><strong>HPU opens 1924 Prime</strong> in the R.G. Wanek Center as a fine dining restaurant and learning lab. Students dine weekly in business attire, without a phone, served by staff trained to teach professional etiquette at the table. Four years of experience in a setting that mirrors the professional world they are preparing to enter.</p>
+        </div>
+        <div class="tl__entry">
+          <div class="tl__year">2015</div>
+          <p class="tl__text"><strong>Cottrell Hall opens,</strong> bringing career development, internships, entrepreneurship, and student success coaching together under one roof so students can connect every experience they accumulate to what comes next.</p>
+        </div>
+        <div class="tl__entry">
+          <div class="tl__year">2021</div>
+          <p class="tl__text"><strong>The Center for Community Engagement launches,</strong> connecting HPU students to the city of High Point through structured service and scholarship programs. Students develop the capacity to lead and work alongside people whose circumstances differ from their own.</p>
+        </div>
+        <div class="tl__entry">
+          <div class="tl__year">2025</div>
+          <p class="tl__text"><strong>HPU launches tuition-free microcredentials</strong> in networking, business etiquette, coachability, and leadership, each verified and resume-ready before graduation. The Class of 2025 graduates with a 99% career placement rate, first in North Carolina.</p>
+        </div>
+        </div>
+      </div>
+
+      <div class="tl__axis" aria-hidden="true"></div>
+
+      <div class="tl__col tl__col--right">
+        <div class="tl__colhead">The World</div>
+        <div class="tl__entries">
+        <div class="tl__entry">
+          <div class="tl__year">2017</div>
+          <p class="tl__text"><strong>Harvard economist David Deming publishes “The Growing Importance of Social Skills in the Labor Market”</strong> in the Quarterly Journal of Economics. Social-skill-intensive employment grew by nearly 12 percentage points as a share of the U.S. labor force between 1980 and 2012. Math-intensive but less social occupations shrank.</p>
+        </div>
+        <div class="tl__entry">
+          <div class="tl__year">2024</div>
+          <p class="tl__text"><strong>MIT economist David Autor publishes NBER Working Paper 32140.</strong> AI extends human expertise rather than replacing it. The workers who benefit most are the ones who bring the judgment to direct it.</p>
+        </div>
+        <div class="tl__entry">
+          <div class="tl__year">2025</div>
+          <p class="tl__text"><strong>Jamie Dimon</strong>, CEO of JPMorgan Chase: “Learn your EQ, learn how to be good in a meeting, how to communicate, how to write.” <strong>Satya Nadella</strong>, CEO of Microsoft: “If you just have IQ without EQ, it’s just a waste of IQ.” Deloitte’s 2026 Global Human Capital Trends names competitive advantage as less about technology and more about cultivating the human edge.</p>
+        </div>
+        <div class="tl__entry">
+          <div class="tl__year">2026</div>
+          <p class="tl__text"><strong>The Brookings Institution and GovAI find 6.1 million U.S. workers at meaningful AI displacement risk.</strong> The differentiator: transferable, broadly developed human skills.</p>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="tl__converge reveal"><span style="font-weight:400;">The world is looking for somewhere to learn these skills.</span> <strong>HPU has been the answer for twenty years.</strong></p>
+  </div>
+</section>
+
+<!-- ===================== HPU RESEARCH (LIGHT) ===================== -->
+<section class="section">
+  <div class="container">
+    <div class="measure reveal">
+      <p class="eyebrow">WHAT THE RESEARCH SHOWS</p>
+      <p class="subhead" style="margin-top:20px;">
+        In May 2022, HPU’s Survey Research Center asked 503 C-level executives at U.S. companies with 2,500 or more employees one direct question: when a new college hire succeeds or fails, what drives it?
+      </p>
+    </div>
+
+    <div class="statrow">
+      <div>
+        <div class="statrow__num">89%</div>
+        <p class="statrow__lab">of what makes a new hire <strong>succeed or fail</strong> comes down to life skills — not technical know-how.</p>
+      </div>
+      <div>
+        <div class="statrow__num">68%</div>
+        <p class="statrow__lab">of executives say weak <strong>emotional intelligence</strong> is their top reason to pass on a new grad.</p>
+      </div>
+      <div>
+        <div class="statrow__num">38%</div>
+        <p class="statrow__lab">of executives say poor motivation is the leading reason new hires fail to deliver.</p>
+      </div>
+    </div>
+
+    <p class="moment__attr reveal" style="margin-top:48px;color:#8a8a90;max-width:900px;"><a class="cite-link" href="https://www.highpoint.edu/src/" target="_blank" rel="noopener noreferrer">HPU Survey Research Center May 2022 503 C-level executives Dynata research panel U.S. companies with 2,500+ employees Charter Member, AAPOR Transparency Initiative since 2010</a></p>
+    <div style="margin-top:20px;"><a href="https://www.highpoint.edu/lifeskills/c-suite-executive-survey/" target="_blank" rel="noopener noreferrer" class="link">Read the full C-Suite Executive Survey</a></div>
+  </div>
+</section>
+
+<!-- ===================== CEO QUOTES (PURPLE) ===================== -->
+<section class="section bg-purple on-dark">
+  <div class="container">
+    <div class="center measure mx-auto reveal" style="margin-bottom:8px;">
+      <p class="eyebrow">What the World Is Saying</p>
+      <h2 class="h2" style="color:#fff;margin-top:0.4em;">The most influential voices in business keep reaching the same conclusion.</h2>
+      <p class="subhead" style="margin-top:18px;">CEOs, economists, and workplace researchers independently, in their own words. Filter by the skill they’re naming.</p>
+    </div>
+
+    <div class="chips reveal" id="voiceChips" role="tablist" aria-label="Filter voices by skill"></div>
+
+    <div class="feed" id="voiceFeed">
+      <figure class="post" data-cat="emotional-iq" data-featured="true" data-all="true">
+        <header class="post__head">
+          <div class="ph ph--round post__avatar"><img src="uploads/Jamie Dimon.jpeg" alt="Jamie Dimon" style="width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%;"></div>
+          <div class="post__id">
+            <span class="post__name">Jamie Dimon<span class="post__badge" aria-hidden="true"></span></span>
+            <span class="post__role">Chairman &amp; CEO, JPMorgan Chase</span>
+          </div>
+        </header>
+        <blockquote class="post__text">“Learn your EQ, learn how to be good in a meeting, how to communicate, how to write.”</blockquote>
+        <footer class="post__foot">
+          <figcaption class="post__meta"><cite>Fox News Sunday Morning Futures Dec 7, 2025</cite></figcaption>
+        </footer>
+      </figure>
+
+      <figure class="post" data-cat="emotional-iq" data-featured="true">
+        <header class="post__head">
+          <div class="ph ph--round post__avatar"><img src="uploads/Satya Nadella.jpeg" alt="Satya Nadella" style="width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%;"></div>
+          <div class="post__id">
+            <span class="post__name">Satya Nadella<span class="post__badge" aria-hidden="true"></span></span>
+            <span class="post__role">CEO, Microsoft</span>
+          </div>
+        </header>
+        <blockquote class="post__text">“If you just have IQ without EQ, it’s just a waste of IQ.”</blockquote>
+        <footer class="post__foot">
+          <figcaption class="post__meta"><cite>Axel Springer MD Meets Nov 29, 2025</cite></figcaption>
+        </footer>
+      </figure>
+
+      <figure class="post" data-cat="durable-skills" data-featured="true" data-all="true">
+        <header class="post__head">
+          <div class="ph ph--round post__avatar"><img src="uploads/Jensen Huang.jpeg" alt="Jensen Huang" style="width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%;"></div>
+          <div class="post__id">
+            <span class="post__name">Jensen Huang<span class="post__badge" aria-hidden="true"></span></span>
+            <span class="post__role">Founder &amp; CEO, NVIDIA</span>
+          </div>
+        </header>
+        <blockquote class="post__text">“Greatness is not intelligence. Greatness comes from character, and character isn’t formed out of smart people — it’s formed out of people who suffered.”</blockquote>
+        <footer class="post__foot">
+          <figcaption class="post__meta"><cite>Stanford SIEPR Economic Summit Mar 2024</cite></figcaption>
+        </footer>
+      </figure>
+
+      <figure class="post" data-cat="adaptability" data-featured="true" data-all="true">
+        <header class="post__head">
+          <div class="ph ph--round post__avatar"><img src="uploads/Sundar Pichai.png" alt="Sundar Pichai" style="width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%;"></div>
+          <div class="post__id">
+            <span class="post__name">Sundar Pichai<span class="post__badge" aria-hidden="true"></span></span>
+            <span class="post__role">CEO, Google &amp; Alphabet</span>
+          </div>
+        </header>
+        <blockquote class="post__text">“The people who will do well are the people who learn how to use these tools whether you want to be a teacher or a doctor.”</blockquote>
+        <footer class="post__foot">
+          <figcaption class="post__meta"><cite>BBC Interview via Fortune Dec 2, 2025</cite></figcaption>
+        </footer>
+      </figure>
+
+      <figure class="post" data-cat="durable-skills" data-featured="true" data-all="true">
+        <header class="post__head">
+          <div class="ph ph--round post__avatar"><img src="uploads/Aneesh Raman.jpeg" alt="Aneesh Raman" style="width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%;"></div>
+          <div class="post__id">
+            <span class="post__name">Aneesh Raman<span class="post__badge" aria-hidden="true"></span></span>
+            <span class="post__role">Chief Economic Opportunity Officer, LinkedIn</span>
+          </div>
+        </header>
+        <blockquote class="post__text">“Our most resilient skills are distinctly human: compassion, creativity, communication, courage, and curiosity. Human skills are becoming the new ‘hard skills.’”</blockquote>
+        <footer class="post__foot">
+          <figcaption class="post__meta"><cite>LinkedIn CNBC Converge 2025</cite></figcaption>
+        </footer>
+      </figure>
+
+      <figure class="post" data-cat="leadership" data-featured="true">
+        <header class="post__head">
+          <div class="ph ph--round post__avatar"><img src="uploads/Adam Grant.jpeg" alt="Adam Grant" style="width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%;"></div>
+          <div class="post__id">
+            <span class="post__name">Adam Grant<span class="post__badge" aria-hidden="true"></span></span>
+            <span class="post__role">Organizational Psychologist, Wharton</span>
+          </div>
+        </header>
+        <blockquote class="post__text">“They’re not soft skills. They’re human skills, behavioural skills, character skills. I don’t care what we call them I care that we build them.”</blockquote>
+        <footer class="post__foot">
+          <figcaption class="post__meta"><cite>WEF Meet the Leader Feb 2025</cite></figcaption>
+        </footer>
+      </figure>
+
+      <figure class="post" data-cat="leadership">
+        <header class="post__head">
+          <div class="ph ph--round post__avatar"><img src="uploads/Brian Moynihan.jpg" alt="Brian Moynihan" style="width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%;"></div>
+          <div class="post__id">
+            <span class="post__name">Brian Moynihan<span class="post__badge" aria-hidden="true"></span></span>
+            <span class="post__role">CEO, Bank of America</span>
+          </div>
+        </header>
+        <blockquote class="post__text">“We have to be more mindful about training them along multiple dimensions.”</blockquote>
+        <footer class="post__foot">
+          <figcaption class="post__meta"><cite>Bloomberg TV Sep 18, 2025</cite></figcaption>
+        </footer>
+      </figure>
+
+      <figure class="post" data-cat="emotional-iq">
+        <header class="post__head">
+          <div class="ph ph--round post__avatar"><img src="uploads/Daniel Goleman.jpeg" alt="Daniel Goleman" style="width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%;"></div>
+          <div class="post__id">
+            <span class="post__name">Daniel Goleman<span class="post__badge" aria-hidden="true"></span></span>
+            <span class="post__role">Psychologist &amp; Author, ‘Emotional Intelligence’</span>
+          </div>
+        </header>
+        <blockquote class="post__text">“Emotional intelligence represents a set of human abilities that AI cannot replace.”</blockquote>
+        <footer class="post__foot">
+          <figcaption class="post__meta"><cite>LinkedIn EI in the Age of AI 2024</cite></figcaption>
+        </footer>
+      </figure>
+
+      <figure class="post" data-cat="adaptability">
+        <header class="post__head">
+          <div class="ph ph--round post__avatar"><img src="uploads/Simon Sinek-3c0fa316.jpeg" alt="Simon Sinek" style="width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%;"></div>
+          <div class="post__id">
+            <span class="post__name">Simon Sinek<span class="post__badge" aria-hidden="true"></span></span>
+            <span class="post__role">Author &amp; Optimist</span>
+          </div>
+        </header>
+        <blockquote class="post__text">“There’s no such thing as soft skills. Empathy, patience, effective confrontation these are human skills, and they must be learned.”</blockquote>
+        <footer class="post__foot">
+          <figcaption class="post__meta"><cite>LinkedIn 2023</cite></figcaption>
+        </footer>
+      </figure>
+
+      <figure class="post" data-cat="judgment">
+        <header class="post__head">
+          <div class="ph ph--round post__avatar"><img src="uploads/David Autor.jpeg" alt="David Autor" style="width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%;"></div>
+          <div class="post__id">
+            <span class="post__name">David Autor<span class="post__badge" aria-hidden="true"></span></span>
+            <span class="post__role">Economist, MIT</span>
+          </div>
+        </header>
+        <blockquote class="post__text">“The quintessential human skill that’s going to remain important is metacognition the ability to synthesize information and make good decisions.”</blockquote>
+        <footer class="post__foot">
+          <figcaption class="post__meta"><cite>OpenAI Forum 2024</cite></figcaption>
+        </footer>
+      </figure>
+
+      <figure class="post" data-cat="empathy">
+        <header class="post__head">
+          <div class="ph ph--round post__avatar"><img src="uploads/Daniel Pink.jpeg" alt="Daniel Pink" style="width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%;"></div>
+          <div class="post__id">
+            <span class="post__name">Daniel Pink<span class="post__badge" aria-hidden="true"></span></span>
+            <span class="post__role">Author, ‘A Whole New Mind’</span>
+          </div>
+        </header>
+        <blockquote class="post__text">“Empathy is about standing in someone else’s shoes, feeling with their heart. It is hard to outsource and automate and it makes the world a better place.”</blockquote>
+        <footer class="post__foot">
+          <figcaption class="post__meta"><cite>A Whole New Mind 2005</cite></figcaption>
+        </footer>
+      </figure>
+
+      <figure class="post" data-cat="empathy">
+        <header class="post__head">
+          <div class="ph ph--round post__avatar"><img src="uploads/Heather McGowan.jpeg" alt="Heather McGowan" style="width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%;"></div>
+          <div class="post__id">
+            <span class="post__name">Heather McGowan<span class="post__badge" aria-hidden="true"></span></span>
+            <span class="post__role">Future-of-Work Strategist</span>
+          </div>
+        </header>
+        <blockquote class="post__text">“By harnessing our natural human advantages curiosity, adaptability, and empathy we can scale organizations that don’t just respond to change but shape it.”</blockquote>
+        <footer class="post__foot">
+          <figcaption class="post__meta"><cite>The Empathy Advantage 2023</cite></figcaption>
+        </footer>
+      </figure>
+
+      <figure class="post" data-cat="durable-skills">
+        <header class="post__head">
+          <div class="ph ph--round post__avatar"><img src="uploads/Josh Bersin.jpeg" alt="Josh Bersin" style="width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%;"></div>
+          <div class="post__id">
+            <span class="post__name">Josh Bersin<span class="post__badge" aria-hidden="true"></span></span>
+            <span class="post__role">Global Industry Analyst, HR</span>
+          </div>
+        </header>
+        <blockquote class="post__text">“That term ‘soft skills’ has to be retired. These are complex, behavioral, uniquely human skills that cannot be done by machines.”</blockquote>
+        <footer class="post__foot">
+          <figcaption class="post__meta"><cite>HR Executive 2024</cite></figcaption>
+        </footer>
+      </figure>
+    </div>
+
+    <div class="feed__more reveal">
+      <button class="showmore" id="voiceMore" type="button" hidden></button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== THE RESEARCH AGREES ===================== -->
+<section class="section bg-tint" id="research-band">
+  <div class="container">
+    <div class="center measure mx-auto reveal">
+      <p class="eyebrow">The Research Agrees</p>
+      <h2 class="h2" style="margin-top: 0.4em;">The Evidence Behind the Demand</h2>
+      <p class="lead" style="margin-top:22px;">Every number below points to the same conclusion: life skills are the most durable career investment a student can make.</p>
+    </div>
+    <div class="statgrid" id="researchGrid"></div>
+    <p class="center reveal" style="margin-top:clamp(36px,4vw,52px);"><a href="#" class="link">See all sources and citations</a></p>
+  </div>
+</section>
+
+<!-- ===================== EIGHT SKILLS ===================== -->
+<section class="section" id="pillars">
+  <div class="container">
+    <div class="center measure mx-auto reveal">
+      <p class="eyebrow">What HPU Teaches Across All Four Years</p>
+      <h2 class="h2" style="margin-top:0.4em;">Life Skills at HPU Is a 
+Four-Year Commitment</h2>
+    </div>
+    <p class="lead measure mx-auto center reveal" style="margin-top:28px;">The eight Life Skills categories at HPU are not a collection of tips and workshops. Each one has dedicated coursework, verified credentials, and a direct line to the outcomes HPU graduates are known for.</p>
+
+    <div class="skillgrid">
+      <article class="skillcard">
+        <div class="skillcard__num">01</div>
+        <h3 class="skillcard__name">Emotional Intelligence</h3>
+        <p class="skillcard__desc">The capability 68% of C-suite executives name as their single top reason to hesitate before hiring a college graduate.</p>
+        <p class="skillcard__src">HPU C-Suite Survey, 503 executives, 2022</p>
+        <div class="skillcard__link"><a href="Emotional Intelligence.html" class="link">Explore</a></div>
+      </article>
+      <article class="skillcard">
+        <div class="skillcard__num">02</div>
+        <h3 class="skillcard__name">Coachability</h3>
+        <p class="skillcard__desc">The willingness to receive feedback and improve. Named by 38% of executives as the primary factor separating new hires who succeed from those who don’t.</p>
+        <p class="skillcard__src">HPU C-Suite Survey, 503 executives, 2022</p>
+        <div class="skillcard__link"><a href="#" class="link">Explore</a></div>
+      </article>
+      <article class="skillcard">
+        <div class="skillcard__num">03</div>
+        <h3 class="skillcard__name">Communication &amp; Relational Capital</h3>
+        <p class="skillcard__desc">Workers in communication-intensive roles earn roughly 20% more per quartile of intensity than peers with less communication-intensive work.</p>
+        <p class="skillcard__src">Georgetown Center on Education &amp; the Workforce, 2020</p>
+        <div class="skillcard__link"><a href="#" class="link">Explore</a></div>
+      </article>
+      <article class="skillcard">
+        <div class="skillcard__num">04</div>
+        <h3 class="skillcard__name">Character &amp; Integrity</h3>
+        <p class="skillcard__desc">The capability most resistant to automation and the hardest to reveal in a thirty-minute interview.</p>
+        <p class="skillcard__src">MIT Work of the Future, 2020</p>
+        <div class="skillcard__link"><a href="#" class="link">Explore</a></div>
+      </article>
+      <article class="skillcard">
+        <div class="skillcard__num">05</div>
+        <h3 class="skillcard__name">Growth Mindset &amp; Motivation</h3>
+        <p class="skillcard__desc">The drive to keep going and the belief that you can get better. 38% of executives say motivation is what separates new hires who thrive from those who stall.</p>
+        <p class="skillcard__src">HPU C-Suite Survey, 503 executives, 2022</p>
+        <div class="skillcard__link"><a href="#" class="link">Explore</a></div>
+      </article>
+      <article class="skillcard">
+        <div class="skillcard__num">06</div>
+        <h3 class="skillcard__name">Adaptability &amp; Resilience</h3>
+        <p class="skillcard__desc">Brookings and GovAI identified 6.1 million workers facing both high AI exposure and low adaptive capacity. Transferable skills are the differentiator.</p>
+        <p class="skillcard__src">Brookings Institution &amp; GovAI, January 2026</p>
+        <div class="skillcard__link"><a href="#" class="link">Explore</a></div>
+      </article>
+      <article class="skillcard">
+        <div class="skillcard__num">07</div>
+        <h3 class="skillcard__name">Leadership &amp; Persuasion</h3>
+        <p class="skillcard__desc">Leadership is among the five most-demanded competencies across all job categories that require a bachelor’s degree.</p>
+        <p class="skillcard__src">Georgetown Center on Education &amp; the Workforce, 2020</p>
+        <div class="skillcard__link"><a href="#" class="link">Explore</a></div>
+      </article>
+      <article class="skillcard">
+        <div class="skillcard__num">08</div>
+        <h3 class="skillcard__name">Judgment &amp; Critical Thinking</h3>
+        <p class="skillcard__desc">AI extends human expertise rather than replacing it. The workers who benefit most are the ones with the judgment to direct it.</p>
+        <p class="skillcard__src">David Autor, MIT, NBER Working Paper 32140, 2024</p>
+        <div class="skillcard__link"><a href="#" class="link">Explore</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CURRICULUM TEASERS ===================== -->
+<section class="section bg-gray" id="curriculum">
+  <div class="container">
+    <div class="center measure mx-auto reveal">
+      <h2 class="h2">The Curriculum Behind 
+the Number</h2>
+    </div>
+    <p class="lead measure mx-auto center reveal" style="margin-top:24px;">
+      The 99% career placement rate does not come from a single program. It comes from a four-year ecosystem built from the ground up around the capabilities employers say they look for most.
+    </p>
+
+    <div class="teasergrid">
+      <article class="teaser">
+        <div class="ph teaser__media"><img src="uploads/Presidents Seminar on Life Skills.jpg" alt="President Nido Qubein addressing students in the theater" style="width:100%;height:100%;object-fit:cover;object-position:center;"></div>
+        <div class="teaser__body">
+          <h3 class="teaser__h">The President’s Seminar on Life Skills</h3>
+          <p class="teaser__p">EXP 1101. Required. First semester. President Qubein teaches it personally to every incoming freshman, every fall, since 2006 the only sitting university president in the U.S. who teaches a required, credit-bearing course to the full entering class.</p>
+          <div class="teaser__link"><a href="#" class="link">The President’s Seminar</a></div>
+        </div>
+      </article>
+      <article class="teaser">
+        <div class="ph teaser__media"><img src="uploads/credentials-microcredentials-illustration.png" alt="Illustration of HPU students looking toward campus and the city skyline" style="width:100%;height:100%;object-fit:cover;object-position:center;"></div>
+        <div class="teaser__body">
+          <h3 class="teaser__h">Credentials &amp; Microcredentials</h3>
+          <p class="teaser__p">Eleven tuition-free Life Skills credentials earned across four years several at locations no other university can access: the Masters Tournament, the Dallas Mavericks boardroom, the High Point Furniture Market, Goldman Sachs. All in the degree. All searchable by employer ATS.</p>
+          <div class="teaser__link"><a href="#" class="link">HPU’s Life Skills Credentials</a></div>
+        </div>
+      </article>
+      <article class="teaser">
+        <div class="ph teaser__media"><img src="uploads/Access to Innovators.jpg" alt="Steve Wozniak meeting with HPU students at The Woz Project" style="width:100%;height:100%;object-fit:cover;object-position:center;"></div>
+        <div class="teaser__body">
+          <h3 class="teaser__h">Access to Innovators</h3>
+          <p class="teaser__p">More than forty global leaders hold formal In-Residence appointments at HPU: Steve Wozniak (Apple co-founder), Marc Randolph (Netflix co-founder), Cynt Marshall (former Dallas Mavericks CEO), Johnny Taylor (President &amp; CEO, SHRM). Ongoing appointments. Real access.</p>
+          <div class="teaser__link"><a href="#" class="link">Innovators in Residence</a></div>
+        </div>
+      </article>
+      <article class="teaser">
+        <div class="ph teaser__media"><img src="uploads/HPU in the City.jpg" alt="HPU students on a major television studio set" style="width:100%;height:100%;object-fit:cover;object-position:center;"></div>
+        <div class="teaser__body">
+          <h3 class="teaser__h">HPU in the City</h3>
+          <p class="teaser__p">Students inside Goldman Sachs, Bloomberg, and JPMorgan Chase in New York, Atlanta, Dallas, and Chicago simultaneously. The Networking and Workplace Etiquette credential is earned here.</p>
+          <div class="teaser__link"><a href="#" class="link">HPU in the City</a></div>
+        </div>
+      </article>
+      <article class="teaser">
+        <div class="ph teaser__media"><img src="uploads/Career Outcomes.jpg" alt="HPU Young Alumni Career and Graduate School Outcomes wall" style="width:100%;height:100%;object-fit:cover;object-position:center;"></div>
+        <div class="teaser__body">
+          <h3 class="teaser__h">Career Outcomes</h3>
+          <p class="teaser__p">99% of the Class of 2025 employed or in graduate school within six months. Number one in North Carolina. NACE-verified. Goldman Sachs, Google, NASA Goddard, the NBA, PwC, and more.</p>
+          <div class="teaser__link"><a href="#" class="link">Career Outcomes: 99%, Class of 2025</a></div>
+        </div>
+      </article>
+      <article class="teaser">
+        <div class="ph teaser__media"><img src="uploads/Life Skills Career Summit.jpg" alt="Students networking with an employer at the Life Skills Career Summit" style="width:100%;height:100%;object-fit:cover;object-position:center;"></div>
+        <div class="teaser__body">
+          <h3 class="teaser__h">Life Skills Career Summit</h3>
+          <p class="teaser__p">A bi-annual structured employer event not an open career fair. Students arrive credentialed. Employers arrive knowing that.</p>
+          <div class="teaser__link"><a href="#" class="link">The Life Skills Career Summit</a></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== INNOVATORS IN RESIDENCE ===================== -->
+<section class="section" id="innovators">
+  <div class="container">
+    <div class="center measure mx-auto reveal" style="max-width:820px;">
+      <p class="eyebrow">Innovators in Residence</p>
+      <h2 class="h2" style="margin-top:0.4em;">You won't just read about them. You'll learn from them.</h2>
+      <p class="lead" style="margin-top:22px;">More than forty global leaders hold formal In-Residence appointments at High Point University, returning to campus year after year to teach, mentor, and open doors for students directly. These are six of them.</p>
+    </div>
+
+    <div class="inres-grid" data-inres>
+      <a class="inres" href="Steve Wozniak.html">
+        <div class="ph ph--dark inres__bg"><img src="uploads/Steve Wozniak.jpg" alt="Steve Wozniak" style="width: 100%; height: 100%; object-fit: cover; object-position: center;"></div>
+        <span class="inres__logo inres__logo--glyph"><img src="uploads/apple.svg" alt="Apple"></span>
+        <div class="inres__text">
+          <p class="inres__title">Innovator in Residence</p>
+          <h3 class="inres__name">Steve Wozniak</h3>
+          <p class="inres__role">Co-Founder, Apple</p>
+        </div>
+      </a>
+
+      <a class="inres" href="Marc Randolph.html">
+        <div class="ph ph--dark inres__bg"><img src="uploads/Marc-Randolph.jpg" alt="Marc Randolph" style="width:100%;height:100%;object-fit:cover;object-position:center 24%;"></div>
+        <span class="inres__logo"><img src="uploads/netflix.jpg" alt="Netflix"></span>
+        <div class="inres__text">
+          <p class="inres__title">Entrepreneur in Residence</p>
+          <h3 class="inres__name">Marc Randolph</h3>
+          <p class="inres__role">Co-Founder &amp; First CEO, Netflix</p>
+        </div>
+      </a>
+
+      <a class="inres" href="Cynt Marshall.html">
+        <div class="ph ph--dark inres__bg"><img src="uploads/Cynt Marshall.jpg" alt="Cynt Marshall" style="width:100%;height:100%;object-fit:cover;object-position:center 14%;"></div>
+        <span class="inres__logo"><img src="uploads/maverics.jpg" alt="Dallas Mavericks"></span>
+        <div class="inres__text">
+          <p class="inres__title">Sports Executive in Residence</p>
+          <h3 class="inres__name">Cynt Marshall</h3>
+          <p class="inres__role">Former CEO, Dallas Mavericks</p>
+        </div>
+      </a>
+
+      <a class="inres" href="Dee Ann Turner.html">
+        <div class="ph ph--dark inres__bg"><img src="uploads/Dee Ann Turner.JPG" alt="Dee Ann Turner" style="width:100%;height:100%;object-fit:cover;object-position:center 16%;"></div>
+        <span class="inres__logo"><img src="uploads/chicfila.jpg" alt="Chick-fil-A"></span>
+        <div class="inres__text">
+          <p class="inres__title">Talent Expert in Residence</p>
+          <h3 class="inres__name">Dee Ann Turner</h3>
+          <p class="inres__role">Former VP of Talent, Chick-fil-A</p>
+        </div>
+      </a>
+
+      <a class="inres" href="Byron Pitts.html">
+        <div class="ph ph--dark inres__bg"><img src="uploads/Byron Pitts.JPG" alt="Byron Pitts" style="width:100%;height:100%;object-fit:cover;object-position:center 14%;"></div>
+        <span class="inres__logo"><img src="uploads/abc.jpg" alt="ABC News"></span>
+        <div class="inres__text">
+          <p class="inres__title">Journalist in Residence</p>
+          <h3 class="inres__name">Byron Pitts</h3>
+          <p class="inres__role">Co-Anchor, ABC's &ldquo;Nightline&rdquo;</p>
+        </div>
+      </a>
+
+      <a class="inres" href="Joe Michaels.html">
+        <div class="ph ph--dark inres__bg"><img src="uploads/Joe Michaels.jpg" alt="Joe Michaels" style="width:100%;height:100%;object-fit:cover;object-position:center 24%;"></div>
+        <span class="inres__logo"><img src="uploads/nbc.jpg" alt="NBC"></span>
+        <div class="inres__text">
+          <p class="inres__title">Broadcaster in Residence</p>
+          <h3 class="inres__name">Joe Michaels</h3>
+          <p class="inres__role">Former Director, NBC's &ldquo;Today&rdquo; Show</p>
+        </div>
+      </a>
+    </div>
+
+    <p class="center reveal" style="margin-top:clamp(40px,5vw,60px);"><a href="#" class="link">View the full roster of 40+ In-Residence leaders</a></p>
+  </div>
+</section>
+
+<!-- ===================== OTHER HALF ===================== -->
+<section class="section">
+  <div class="container">
+    <div class="otherhalf">
+      <div class="reveal">
+        <p class="eyebrow">EXTRAORDINARY EDUCATION + LIFE SKILLS</p>
+        <h2 class="h2" style="margin-top:0.4em;">The Full Picture </h2>
+        <p class="lead" style="margin-top:22px;">Life Skills build the capabilities employers cannot find. Academic preparation builds the expertise to back them up. HPU holds 100% first-time licensure pass rates across five nationally examined programs, thirteen professional accreditations, and more than forty million dollars in active federal research grants. Both halves work together. The 99% placement rate is what they produce.</p>
+        <div style="margin-top:24px;"><a href="https://www.highpoint.edu/academic-excellence/" target="_blank" rel="noopener noreferrer" class="link">View Academic Excellence at HPU</a></div>
+      </div>
+      <div class="ph otherhalf__media reveal"><img src="uploads/Lab  studio academic excellence.jpg" alt="HPU faculty member and student working at a microscope in a research lab" style="width:100%;height:100%;object-fit:cover;object-position:center;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section class="section bg-gray" id="faq">
+  <div class="container">
+    <div class="center measure mx-auto reveal">
+      <p class="eyebrow">Frequently Asked Questions</p>
+      <h2 class="h2" style="margin-top:0.4em;">Life Skills at High Point University</h2>
+    </div>
+
+    <div class="faq reveal">
+      <details class="faq__item">
+        <summary>What is the Life Skills program at High Point University?</summary>
+        <div class="faq__a">HPU’s Life Skills program is a required four-year curriculum built into every undergraduate degree. It begins with EXP 1101, the President’s Seminar on Life Skills a one-credit course President Nido Qubein teaches personally to every incoming freshman, every fall, since 2006. It continues through eight named skill categories and eleven tuition-free microcredentials earned across four years. The research behind it: HPU’s 2022 C-Suite Survey of 503 executives found that 89% of new-hire success and failure factors are Life Skills related. The outcome: 99% of the Class of 2025 employed or in graduate school within six months. See the <a href="#" class="link">President’s Seminar</a> and the full <a href="#" class="link">credentials page</a>.</div>
+      </details>
+      <details class="faq__item">
+        <summary>What are the eight Life Skills HPU teaches?</summary>
+        <div class="faq__a">HPU organizes Life Skills into eight named categories: Emotional Intelligence, Coachability, Communication and Relational Capital, Character and Integrity, Growth Mindset, Adaptability and Resilience, Leadership and Persuasion, and Judgment and Critical Thinking. Each has its own coursework, its own credential, and its own spoke page with the full depth on why that skill matters and how HPU teaches it.</div>
+      </details>
+      <details class="faq__item">
+        <summary>Why do Life Skills matter more in an AI economy?</summary>
+        <div class="faq__a">Because AI makes technical work more efficient, which makes human capabilities more valuable, not less. MIT economist David Autor’s 2024 NBER research shows AI extends human expertise to more workers those who benefit most bring the judgment to direct it. A January 2026 Brookings Institution and GovAI study found 6.1 million workers at meaningful AI displacement risk whose primary vulnerability is low adaptive capacity, not low technical skill. David Deming’s 2017 Quarterly Journal of Economics research documented that social-skill-intensive employment grew by nearly 12 percentage points as a share of the U.S. labor force between 1980 and 2012. HPU built the curriculum around these findings in 2006. Related: <a href="#" class="link">What Skills AI Cannot Replace</a> <a href="#" class="link">Is College Worth It in the AI Economy?</a></div>
+      </details>
+      <details class="faq__item">
+        <summary>Does President Qubein really teach a class to every freshman?</summary>
+        <div class="faq__a">Yes. President Nido R. Qubein teaches EXP 1101, the President’s Seminar on Life Skills, a required one-credit course every incoming freshman takes in their first semester. He is the only sitting university president in the United States who teaches a required, credit-bearing course to the full entering class. Every fall, since 2006. The course covers self-esteem, goal-setting, fiscal literacy, communication, leadership, ethical decision-making, and what he calls relational capital. <a href="#" class="link">Full detail on the President’s Seminar</a>.</div>
+      </details>
+      <details class="faq__item">
+        <summary>What are HPU’s eleven Life Skills microcredentials?</summary>
+        <div class="faq__a">HPU awards eleven tuition-free microcredentials students can earn during their undergraduate degree: Emotional Intelligence, Coachability, Motivation, Foundational Life Skills (first-year exclusive, earned alongside EXP 1101), Professional Assessment, Guest Relations (earned at the Masters Tournament in Augusta, Georgia), Global Showroom Merchandising (earned at the High Point Furniture Market), Networking and Workplace Etiquette (earned through HPU in the City at Goldman Sachs, Bloomberg, and JPMorgan Chase), Executive Sports Leadership (earned in the Dallas Mavericks boardroom), Organization Solutions, and Leadership Essentials. Every credential is tuition-free, included in the undergraduate degree, and searchable by employer applicant tracking systems. <a href="#" class="link">Full credentials page</a>.</div>
+      </details>
+      <details class="faq__item">
+        <summary>What is HPU’s career placement rate?</summary>
+        <div class="faq__a">99% of HPU’s Class of 2025 was employed or enrolled in graduate school within 180 days of graduation, verified to NACE First-Destination Survey standards, ranked first in North Carolina, thirteen points above the national average. HPU tracked outcomes for 84% of its graduating class the highest knowledge rate published by any institution in the country. <a href="#" class="link">Full career outcomes data, employer destinations, and NACE methodology</a>.</div>
+      </details>
+      <details class="faq__item">
+        <summary>How is HPU’s Life Skills program different from career services at other universities?</summary>
+        <div class="faq__a">At most universities, career readiness lives in an office students visit when they choose to. At HPU, it lives in the curriculum every student is required to complete a four-year, credit-bearing program with eight named pillars, a presidential seminar in the first semester, and eleven formal microcredentials. Princeton Review ranks HPU’s career services ninth nationally in student surveys. That ranking sits on top of a curriculum that has already done the foundational work before you walk into a career center appointment for the first time. Related: <a href="#" class="link">What Makes a Graduate Trustworthy to Employers</a>.</div>
+      </details>
+      <details class="faq__item">
+        <summary>Can Life Skills actually be learned in college?</summary>
+        <div class="faq__a">Yes. The entire program is built on the premise that these capabilities are teachable, not innate. HPU’s C-Suite Survey shows executives observe Life Skills as qualities that vary meaningfully across graduates which means they respond to education, not just personality. Coachability, emotional intelligence, communication under pressure, and professional judgment all develop through instruction, practice, and honest feedback. HPU built a four-year curriculum and a credentialing system around exactly this. The 99% placement rate for the Class of 2025 is what that produces at scale. Related: <a href="#" class="link">The Real Reason New Hires Fail</a> <a href="#" class="link">What the World’s Top CEOs Hire For</a>.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <div>
+      <div class="footer__brand">High Point University</div>
+      <div class="footer__meta" style="margin-top:6px;">The Premier Life Skills University One University Parkway, High Point, NC 27268</div>
+    </div>
+    <div class="footer__meta" style="text-align:right;">Career outcomes verified to NACE First-Destination Survey standards Class of 2025</div>
+  </div>
+</footer>
+
+<script src="evidence.js"></script>
+
+<script>
+  /* Print build: skip GSAP/ScrollTrigger/motion.js so nothing is hidden,
+     reveal every quote card and FAQ answer, then auto-open the print dialog
+     once fonts have settled. */
+  (function () {
+    function prepareForPrint() {
+      document.querySelectorAll("#voiceFeed .post.is-hidden").forEach(function (el) {
+        el.classList.remove("is-hidden");
+        el.removeAttribute("aria-hidden");
+      });
+      document.querySelectorAll("details").forEach(function (d) { d.open = true; });
+    }
+
+    function go() {
+      prepareForPrint();
+      var fonts = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+      fonts.then(function () {
+        setTimeout(function () { window.print(); }, 500);
+      });
+    }
+
+    if (document.readyState === "complete") { go(); }
+    else { window.addEventListener("load", go); }
+  })();
+</script>
+
+</body>
+</html>

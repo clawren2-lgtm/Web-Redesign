@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Steve Wozniak Teaches at High Point University</title>
+<meta name="description" content="Steve Wozniak, co-founder of Apple, is an Innovator in Residence at High Point University — teaching students judgment, critical thinking, and what it really takes to build something that lasts.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="innovator.css">
+<script>
+  (function () {
+    try {
+      var ok = window.matchMedia && window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
+      if (!ok) { return; }
+      var d = document.documentElement;
+      d.classList.add("js-anim");
+      setTimeout(function () { if (!window.__motionReady) { d.classList.remove("js-anim"); } }, 3000);
+    } catch (e) {}
+  })();
+</script>
+<style>
+  /* HPU API header overlays the hero with no layout height, so the hero
+     sits at the very top of the page (matches the Visit page). */
+  #hpuHeaderMount {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+  /* The injected HPU site stylesheet redefines `.container` and loads after
+     ours, knocking page content off-center. Re-assert OUR centered container
+     for page content (higher specificity), while letting the injected
+     header/footer keep the HPU site's own full-width container. */
+  body .container { max-width: var(--maxw-wide); margin-inline: auto; }
+  body .container--text { max-width: var(--maxw-text); }
+  #hpuHeaderMount .container,
+  .hpu-api-template-part .container { max-width: 100%; margin-inline: 0; }
+  /* Match Visit: HPU header CTA buttons in Poppins + 5px radius. */
+  #hpuHeaderMount .cta-button-link,
+  #hpuHeaderMount a.cta-button-link {
+    font-family: "Poppins", sans-serif !important;
+    font-weight: 600 !important;
+    border-radius: 5px !important;
+  }
+</style>
+</head>
+<body data-screen-label="Steve Wozniak">
+
+<!-- ===================== HPU SITE HEADER (API) =====================
+     The API replaces the inner .hpu-api-template-part marker with the live
+     site header. The #hpuHeaderMount wrapper SURVIVES the swap and is
+     absolutely positioned so the header overlays the hero (zero layout
+     height) instead of pushing the page content down. -->
+<div id="hpuHeaderMount">
+  <div class="hpu-api-template-part" data-part="header">
+    <noscript>High Point University</noscript>
+  </div>
+</div>
+
+
+<!-- ===================== HERO ===================== -->
+<header class="hero hero--circuit on-dark" id="top">
+  <div class="hero__media">
+    <img src="uploads/Steve Wozniak-42b42717.jpg" alt="Steve Wozniak" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 18%;">
+  </div>
+  <div class="hero__scrim"></div>
+  <div class="hero__content">
+    <p class="eyebrow eyebrow--tick">Innovator in Residence</p>
+    <h1 class="hero__h1">Steve Wozniak</h1>
+    <p class="hero__sub">Co-Founder, Apple</p>
+  </div>
+</header>
+
+<!-- ===================== DARK BIO BAND ===================== -->
+<section class="idark">
+  <div class="container">
+    <div class="about reveal">
+      <div class="logoplate">
+        <div class="logoplate__frame logoplate__frame--img logoplate__frame--glyph">
+          <img class="logoplate__img" src="uploads/apple.svg" alt="Apple logo">
+        </div>
+      </div>
+      <div class="about__body">
+        <p class="about__lead">Steve Wozniak co-founded Apple and hand-designed the machines that made computing personal — and as High Point University’s Innovator in Residence, he brings that same curiosity directly to our students.</p>
+        <p class="about__p">The sole designer of the Apple I and Apple II, Wozniak launched the personal-computing revolution by pairing technical genius with a simple conviction: technology should be honest, approachable, and built to delight the person using it. In March 2016, he became the founding voice of HPU’s Access to Innovators Program.</p>
+        <p class="about__p">Through Access to Innovators, HPU students sit across from the people who changed the world and ask them anything. Wozniak models the Premier Life Skills that outlast any single technology: the judgment to know what is worth building, the integrity to build it honestly, and the curiosity to keep learning long after the world calls you an expert.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ON CAMPUS ===================== -->
+<section class="section bg-gray" id="on-campus">
+  <div class="container">
+    <div class="detail-intro mx-auto center reveal">
+      <p class="eyebrow">On Campus at HPU</p>
+      <h2 class="h2">What Steve Wozniak Teaches HPU Students</h2>
+      <p class="lead" style="margin-top:20px;">Most students will only ever read about the people who changed the world. Through HPU’s Access to Innovators Program, our students sit across from one of them and ask anything they want. Wozniak comes back to campus because he believes the next generation of builders deserves real access to the people who have done it.</p>
+    </div>
+    <div class="teachgrid reveal">
+      <article class="teachcard">
+        <div class="teachcard__k">01</div>
+        <h3 class="teachcard__h">Fireside conversations on invention</h3>
+        <p class="teachcard__p">Wozniak sits down with students in small-group sessions and speaks candidly about building, failing, and the ethics of creating technology people trust. Every session is an open, honest conversation where students set the agenda.</p>
+      </article>
+      <article class="teachcard">
+        <div class="teachcard__k">02</div>
+        <h3 class="teachcard__h">Direct mentorship for student innovators</h3>
+        <p class="teachcard__p">Engineering and entrepreneurship students get face-to-face feedback on the ideas and prototypes they’re actually working on. Wozniak has a rare gift for seeing the idea inside the rough prototype.</p>
+      </article>
+      <article class="teachcard">
+        <div class="teachcard__k">03</div>
+        <h3 class="teachcard__h">Judgment in the age of AI</h3>
+        <p class="teachcard__p">He pushes students past “Can we build it?” to the question that defines a good engineer: “Should we?” In a world where AI can do more and more, that judgment is the skill that sets people apart.</p>
+      </article>
+    </div>
+    <div class="skills-footer reveal">
+      <p class="skills-footer__label">Life skills reinforced</p>
+      <div class="skilltags">
+          <a class="skilltag" href="Life Skills.html#pillars">
+            <span class="skilltag__name">Judgment & Critical Thinking</span>
+          </a>
+          <a class="skilltag" href="Life Skills.html#pillars">
+            <span class="skilltag__name">Growth Mindset</span>
+          </a>
+          <a class="skilltag" href="Life Skills.html#pillars">
+            <span class="skilltag__name">Character & Integrity</span>
+          </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PULL QUOTE ===================== -->
+<section class="section bg-purple on-dark">
+  <div class="container">
+    <div class="pullquote reveal">
+      <span class="pullquote__mark" aria-hidden="true">“</span>
+      <blockquote>I am always reachable. You have full access to me.</blockquote>
+      <cite>Steve Wozniak</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MORE INNOVATORS ===================== -->
+<section class="section" id="innovators">
+  <div class="container">
+    <div class="detail-intro mx-auto center reveal" style="max-width:760px;">
+      <p class="eyebrow">More Innovators in Residence</p>
+      <h2 class="h2">Meet more of the innovators.</h2>
+    </div>
+    <div class="inres-grid inres-grid--nav" style="margin-top:clamp(40px,5vw,64px);">
+      <a class="inres" href="Marc Randolph.html">
+        <div class="ph ph--dark inres__bg"><img src="uploads/Marc-Randolph.jpg" alt="Marc Randolph" style="width:100%;height:100%;object-fit:cover;object-position:center 24%;"></div>
+        <span class="inres__logo"><img src="uploads/netflix.jpg" alt="Netflix"></span>
+        <div class="inres__text">
+          <p class="inres__title">Entrepreneur in Residence</p>
+          <h3 class="inres__name">Marc Randolph</h3>
+          <p class="inres__role">Co-Founder & First CEO, Netflix</p>
+        </div>
+      </a>
+      <a class="inres" href="Cynt Marshall.html">
+        <div class="ph ph--dark inres__bg"><img src="uploads/Cynt Marshall.jpg" alt="Cynt Marshall" style="width:100%;height:100%;object-fit:cover;object-position:center 14%;"></div>
+        <span class="inres__logo"><img src="uploads/maverics.jpg" alt="Dallas Mavericks"></span>
+        <div class="inres__text">
+          <p class="inres__title">Sports Executive in Residence</p>
+          <h3 class="inres__name">Cynt Marshall</h3>
+          <p class="inres__role">Former CEO, Dallas Mavericks</p>
+        </div>
+      </a>
+      <a class="inres" href="Dee Ann Turner.html">
+        <div class="ph ph--dark inres__bg"><img src="uploads/Dee Ann Turner.JPG" alt="Dee Ann Turner" style="width:100%;height:100%;object-fit:cover;object-position:center 16%;"></div>
+        <span class="inres__logo"><img src="uploads/chicfila.jpg" alt="Chick-fil-A"></span>
+        <div class="inres__text">
+          <p class="inres__title">Talent Expert in Residence</p>
+          <h3 class="inres__name">Dee Ann Turner</h3>
+          <p class="inres__role">Former VP of Talent, Chick-fil-A</p>
+        </div>
+      </a>
+      <a class="inres" href="Byron Pitts.html">
+        <div class="ph ph--dark inres__bg"><img src="uploads/Byron Pitts.JPG" alt="Byron Pitts" style="width:100%;height:100%;object-fit:cover;object-position:center 14%;"></div>
+        <span class="inres__logo"><img src="uploads/abc.jpg" alt="ABC News"></span>
+        <div class="inres__text">
+          <p class="inres__title">Journalist in Residence</p>
+          <h3 class="inres__name">Byron Pitts</h3>
+          <p class="inres__role">Co-Anchor, ABC’s “Nightline”</p>
+        </div>
+      </a>
+      <a class="inres" href="Joe Michaels.html">
+        <div class="ph ph--dark inres__bg"><img src="uploads/Joe Michaels.jpg" alt="Joe Michaels" style="width:100%;height:100%;object-fit:cover;object-position:center 24%;"></div>
+        <span class="inres__logo"><img src="uploads/nbc.jpg" alt="NBC"></span>
+        <div class="inres__text">
+          <p class="inres__title">Broadcaster in Residence</p>
+          <h3 class="inres__name">Joe Michaels</h3>
+          <p class="inres__role">Former Director, NBC’s “Today” Show</p>
+        </div>
+      </a>
+    </div>
+    <p class="center reveal" style="margin-top:clamp(40px,5vw,60px);"><a href="Life Skills.html#innovators" class="link">View the full roster of 40+ In-Residence leaders</a></p>
+  </div>
+</section>
+
+<!-- ===================== HPU SITE FOOTER (API) =====================
+     Replaced at runtime by the HPU Header/Footer API. The placeholder
+     content below shows before the API responds (or if it fails). -->
+<div class="hpu-api-template-part" data-part="footer">
+<footer class="footer">
+  <div class="container footer__inner">
+    <div>
+      <div class="footer__brand">High Point University</div>
+      <div class="footer__meta" style="margin-top:6px;">The Premier Life Skills University · One University Parkway, High Point, NC 27268</div>
+    </div>
+    <div class="footer__meta" style="text-align:right;">Career outcomes verified to NACE First-Destination Survey standards · Class of 2025</div>
+  </div>
+</footer>
+</div>
+
+<!-- HPU Header/Footer API — replaces the .hpu-api-template-part markers
+     with the live site header/footer. -->
+<script src="https://www.highpoint.edu/wp-content/themes/hpu/src/assets/js/template-api.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="motion.js"></script>
+
+</body>
+</html>

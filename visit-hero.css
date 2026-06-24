@@ -1,0 +1,1146 @@
+/* ============================================================
+   HPU — Visit page · Cinematic film-title HERO
+   ------------------------------------------------------------
+   A single subject (the campus) given the whole frame, near
+   silence, slow heavy motion. The headline rises out of a clean
+   edge like a title card. Built on the site tokens in styles.css
+   (Bitter / Poppins, brand purple + orange). All bespoke under
+   the .fhero namespace so it never fights the shared .hero.
+
+   AEO / FOUC safety: everything is VISIBLE by default. The
+   about-to-animate start-states apply ONLY under html.js-anim
+   (added by the inline head gate when JS runs AND reduced-motion
+   is off). No-JS and reduced-motion paths show the poster + full
+   type with no hidden state.
+   ============================================================ */
+
+/* button size add-on (declared standalone so the page renders on its own) */
+.btn--lg { font-size: 1.08rem; padding: 0.92em 1.8em; }
+
+/* ============================================================
+   STAGE
+   ============================================================ */
+.fhero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: hidden;
+  background: #0e0a18;
+  color: #fff;
+  isolation: isolate;
+}
+
+/* ---- The asset: full-bleed campus, edge to edge ----
+   .fhero__media carries the scroll parallax; the inner <video>
+   carries the slow continuous push-in, so the two transforms
+   never fight. */
+.fhero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  will-change: transform;
+}
+.fhero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  will-change: transform;
+}
+
+/* ---- Scrim: weighted to the bottom-left, vivid up top ----
+   A soft darkening where the type sits — not a flat black wash. */
+.fhero__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(to top, rgba(8,4,20,0.80) 0%, rgba(8,4,20,0.34) 26%, rgba(8,4,20,0) 54%),
+    radial-gradient(125% 115% at 0% 100%, rgba(10,4,26,0.66) 0%, rgba(10,4,26,0) 56%);
+}
+/* A second layer that deepens on scroll so the next scene can
+   emerge from underneath rather than just sliding away. */
+.fhero__deepen {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(to top, rgba(6,3,16,0.66) 0%, rgba(6,3,16,0) 62%);
+}
+
+/* ============================================================
+   CONTENT — anchored to the bottom like a film title card
+   ============================================================ */
+.fhero__frame {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(28px, 4.5vw, 72px);
+  padding-bottom: clamp(40px, 7vh, 90px);
+}
+
+/* The title lockup, bottom-left, given generous room to breathe */
+.fhero__card { max-width: 820px; }
+
+.fhero__kicker {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: clamp(0.74rem, 1.3vw, 0.92rem);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ae-orange-bright);
+  margin: 0;
+}
+
+.fhero__h1 {
+  font-family: "Bitter", Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(3rem, 9.2vw, 7.2rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin: clamp(14px, 1.6vw, 22px) 0 0;
+}
+/* Each line lives in an overflow-clipped mask so it can lift out
+   from behind a clean edge. Padding/negative margin gives
+   descenders + the entrance blur room without clipping. */
+.fhero__lineMask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+.fhero__line { display: block; }
+
+.fhero__sub {
+  margin: clamp(16px, 1.8vw, 24px) 0 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.1rem, 1.7vw, 1.5rem);
+  line-height: 1.4;
+  color: rgba(255,255,255,0.84);
+  max-width: 40ch;
+  text-wrap: pretty;
+}
+
+/* The baseline of action: primary left, quiet secondary far right */
+.fhero__baseline {
+  margin-top: clamp(26px, 3.2vw, 44px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 28px;
+  flex-wrap: wrap;
+}
+.fhero__primary { will-change: transform, opacity; }
+
+/* Secondary — a quiet text link with an arrow, not a second button */
+.fhero__alt {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: clamp(0.95rem, 1.3vw, 1.08rem);
+  color: rgba(255,255,255,0.86);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  transition: gap 0.25s ease, color 0.2s ease;
+  white-space: nowrap;
+}
+.fhero__alt span { transition: transform 0.25s ease; font-size: 1.05em; }
+.fhero__alt:hover { color: #fff; }
+.fhero__alt:hover span { transform: translateX(4px); }
+
+/* ---- Scroll cue, centered at the baseline ---- */
+.fhero__cue {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(16px, 2.4vh, 26px);
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  pointer-events: none;
+}
+.fhero__cueLabel {
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+}
+.fhero__cueLine {
+  width: 1px;
+  height: 26px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.62), rgba(255,255,255,0));
+}
+@media (prefers-reduced-motion: no-preference) {
+  .fhero__cueLine { animation: fheroCueNudge 2.4s ease-in-out infinite; }
+}
+@keyframes fheroCueNudge {
+  0%, 100% { transform: translateY(0); opacity: 0.55; }
+  50%      { transform: translateY(7px); opacity: 1; }
+}
+/* The persistent .scrollguide pill now serves the hero too, so the old
+   in-hero cue is retired. Mobile reserves extra frame room so the pill
+   sits cleanly below the CTAs rather than over them. */
+.fhero__cue { display: none; }
+@media (max-width: 640px) {
+  .fhero__frame { padding-bottom: clamp(76px, 13vh, 116px); }
+}
+
+/* ---- Pause affordance: low-contrast, corner, hover/focus only ---- */
+.fhero__pause {
+  position: absolute;
+  top: clamp(16px, 2vw, 24px);
+  right: clamp(16px, 2vw, 24px);
+  z-index: 4;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(8,4,20,0.34);
+  border: 1px solid rgba(255,255,255,0.22);
+  color: #fff;
+  cursor: pointer;
+  opacity: 0;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition: opacity 0.4s ease, background 0.2s ease, border-color 0.2s ease;
+}
+.fhero:hover .fhero__pause,
+.fhero__pause:focus-visible { opacity: 1; }
+.fhero__pause:hover { background: rgba(8,4,20,0.6); border-color: rgba(255,255,255,0.5); }
+.fhero__pauseIcon { position: relative; width: 14px; height: 14px; }
+.fhero__pauseIcon::before,
+.fhero__pauseIcon::after {
+  content: ""; position: absolute; top: 0; width: 4px; height: 14px; background: #fff; border-radius: 1px;
+}
+.fhero__pauseIcon::before { left: 2px; }
+.fhero__pauseIcon::after  { right: 2px; }
+/* paused → show a play triangle instead */
+.fhero__pause.is-paused .fhero__pauseIcon::after { display: none; }
+.fhero__pause.is-paused .fhero__pauseIcon::before {
+  left: 3px; top: 0; width: 0; height: 0; background: transparent; border-radius: 0;
+  border-left: 12px solid #fff;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+}
+
+/* ============================================================
+   FOUC / motion gate — hidden start-states ONLY under js-anim
+   ============================================================ */
+html.js-anim .fhero__kicker,
+html.js-anim .fhero__sub,
+html.js-anim .fhero__primary,
+html.js-anim .fhero__alt,
+html.js-anim .fhero__cue { opacity: 0; }
+html.js-anim .fhero__line { transform: translateY(110%); }
+html.js-anim .fhero__scrim { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  html.js-anim .fhero__kicker,
+  html.js-anim .fhero__sub,
+  html.js-anim .fhero__primary,
+  html.js-anim .fhero__alt,
+  html.js-anim .fhero__cue,
+  html.js-anim .fhero__scrim { opacity: 1; }
+  html.js-anim .fhero__line { transform: none; }
+}
+
+/* ============================================================
+   BEAT 2 · THE INVITATION
+   ------------------------------------------------------------
+   The quiet light beat. Enormous calm type on a crisp white
+   ground, left-aligned within a centered, capped column — a
+   sea of whitespace above and below. The masked line reveal
+   reads sharper here than over video because the edges are
+   clean. Reuses the hero's type family + weights so the voice
+   is continuous; no eyebrow, no rule, no card.
+   ============================================================ */
+.invite {
+  background: var(--ae-white);
+  min-height: 88vh;
+  display: flex;
+  align-items: center;
+  padding-block: clamp(80px, 12vh, 160px);
+}
+/* Left-aligned block, capped so the drama holds; sits on the
+   container's left edge to continue the hero's left axis. */
+.invite__inner { max-width: 880px; }
+
+.invite__h2 {
+  font-family: "Bitter", Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(2.6rem, 6.6vw, 5.4rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  color: var(--ae-text);
+  margin: 0;
+  text-wrap: balance;
+}
+/* Each headline line lifts out of a clipped edge, same as the hero */
+.invite__lineMask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+.invite__line { display: block; }
+
+.invite__sub {
+  margin: clamp(22px, 2.8vw, 34px) 0 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.15rem, 1.7vw, 1.45rem);
+  line-height: 1.6;
+  color: var(--ae-text-secondary);
+  max-width: 46ch;
+  text-wrap: pretty;
+}
+
+.invite__cta { margin-top: clamp(34px, 4.2vw, 56px); }
+
+/* FOUC / motion gate — hidden start-states ONLY under js-anim */
+html.js-anim .invite__sub,
+html.js-anim .invite__cta { opacity: 0; }
+html.js-anim .invite__line { transform: translateY(110%); }
+@media (prefers-reduced-motion: reduce) {
+  html.js-anim .invite__sub,
+  html.js-anim .invite__cta { opacity: 1; }
+  html.js-anim .invite__line { transform: none; }
+}
+
+/* ============================================================
+   BEAT 3 · THE CAMPUS WALK
+   ------------------------------------------------------------
+   DEFAULT (no-JS / reduced-motion / mobile / crawlers): a static
+   vertical sequence of full-width scenes, captions bottom-left in
+   reading order, ending on the saved moment + button. WITH MOTION
+   on desktop (html.js-anim, >=900px): the stage pins and the scenes
+   cross-dissolve under a scrub. Stills now; the same markup takes a
+   <video> per scene later with no structural change.
+   ============================================================ */
+.walk {
+  position: relative;
+  background: var(--ae-dark);
+  color: #fff;
+}
+.walk__stage { position: relative; }
+.walk__scenes { display: flex; flex-direction: column; }
+
+.walk__scene { position: relative; margin: 0; }
+.walk__media { position: relative; }
+.walk__imgwrap { position: relative; overflow: hidden; }
+.walk__img {
+  display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
+  border: 0; border-radius: 0;
+}
+/* placeholder scene (no asset yet) keeps the same frame */
+.walk__img.ph { aspect-ratio: 16 / 9; }
+
+.walk__mediascrim {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  /* Straight-across base, PLUS a smooth skateboard-ramp arc that rises higher
+     on the caption side. Default = caption bottom-LEFT, so the ramp sweeps up
+     the left edge. :has() overrides below mirror it to the text's actual side. */
+  background:
+    linear-gradient(to top, rgba(8,4,20,0.86) 0%, rgba(8,4,20,0.34) 28%, rgba(8,4,20,0) 56%),
+    radial-gradient(135% 125% at 0% 100%, rgba(8,4,20,0.64) 0%, rgba(8,4,20,0.3) 33%, rgba(8,4,20,0) 64%);
+}
+/* caption on the RIGHT → mirror the ramp arc to the right edge */
+.walk__scene:has(.walk__cap--br) .walk__mediascrim {
+  background:
+    linear-gradient(to top, rgba(8,4,20,0.86) 0%, rgba(8,4,20,0.34) 28%, rgba(8,4,20,0) 56%),
+    radial-gradient(135% 125% at 100% 100%, rgba(8,4,20,0.64) 0%, rgba(8,4,20,0.3) 33%, rgba(8,4,20,0) 64%);
+}
+/* caption CENTERED → the ramp rises through the middle */
+.walk__scene:has(.walk__cap--bc) .walk__mediascrim {
+  background:
+    linear-gradient(to top, rgba(8,4,20,0.86) 0%, rgba(8,4,20,0.34) 28%, rgba(8,4,20,0) 56%),
+    radial-gradient(118% 130% at 50% 100%, rgba(8,4,20,0.54) 0%, rgba(8,4,20,0.26) 38%, rgba(8,4,20,0) 66%);
+}
+
+/* ---- Day-scene caption, bottom-left on the shared left axis ---- */
+.walk__cap {
+  position: absolute; left: 0; bottom: 0; z-index: 3;
+  max-width: 920px;
+  padding: clamp(28px, 4.5vw, 72px);
+  padding-bottom: clamp(40px, 7vh, 84px);
+}
+.walk__marker {
+  display: block; margin-bottom: 0.8em;
+  font-family: "Poppins", sans-serif; font-weight: 600;
+  font-size: clamp(0.74rem, 1.3vw, 0.92rem);
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ae-orange-bright);
+}
+.walk__line {
+  margin: 0;
+  font-family: "Bitter", Georgia, serif; font-weight: 700;
+  font-size: clamp(2.1rem, 4.8vw, 3.7rem);
+  line-height: 1.04; letter-spacing: -0.03em;
+  color: #fff; max-width: 18ch; text-wrap: balance;
+  text-shadow: 0 2px 30px rgba(0,0,0,0.35);
+}
+/* Subtext — the smaller secondary beat under the line */
+.walk__sub {
+  margin: clamp(14px, 1.6vw, 20px) 0 0;
+  font-family: "Poppins", sans-serif; font-weight: 400;
+  font-size: clamp(1rem, 1.35vw, 1.2rem);
+  line-height: 1.55; color: rgba(255,255,255,0.78);
+  max-width: 40ch; text-wrap: pretty;
+  text-shadow: 0 1px 20px rgba(0,0,0,0.35);
+}
+/* The surprising fact gets a small beat of emphasis as it lands.
+   Orange by default (no-JS / mobile); on desktop it starts dimmed to the
+   normal subtext color and the orange is TRIGGERED (a real-time color pop,
+   not scrubbed) as the subtext comes in. */
+.walk__emph { color: #fff; font-weight: 700; }
+.walk__emph.is-dim { color: #fff; }
+
+/* ---- Composition variants: vary the frame scene to scene ---- */
+.walk__cap--br {
+  left: auto; right: 0; text-align: right;
+  display: flex; flex-direction: column; align-items: flex-end;
+}
+.walk__cap--br .walk__line,
+.walk__cap--br .walk__sub { margin-left: auto; }
+.walk__cap--bc {
+  left: 0; right: 0; max-width: none;
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center;
+  /* lift the centered caption clear of the bottom scroll-guide pill */
+  padding-bottom: clamp(96px, 15vh, 168px);
+}
+.walk__cap--bc .walk__line,
+.walk__cap--bc .walk__sub { margin-left: auto; margin-right: auto; }
+
+/* ---- Saved-moment frame: stronger scrim, centered low ---- */
+.walk__scene--saved .walk__mediascrim {
+  background:
+    linear-gradient(to top, rgba(6,3,16,0.6) 0%, rgba(6,3,16,0.3) 42%, rgba(6,3,16,0.08) 76%),
+    radial-gradient(78% 72% at 50% 64%, rgba(6,3,16,0.3) 0%, rgba(6,3,16,0) 72%);
+}
+.walk__saved {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding: clamp(40px, 9vh, 130px) clamp(24px, 5vw, 48px) clamp(56px, 11vh, 130px);
+  /* This box stays present (only its image fades) and, as the LAST scene in the
+     DOM, paints over the day-scene captions below it. Let clicks pass through
+     the empty area so the day scenes' "Plan your visit" links stay clickable;
+     the CTA button re-enables pointer events for itself. */
+  pointer-events: none;
+}
+.walk__savedline { pointer-events: none; }
+.walk__savedcta, .walk__savedcta a { pointer-events: auto; }
+.walk__savedline {
+  margin: 0;
+  font-family: "Bitter", Georgia, serif; font-weight: 700;
+  font-size: clamp(2.2rem, 5.4vw, 4.4rem);
+  line-height: 1.05; letter-spacing: -0.03em;
+  color: #fff; max-width: 20ch; text-wrap: balance;
+  text-shadow: 0 2px 40px rgba(0,0,0,0.45);
+}
+.walk__savedline--two { color: var(--ae-orange-bright); margin-top: 0.18em; }
+.walk__savedcta { margin-top: clamp(28px, 3.6vw, 46px); }
+
+/* ---- Progress line, pinned to the bottom of the pinned stage ----
+   Section 2's own in-context progress through the film (desktop). The
+   page-wide scroll guide steps aside here, so this is the "more below"
+   signal during the walk. Mobile (un-pinned panels) hides it below. */
+.walk__progress {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 4;
+  height: 3px; background: rgba(255,255,255,0.12);
+}
+.walk__progressbar {
+  display: block; height: 100%; width: 100%;
+  transform-origin: left center; transform: scaleX(0);
+  background: rgba(255,159,69,0.78);
+}
+
+/* ---- The cinematic handoff target (desktop motion only) ----
+   A clean light field that rises up over the receding dusk frame.
+   Hidden everywhere else so mobile / reduced-motion cut straight to
+   the light section below. */
+.walk__handoff { display: none; }
+
+/* ---- WITH MOTION, desktop: pinned stage, scenes stacked full-bleed ---- */
+@media (min-width: 900px) {
+  /* ---- BEAT 2 → BEAT 3 CROSS-DISSOLVE ----
+     Beat 2 is held still by sticky positioning and pulled to sit ON TOP
+     of the campus walk (which is pulled up beneath it by the matching
+     negative margin). The first phase of the walk's single pinned
+     timeline fades this whole light field out in place while scene 1
+     shows through underneath — a held opacity cross-fade, no scroll. */
+  html.js-anim .invite { position: relative; z-index: 2; height: 200vh; min-height: 0; padding-block: 0; display: block; }
+  html.js-anim .invite > .container {
+    position: sticky; top: 0; height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding-top: clamp(48px, 7vh, 88px); padding-bottom: clamp(48px, 7vh, 88px);
+    background: var(--ae-white);
+    will-change: opacity, transform;
+  }
+
+  /* Tighter than before so the film moves — brisker scroll per scene.
+     +100vh of height covers the dissolve lead so scene pacing is kept;
+     the negative margin overlaps beat 2 so the pin engages while beat 2
+     still fills the screen (no slide at the handoff). */
+  html.js-anim .walk { position: relative; z-index: 1; height: 580vh; margin-top: -200vh; background: var(--ae-white); }
+  html.js-anim .walk__stage { height: 100vh; overflow: visible; background: var(--ae-white); }
+  /* full-size so it stays the containing block once the handoff recede
+     stamps a transform on it (otherwise its absolute children collapse) */
+  html.js-anim .walk__scenes { position: absolute; inset: 0; z-index: 5; overflow: hidden; box-shadow: 0 40px 100px rgba(8,4,20,0.26); will-change: transform, border-radius; }
+  html.js-anim .walk__scene { position: absolute; inset: 0; }
+  html.js-anim .walk__media { position: absolute; inset: 0; will-change: opacity; }
+  html.js-anim .walk__imgwrap { position: absolute; inset: 0; will-change: transform; }
+  html.js-anim .walk__img { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; }
+  /* keep non-active scenes from flashing before JS sets initial states */
+  html.js-anim .walk__scene:not(:first-child) .walk__media { opacity: 0; }
+
+  /* Unused now (the recede no longer rises a separate field) — keep it out
+     of the box so it can't show once the stage clips nothing. */
+  html.js-anim .walk__handoff { display: none; }
+}
+
+/* ---- MOBILE / NARROW: the walk as a native-scroll, full-bleed story ----
+   No pin, no scrub-driven layout — each scene is its own 100svh panel
+   that the phone scrolls natively. The 16:9 photo is cover-cropped to
+   fill the portrait frame, a strong bottom scrim carries the type, and
+   the one-liner sits low like a film caption. This is the mobile-grand
+   counterpart to the desktop film: same beats, told one screen at a time. */
+@media (max-width: 899px) {
+  .walk { background: #07040f; }
+  .walk__stage { position: static; }
+  .walk__scenes { display: block; }
+
+  .walk__scene,
+  .walk__scene--saved {
+    position: relative;
+    min-height: 110lvh;
+    overflow: hidden;
+  }
+  .walk__media { position: absolute; inset: 0; }
+  .walk__imgwrap { position: absolute; inset: 0; will-change: transform; }
+  .walk__img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover;
+  }
+  .walk__img.ph { aspect-ratio: auto; }
+
+  /* legibility scrim — heavier at the foot where the caption lives */
+  .walk__mediascrim {
+    background:
+      linear-gradient(to top,
+        rgba(6,3,16,0.96) 0%, rgba(6,3,16,0.78) 22%,
+        rgba(6,3,16,0.38) 48%, rgba(6,3,16,0.06) 78%, rgba(6,3,16,0) 100%);
+  }
+  .walk__scene--saved .walk__mediascrim {
+    background:
+      linear-gradient(to top,
+        rgba(6,3,16,0.72) 0%, rgba(6,3,16,0.5) 26%,
+        rgba(6,3,16,0.24) 54%, rgba(6,3,16,0.04) 82%, rgba(6,3,16,0) 100%);
+  }
+
+  /* every caption variant collapses to one mobile treatment:
+     full-width, left-aligned, anchored low with safe-area room */
+  .walk__cap,
+  .walk__cap--br,
+  .walk__cap--bc {
+    position: absolute; left: 0; right: 0; bottom: 0; top: auto;
+    max-width: none; text-align: left;
+    align-items: flex-start;
+    padding: 0 24px calc(env(safe-area-inset-bottom, 0px) + 13vh);
+  }
+  .walk__cap--br .walk__line, .walk__cap--br .walk__sub,
+  .walk__cap--bc .walk__line, .walk__cap--bc .walk__sub {
+    margin-left: 0; margin-right: 0;
+  }
+  .walk__marker { margin-bottom: 0.9em; font-size: 0.8rem; letter-spacing: 0.18em; }
+  .walk__line {
+    font-size: clamp(2rem, 8.6vw, 3.1rem);
+    line-height: 1.05; max-width: 15ch;
+  }
+  .walk__sub {
+    margin-top: 16px;
+    font-size: clamp(1.02rem, 4.1vw, 1.2rem);
+    line-height: 1.5; max-width: 38ch;
+  }
+
+  .walk__saved {
+    padding: 0 24px calc(env(safe-area-inset-bottom, 0px) + 13vh);
+    justify-content: flex-end;
+  }
+  .walk__savedline { font-size: clamp(2.1rem, 9vw, 3.3rem); line-height: 1.06; }
+  .walk__savedcta { margin-top: clamp(26px, 7vw, 40px); }
+
+  .walk__progress { display: none; }
+}
+
+/* ============================================================
+   BEAT 4 · THE TRUST BEAT — lands on light
+   ------------------------------------------------------------
+   The daylight the dusk frame recedes into. Calm and spacious:
+   one figure at a time with air around it, then a parent's voice,
+   then the trust-peak button. Asymmetry, not a stat row. Left-
+   aligned on the page's shared axis. Inherits the site type, color,
+   and buttons; only layout + the entrance scaffolding are new.
+   ============================================================ */
+.trust {
+  background: var(--ae-white);
+  padding-top: clamp(96px, 16vh, 220px);
+  /* bottom spacing matched to .finalcta's top padding so the gap below the
+     CTA box equals the gap above "Ways to Visit" — balanced across the seam */
+  padding-bottom: clamp(72px, 12vh, 168px);
+}
+.trust__inner { max-width: var(--maxw-wide); }
+
+/* Headline — same masked-line + blur entrance as beat 2 */
+.trust__h2 {
+  font-family: "Bitter", Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(2.6rem, 6.6vw, 5.4rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  color: var(--ae-text);
+  margin: 0;
+  text-wrap: balance;
+}
+.trust__lineMask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+.trust__line { display: block; }
+
+.trust__bridge {
+  margin: clamp(22px, 2.8vw, 34px) 0 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.15rem, 1.7vw, 1.45rem);
+  line-height: 1.6;
+  color: var(--ae-text-secondary);
+  max-width: 46ch;
+  text-wrap: pretty;
+}
+
+/* ---- The numbers, as a structured bento ----
+   The 99% sits in a large tinted hero panel; the two rankings stack
+   beside it as a pair of bordered cards. Deliberately asymmetric (a
+   big block + two small), not a row of equal tiles. The brand-purple
+   voice panel below anchors the section so it reads as a composed
+   layout, not loose text on white. */
+.trust__numbers {
+  margin-top: clamp(44px, 6vw, 84px);
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  gap: clamp(14px, 1.4vw, 22px);
+  align-items: stretch;
+}
+
+/* The hero panel — the 99% dominates, its line beneath it */
+.trust__hero {
+  background: var(--ae-purple-tint);
+  border-radius: var(--r-lg);
+  padding: clamp(32px, 4vw, 60px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(20px, 3vw, 40px);
+  min-height: clamp(280px, 30vw, 420px);
+}
+.trust__figure {
+  font-family: "Bitter", Georgia, serif;
+  font-weight: 700;
+  color: var(--ae-purple);
+  line-height: 0.78;
+  letter-spacing: -0.05em;
+  font-size: clamp(5rem, 13vw, 10.5rem);
+  display: inline-flex;
+  align-items: flex-start;
+}
+.trust__figmark { font-size: 0.4em; line-height: 1; letter-spacing: -0.02em; }
+.trust__heroline {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.15rem, 1.7vw, 1.5rem);
+  line-height: 1.42;
+  color: var(--ae-text);
+  max-width: 20ch;
+  text-wrap: pretty;
+}
+/* visually hidden 99% prefix so the figure reads correctly to AT */
+.trust__sr {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+/* The two rankings — a stacked pair of quieter bordered cards */
+.trust__rankcol {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: clamp(14px, 1.4vw, 22px);
+}
+.trust__rank {
+  background: var(--ae-white);
+  border: 1px solid var(--ae-line);
+  border-radius: var(--r-lg);
+  padding: clamp(22px, 2.4vw, 36px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(8px, 0.8vw, 12px);
+}
+.trust__rankfig {
+  font-family: "Bitter", Georgia, serif;
+  font-weight: 700;
+  color: var(--ae-purple);
+  font-size: clamp(2.3rem, 3.6vw, 3.3rem);
+  line-height: 0.85;
+  letter-spacing: -0.035em;
+}
+.trust__rankline {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: clamp(1rem, 1.25vw, 1.16rem);
+  line-height: 1.45;
+  color: var(--ae-text);
+  text-wrap: pretty;
+}
+.trust__src {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ae-text-secondary);
+}
+
+/* ---- The voice panel: brand-purple anchor for the parent's words,
+   with the trust-peak CTA in a hairline-divided footer ---- */
+.trust__voice {
+  margin-top: clamp(14px, 1.4vw, 22px);
+  background: var(--ae-purple);
+  color: #fff;
+  border-radius: var(--r-lg);
+  padding: clamp(38px, 5vw, 76px);
+  display: grid;
+  gap: clamp(28px, 3.4vw, 48px);
+}
+.trust__quote { margin: 0; max-width: 46ch; }
+.trust__quotemark {
+  display: block;
+  font-family: "Bitter", Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(3.4rem, 6vw, 5.4rem);
+  line-height: 0.5;
+  color: var(--ae-orange-bright);
+  margin-bottom: 0.14em;
+  user-select: none;
+}
+.trust__quotetext {
+  margin: 0;
+  font-family: "Bitter", Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(1.4rem, 2.4vw, 2.05rem);
+  line-height: 1.42;
+  letter-spacing: -0.015em;
+  color: #fff;
+  text-wrap: pretty;
+}
+.trust__cite {
+  margin-top: clamp(20px, 2.2vw, 30px);
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: clamp(0.95rem, 1.2vw, 1.08rem);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* ---- The trust-peak close: lead-in left, button right, after the quote ---- */
+.trust__close {
+  padding-top: clamp(28px, 3.4vw, 46px);
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(20px, 3vw, 44px);
+  flex-wrap: wrap;
+}
+.trust__leadin {
+  margin: 0;
+  font-family: "Bitter", Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(1.6rem, 3vw, 2.5rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: #fff;
+}
+
+/* FOUC / motion gate — hidden start-states ONLY under js-anim.
+   Transform + opacity only; the headline's blur clears on entrance. */
+html.js-anim .trust__bridge,
+html.js-anim .trust__hero,
+html.js-anim .trust__rank,
+html.js-anim .trust__voice { opacity: 0; }
+html.js-anim .trust__line { transform: translateY(110%); }
+@media (prefers-reduced-motion: reduce) {
+  html.js-anim .trust__bridge,
+  html.js-anim .trust__hero,
+  html.js-anim .trust__rank,
+  html.js-anim .trust__voice { opacity: 1; }
+  html.js-anim .trust__line { transform: none; }
+}
+
+@media (max-width: 760px) {
+  .trust__numbers { grid-template-columns: 1fr; }
+  .trust__close { justify-content: flex-start; }
+}
+
+/* ============================================================
+   FINAL CTA · WAYS TO VISIT
+   ------------------------------------------------------------
+   The practical close on a quiet gray ground. A dominant brand-
+   purple primary (Schedule a Tour), then two lighter option cards
+   for the hesitant. Reuses the site's card vocabulary (border,
+   radius, lift on hover) so it reads as part of the same system.
+   ============================================================ */
+.finalcta {
+  background: linear-gradient(to bottom, var(--ae-gray), var(--ae-white));
+  padding-block: clamp(72px, 12vh, 168px);
+  border-top: 1px solid var(--ae-line);
+}
+.finalcta__head { margin-bottom: clamp(30px, 4vw, 52px); }
+.finalcta__head .eyebrow { color: var(--ae-purple); }
+.finalcta__h2 {
+  margin: 0.35em 0 0;
+  font-family: "Bitter", Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--ae-text);
+}
+
+/* Primary — the dominant action */
+.finalcta__primary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(24px, 4vw, 56px);
+  flex-wrap: wrap;
+  background: var(--ae-purple);
+  color: #fff;
+  border-radius: var(--r-lg);
+  padding: clamp(32px, 4.4vw, 64px);
+  text-decoration: none;
+  box-shadow: var(--shadow-soft);
+  transition: box-shadow 0.3s ease, transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.finalcta__primary:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+.finalcta__primaryText { max-width: 48ch; }
+.finalcta__primaryK {
+  margin: 0;
+  font-family: "Poppins", sans-serif; font-weight: 600;
+  font-size: 0.76rem; letter-spacing: 0.13em; text-transform: uppercase;
+  color: var(--ae-orange-bright);
+}
+.finalcta__primaryH {
+  margin: 0.45em 0 0;
+  font-family: "Bitter", Georgia, serif; font-weight: 700;
+  font-size: clamp(1.8rem, 3.4vw, 2.8rem); line-height: 1.06;
+  letter-spacing: -0.025em; color: #fff;
+}
+.finalcta__primaryP {
+  margin: 0.7em 0 0;
+  font-family: "Poppins", sans-serif; font-weight: 400;
+  font-size: clamp(1rem, 1.4vw, 1.2rem); line-height: 1.55;
+  color: rgba(255, 255, 255, 0.82); max-width: 42ch; text-wrap: pretty;
+}
+.finalcta__primaryBtn { flex: none; display: inline-flex; align-items: center; gap: 0.5em; }
+.finalcta__arr { display: inline-block; transition: transform 0.25s ease; }
+.finalcta__primary:hover .finalcta__primaryBtn .finalcta__arr { transform: translateX(4px); }
+
+/* Alternatives label with a hairline rule trailing off */
+.finalcta__altsHead {
+  display: flex; align-items: center; gap: clamp(14px, 1.6vw, 22px);
+  margin: clamp(40px, 5.5vw, 80px) 0 clamp(18px, 2vw, 28px);
+}
+.finalcta__altsHead::after { content: ""; flex: 1; height: 1px; background: var(--ae-line); }
+.finalcta__altsLabel {
+  font-family: "Poppins", sans-serif; font-weight: 600;
+  font-size: clamp(0.86rem, 1.1vw, 0.98rem); letter-spacing: 0.01em;
+  color: var(--ae-text-secondary);
+}
+
+/* The two option cards */
+.finalcta__alts {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(16px, 2vw, 28px);
+}
+.finalcta__card {
+  background: var(--ae-white);
+  border: 1px solid var(--ae-line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  text-decoration: none; color: inherit;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.finalcta__card:hover { box-shadow: var(--shadow-lift); border-color: rgba(51, 0, 114, 0.22); transform: translateY(-3px); }
+.finalcta__cardMedia { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--ae-gray-2); }
+.finalcta__cardMedia::before {
+  content: ""; position: absolute; inset: 0;
+  background-image: inherit; background-size: cover; background-position: center;
+  transform: scale(1); transition: transform 1.4s ease; will-change: transform;
+}
+.finalcta__card:hover .finalcta__cardMedia::before { transform: scale(1.07); }
+.finalcta__cardBody { padding: clamp(22px, 2.6vw, 34px); display: flex; flex-direction: column; flex: 1; }
+.finalcta__cardK {
+  margin: 0;
+  font-family: "Poppins", sans-serif; font-weight: 600;
+  font-size: 0.76rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--ae-purple);
+}
+.finalcta__cardH {
+  margin: 0.6em 0 0;
+  font-family: "Bitter", Georgia, serif; font-weight: 700;
+  font-size: clamp(1.3rem, 2vw, 1.7rem); line-height: 1.16; color: var(--ae-text);
+}
+.finalcta__cardP {
+  margin: 0.6em 0 0;
+  font-family: "Poppins", sans-serif; font-weight: 400;
+  font-size: 0.98rem; line-height: 1.6; color: var(--ae-text-secondary); text-wrap: pretty;
+}
+.finalcta__cardLink {
+  margin-top: auto; padding-top: 22px;
+  font-family: "Poppins", sans-serif; font-weight: 500;
+  font-size: 1rem; color: var(--ae-orange);
+  display: inline-flex; align-items: center; gap: 0.45em;
+}
+.finalcta__card:hover .finalcta__cardLink .finalcta__arr { transform: translateX(4px); }
+
+@media (max-width: 700px) {
+  .finalcta__primary { flex-direction: column; align-items: flex-start; }
+  .finalcta__primaryBtn { width: 100%; justify-content: center; }
+  .finalcta__alts { grid-template-columns: 1fr; }
+}
+
+/* FOUC / motion gate — gentle fade-ins on scroll-in (transform + opacity) */
+html.js-anim .finalcta__head,
+html.js-anim .finalcta__primary,
+html.js-anim .finalcta__altsHead,
+html.js-anim .finalcta__card { opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  html.js-anim .finalcta__head,
+  html.js-anim .finalcta__primary,
+  html.js-anim .finalcta__altsHead,
+  html.js-anim .finalcta__card { opacity: 1; }
+}
+
+/* FOUC / motion gate for captions (revealed by JS on both branches) */
+html.js-anim .walk__cap,
+html.js-anim .walk__savedline,
+html.js-anim .walk__savedcta { opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  html.js-anim .walk__cap,
+  html.js-anim .walk__savedline,
+  html.js-anim .walk__savedcta { opacity: 1; }
+}
+
+/* ============================================================
+   SCROLL GUIDE — persistent, contextual "keep going" pill
+   ------------------------------------------------------------
+   Fixed at bottom-center. Brand purple so it reads cleanly on BOTH
+   the dark hero and the light sections — no theme-switching. It names
+   what's next and points down; clicking glides there. JS shows it on
+   the hero + trust beat and hides it (.is-hidden) during the film and
+   at the closing CTA. Mobile + desktop identical.
+   ============================================================ */
+.scrollguide {
+  position: fixed;
+  left: 50%;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + clamp(18px, 3vh, 34px));
+  transform: translateX(-50%);
+  z-index: 90;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  margin: 0;
+  padding: 0.42em 0.5em 0.42em 1.3em;
+  /* pill-shaped deep-purple glass — opaque enough to stay legible over
+     bright scene photos (no more washing out), still a touch of glass */
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(51, 0, 114, 0.8);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  backdrop-filter: saturate(160%) blur(14px);
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  box-shadow: 0 14px 40px rgba(14, 0, 38, 0.45);
+  transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1), background 0.2s ease, width 0.22s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.scrollguide:hover { background: rgba(51, 0, 114, 0.92); }
+.scrollguide:focus-visible { outline: 2px solid var(--ae-orange-bright); outline-offset: 3px; }
+.scrollguide__label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  max-width: 60vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* iOS-style understated swap when the text changes */
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.scrollguide__label.is-swapping { opacity: 0; transform: translateY(-4px); }
+/* chevron in a circle, an actual icon, vertically centered. margin-left:auto
+   pins it flush to the pill's right edge, so a label-width change never bumps
+   the chevron around inside the (still-centered) container. */
+.scrollguide__chev {
+  flex: none;
+  margin-left: auto;
+  width: 24px; height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+.scrollguide__chev svg { display: block; }
+.scrollguide.is-hidden {
+  opacity: 0;
+  transform: translateX(-50%) translateY(14px);
+  pointer-events: none;
+}
+
+/* Per-slide visit CTA — a text link with an arrow, under each subtext */
+.walk__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-top: clamp(16px, 1.8vw, 24px);
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  color: var(--ae-orange-bright);
+  text-decoration: none;
+  transition: gap 0.25s ease, color 0.2s ease;
+}
+.walk__cta span { transition: transform 0.25s ease; }
+.walk__cta:hover { color: #fff; gap: 0.7em; }
+.walk__cta:hover span { transform: translateX(3px); color: #fff; }
+
+/* ============================================================
+   VISIT MODAL — opened by the scroll-guide CTA in the card section.
+   Mirrors the project's modal/form conventions.
+   ============================================================ */
+.vmodal {
+  position: fixed; inset: 0; z-index: 300;
+  display: flex; align-items: center; justify-content: center;
+  padding: clamp(16px, 4vw, 40px);
+  visibility: hidden;
+}
+.vmodal.is-open { visibility: visible; }
+.vmodal__scrim {
+  position: absolute; inset: 0;
+  background: rgba(14, 0, 38, 0.55);
+  -webkit-backdrop-filter: blur(9px) saturate(150%);
+  backdrop-filter: blur(9px) saturate(150%);
+  opacity: 0; cursor: pointer;
+  transition: opacity 0.35s ease;
+}
+.vmodal.is-open .vmodal__scrim { opacity: 1; }
+.vmodal__card {
+  position: relative; z-index: 1;
+  width: 100%; max-width: 500px;
+  max-height: calc(100vh - 32px); overflow-y: auto;
+  background: var(--ae-white); color: var(--ae-text);
+  border-radius: var(--r-lg);
+  padding: clamp(28px, 4vw, 44px);
+  box-shadow: 0 40px 120px rgba(14, 0, 38, 0.5);
+  opacity: 0; transform: translateY(16px) scale(0.98);
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.vmodal.is-open .vmodal__card { opacity: 1; transform: none; }
+.vmodal__close {
+  position: absolute; top: 14px; right: 16px;
+  width: 36px; height: 36px; border: 0; border-radius: 50%;
+  background: var(--ae-gray); color: var(--ae-text-secondary);
+  font-size: 1.4rem; line-height: 1; cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.vmodal__close:hover { background: var(--ae-gray-2); color: var(--ae-text); }
+.vmodal__eyebrow {
+  font-family: "Poppins", sans-serif; font-weight: 600; font-size: 0.76rem;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ae-purple); margin: 0;
+}
+.vmodal__title {
+  font-family: "Bitter", Georgia, serif; font-weight: 700;
+  font-size: clamp(1.7rem, 3.2vw, 2.3rem); line-height: 1.08;
+  letter-spacing: -0.02em; color: var(--ae-text); margin: 0.3em 0 0; text-wrap: balance;
+}
+.vmodal__sub {
+  font-family: "Poppins", sans-serif; font-size: 1rem; line-height: 1.55;
+  color: var(--ae-text-secondary); margin: 0.6em 0 0; text-wrap: pretty;
+}
+.vform { margin-top: clamp(20px, 2.6vw, 28px); display: flex; flex-direction: column; gap: 14px; }
+.vform__row { display: flex; gap: 14px; }
+.vform__field { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 0; }
+.vform__field > span {
+  font-family: "Poppins", sans-serif; font-weight: 600; font-size: 0.78rem; color: var(--ae-text-secondary);
+}
+.vform__field input,
+.vform__field select {
+  font-family: "Poppins", sans-serif; font-size: 1rem; color: var(--ae-text);
+  padding: 0.7em 0.85em; border: 1px solid var(--ae-line); border-radius: var(--r-btn);
+  background: var(--ae-white); width: 100%;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.vform__field input:focus,
+.vform__field select:focus {
+  outline: none; border-color: var(--ae-purple); box-shadow: 0 0 0 3px rgba(51, 0, 114, 0.12);
+}
+.vform__selectwrap { position: relative; display: block; }
+.vform__selectwrap select { appearance: none; -webkit-appearance: none; padding-right: 2.2em; }
+.vform__selectwrap::after {
+  content: ""; position: absolute; right: 0.95em; top: 50%; width: 8px; height: 8px;
+  border-right: 2px solid var(--ae-text-secondary); border-bottom: 2px solid var(--ae-text-secondary);
+  transform: translateY(-65%) rotate(45deg); pointer-events: none;
+}
+.vform__submit { margin-top: 6px; width: 100%; justify-content: center; }
+
+.vmodal__done { text-align: center; }
+.vmodal__mark {
+  width: 60px; height: 60px; margin: 0 auto;
+  border-radius: 50%; background: var(--ae-purple);
+  display: flex; align-items: center; justify-content: center; position: relative;
+}
+.vmodal__mark::after {
+  content: ""; width: 14px; height: 26px; margin-top: -5px;
+  border: solid #fff; border-width: 0 3px 3px 0; transform: rotate(43deg);
+}
+.vmodal__done .vmodal__title { margin-top: 16px; }
+.vmodal__done .btn { margin-top: clamp(20px, 3vw, 28px); }
+@media (max-width: 520px) { .vform__row { flex-direction: column; } }
+

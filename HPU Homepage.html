@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>High Point University — You Were Meant to be Extraordinary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="hpu-home.css">
+<script>
+  /* AEO-safe motion gate (same pattern as the Life Skills page):
+     hide about-to-animate elements before first paint, but only when
+     JS runs with reduced-motion off; failsafe reveals within 3s. */
+  (function () {
+    try {
+      var ok = window.matchMedia && window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
+      if (!ok) { return; }
+      var d = document.documentElement;
+      d.classList.add("js-anim");
+      setTimeout(function () {
+        if (!window.__motionReady) { d.classList.remove("js-anim"); }
+      }, 3000);
+    } catch (e) {}
+  })();
+</script>
+<style>
+  /* HPU API header overlays the hero with no layout height, so the hero
+     sits at the very top of the page (matches the Visit page). */
+  #hpuHeaderMount {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+  /* The injected HPU site stylesheet redefines `.container` and loads after
+     ours, knocking page content off-center. Re-assert OUR centered container
+     for page content (higher specificity), while letting the injected
+     header/footer keep the HPU site's own full-width container. */
+  body .container { max-width: var(--maxw-wide); margin-inline: auto; }
+  body .container--text { max-width: var(--maxw-text); }
+  #hpuHeaderMount .container,
+  .hpu-api-template-part .container { max-width: 100%; margin-inline: 0; }
+  /* Match Visit: HPU header CTA buttons in Poppins + 5px radius. */
+  #hpuHeaderMount .cta-button-link,
+  #hpuHeaderMount a.cta-button-link {
+    font-family: "Poppins", sans-serif !important;
+    font-weight: 600 !important;
+    border-radius: 5px !important;
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== HPU SITE HEADER (API) =====================
+     The API replaces the inner .hpu-api-template-part marker with the live
+     site header. The #hpuHeaderMount wrapper SURVIVES the swap and is
+     absolutely positioned so the header overlays the hero (zero layout
+     height) instead of pushing the page content down. -->
+<div id="hpuHeaderMount">
+  <div class="hpu-api-template-part" data-part="header">
+    <noscript>High Point University</noscript>
+  </div>
+</div>
+
+
+<!-- ===================== 2 · HERO ===================== -->
+<header class="hero on-dark" id="top" data-screen-label="Hero">
+  <div class="hero__media">
+    <video autoplay loop muted playsinline class="hero__video">
+      <source src="uploads/lifeskills banner video.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero__scrim"></div>
+  <div class="hero__content">
+    <p class="eyebrow">High Point University &middot; The Premier Life Skills University</p>
+    <h1 class="hero__h1">You Were Meant<br>to be Extraordinary<sup style="font-size:0.3em;vertical-align:super;font-weight:400;">&reg;</sup></h1>
+    <p class="hero__sub">Discover the Premier Life Skills University.</p>
+    <div class="btn-row">
+      <a href="#visit" class="btn btn--primary">Schedule Your Visit</a>
+      <a href="#academics" class="btn btn--ghost">Request Info</a>
+      <a href="#visit" class="btn btn--ghost">Apply</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== 3 · THE WHY (DRAMA BEAT 1) ===================== -->
+<section class="section bg-purple on-dark" data-screen-label="The Why">
+  <div class="container statement reveal">
+    <h2 class="statement__h">A degree opens the door. What you carry through it decides everything after.</h2>
+    <p class="statement__sub">High Point University built its entire curriculum around the skills employers say they cannot find. Communicating. Adapting. Leading. Solving problems that do not have an answer key yet. We call it <b>Premier Life Skills</b>, and it is why our graduates are ready when it counts.</p>
+  </div>
+</section>
+
+<!-- ===================== 4 · GET THE HIGHLIGHTS (SLIDER) ===================== -->
+<section class="section" data-screen-label="Highlights">
+  <div class="container">
+    <div class="hlslider reveal">
+      <div class="hlslider__head">
+        <h2 class="hlslider__title">Get the highlights.</h2>
+        <a href="#experience" class="hlslider__film">Watch the film <span class="ic">&#9654;</span></a>
+      </div>
+      <div class="hlslider__viewport">
+        <div class="hlslider__track" id="hlTrack"></div>
+      </div>
+      <div class="hlslider__controls">
+        <div class="hlslider__dots" id="hlDots"></div>
+        <button class="hlslider__pause" id="hlPause" type="button" aria-label="Pause"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 5 · THE EXPERIENCE (PINNED SCRUB) ===================== -->
+<section class="scrub" id="experience" data-screen-label="The Experience">
+  <div class="scrub__stage">
+    <div class="scrub__frame"><div class="ph ph--dark" style="width:100%;height:100%;border:none;border-radius:0;"><span class="ph__label">campus aerial &middot; 500-acre campus, Kester Promenade</span></div></div>
+    <div class="scrub__frame"><div class="ph ph--dark" style="width:100%;height:100%;border:none;border-radius:0;"><span class="ph__label">Mariana H. Qubein Arboretum &middot; one of 31 gardens</span></div></div>
+    <div class="scrub__frame"><div class="ph ph--dark" style="width:100%;height:100%;border:none;border-radius:0;"><span class="ph__label">residence hall exterior &middot; #6 Best College Dorms</span></div></div>
+    <div class="scrub__frame"><div class="ph ph--dark" style="width:100%;height:100%;border:none;border-radius:0;"><span class="ph__label">students on the promenade at golden hour</span></div></div>
+    <div class="scrub__scrim"></div>
+    <div class="scrub__copy">
+      <p class="scrub__eyebrow">The Experience</p>
+      <h2 class="scrub__h">A campus built to make you want to be here.</h2>
+    </div>
+    <div class="scrub__progress" aria-hidden="true">
+      <span class="scrub__dot is-on"></span><span class="scrub__dot"></span><span class="scrub__dot"></span><span class="scrub__dot"></span>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <p class="leadcap reveal"><b>A 500-acre classroom.</b> Campus was designed to make you want to be here, from the Mariana H. Qubein Arboretum and its 31 gardens to the residence halls that earned the #6 Best College Dorms ranking. 95% of students live on campus, because there is a reason to.</p>
+  </div>
+</section>
+
+<!-- ===================== 6 · PREMIER LIFE SKILLS (STICKY MEDIA) ===================== -->
+<section class="section bg-soft" data-screen-label="Premier Life Skills">
+  <div class="container">
+    <div class="center measure mx-auto reveal" style="margin-bottom:clamp(36px,4vw,56px);">
+      <p class="eyebrow">Premier Life Skills</p>
+      <h2 class="h2" style="margin-top:0.4em;">The skills that outlast any job title.</h2>
+    </div>
+    <div class="stickymedia">
+      <div class="ph stickymedia__media reveal"><img src="uploads/Presidents Seminar on Life Skills.jpg" alt="President Nido Qubein teaching the President's First-Year Seminar on Life Skills" style="width:100%;height:100%;object-fit:cover;object-position:center;"></div>
+      <div class="stickymedia__list">
+        <div class="stickymedia__item reveal">
+          <p class="stickymedia__k">The Required Seminar</p>
+          <h3 class="stickymedia__h">Every freshman takes the President's First-Year Seminar on Life Skills.</h3>
+          <p class="stickymedia__p">Taught by President Nido Qubein himself &mdash; the only sitting university president in the country who teaches a required, credit-bearing course to the full entering class.</p>
+        </div>
+        <div class="stickymedia__item reveal">
+          <p class="stickymedia__k">What Gets Built</p>
+          <h3 class="stickymedia__h">Communicating, adapting, leading, and the judgment to direct it.</h3>
+          <p class="stickymedia__p">It is where the skills that outlast any job title get built &mdash; <b>the same capabilities CEOs and economists keep naming as the new hard skills.</b></p>
+        </div>
+        <div class="stickymedia__item reveal">
+          <p class="stickymedia__k">Why It Matters</p>
+          <h3 class="stickymedia__h">It is the reason 99% of HPU graduates are placed within 180 days.</h3>
+          <p class="stickymedia__p">Employed or in graduate school within 180 days of walking across the stage &mdash; 14 points above the national average.</p>
+        </div>
+      </div>
+    </div>
+    <p class="leadcap reveal" style="margin-top:clamp(48px,6vw,80px);"><b>Premier Life Skills.</b> Every freshman takes the President's First-Year Seminar on Life Skills, taught by President Nido Qubein himself. It is where the skills that outlast any job title get built, and it is the reason 99% of HPU graduates are employed or in graduate school within 180 days of walking across the stage.</p>
+  </div>
+</section>
+
+<!-- ===================== 7 · ACADEMICS (OPENER + EXPLORER) ===================== -->
+<section class="section" id="academics" data-screen-label="Academics">
+  <div class="container">
+    <div class="opener reveal">
+      <p class="eyebrow">Academics</p>
+      <h2 class="h2" style="margin-top:0.4em;">Take a closer look at every school.</h2>
+      <p class="lead" style="margin-top:22px;">Fourteen schools and a graduate college, up from three in 2005. Step through them one at a time.</p>
+    </div>
+    <div class="closer reveal">
+      <div class="closer__nav">
+        <button class="closer__arrow" id="closerPrev" type="button" aria-label="Previous school">&#9650;</button>
+        <button class="closer__arrow" id="closerNext" type="button" aria-label="Next school">&#9660;</button>
+      </div>
+      <div class="closer__list" id="closerList" role="tablist" aria-label="HPU schools"></div>
+      <div class="closer__media" id="closerMedia"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 8 · ACCESS TO INNOVATORS ===================== -->
+<section class="section bg-soft" data-screen-label="Access to Innovators">
+  <div class="container">
+    <div class="opener reveal">
+      <p class="eyebrow">Access to Innovators</p>
+      <h2 class="h2" style="margin-top:0.4em;">You will learn from the people who built what you use.</h2>
+    </div>
+    <p class="leadcap reveal" style="text-align:center;margin-top:28px;">Through the Access to Innovators Program, more than 30 global leaders mentor HPU students &mdash; on campus, in the room, in conversation. Not a guest lecture. <b>Access.</b></p>
+    <div class="carousel">
+      <div class="carousel__track" id="innoTrack" tabindex="0" aria-label="Innovators in Residence"></div>
+      <div class="carousel__foot">
+        <div class="carousel__nav">
+          <button class="carousel__btn" id="innoPrev" type="button" aria-label="Previous">&#8249;</button>
+          <button class="carousel__btn" id="innoNext" type="button" aria-label="Next">&#8250;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 9 · OUTCOMES PEAK (DRAMA BEAT 2) ===================== -->
+<section class="section bg-purple on-dark moment" id="outcomes" data-screen-label="Outcomes 99%">
+  <div class="container reveal">
+    <div class="moment__num">99<span class="moment__pct">%</span></div>
+    <p class="moment__label">of HPU graduates are employed or in graduate school within 180 days.</p>
+    <p class="moment__body">14 points above the national average.</p>
+  </div>
+</section>
+
+<!-- ===================== 10 · OUTCOMES BY FIELD (PILL GALLERY) ===================== -->
+<section class="section" data-screen-label="Outcomes by Field">
+  <div class="container">
+    <div class="opener reveal">
+      <p class="eyebrow">Outcomes by Field</p>
+      <h2 class="h2" style="margin-top:0.4em;">The 99% holds up field by field.<span class="flag-inline">data gate &middot; figures placeholder</span></h2>
+    </div>
+    <div class="fieldgallery reveal">
+      <div class="fieldgallery__media" id="fieldMedia">
+        <div class="fieldchip">
+          <span class="fieldchip__fig" id="fieldChipFig"></span>
+          <span class="fieldchip__lab" id="fieldChipLab"></span>
+        </div>
+      </div>
+      <div class="pills" id="fieldPills" role="tablist" aria-label="Outcomes by field"></div>
+      <div class="fieldcaption">
+        <p class="fieldcaption__p" id="fieldP"></p>
+        <p class="fieldcaption__where" id="fieldWhere"></p>
+        <span class="flag">data gate &middot; not final until field-level figures are locked</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 11 · GRADUATE STORIES ===================== -->
+<section class="section" data-screen-label="Graduate Stories">
+  <div class="container">
+    <div class="opener reveal">
+      <p class="eyebrow">Graduate Stories</p>
+      <h2 class="h2" style="margin-top:0.4em;">Who the 99% actually is.<span class="flag-inline">data gate &middot; profiles placeholder</span></h2>
+    </div>
+    <div class="carousel">
+      <div class="carousel__track" id="gradTrack" tabindex="0" aria-label="Graduate stories"></div>
+      <div class="carousel__foot">
+        <div class="carousel__nav">
+          <button class="carousel__btn" id="gradPrev" type="button" aria-label="Previous">&#8249;</button>
+          <button class="carousel__btn" id="gradNext" type="button" aria-label="Next">&#8250;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 12 · CAMPUS LIFE (BENTO) ===================== -->
+<section class="section bg-soft" id="life" data-screen-label="Campus Life">
+  <div class="container">
+    <div class="opener reveal">
+      <p class="eyebrow">Campus Life</p>
+      <h2 class="h2" style="margin-top:0.4em;">Life here does not slow down.</h2>
+    </div>
+    <div class="bento" id="bento">
+      <div class="tile tile--photo tile--xl" data-expandable aria-label="Division I Athletics, tap to expand">
+        <div class="ph ph--dark tile__bg"><span class="ph__label">athletics &middot; Qubein Center, both basketball teams</span></div>
+        <p class="tile__k">Division I Athletics</p>
+        <h3 class="tile__h">17 teams, 1 family.</h3>
+        <p class="tile__p">Both basketball teams reached the 2026 NCAA Tournament, playing in the Qubein Center.</p>
+        <span class="tile__expand">Schedule, the run &amp; a clip</span>
+        <div class="tile__more">The 2026 tournament run, the home schedule in the 5,000-seat arena, and game-day highlights &mdash; "Get loud, get proud, get hyped." Go Panthers!</div>
+      </div>
+      <div class="tile tile--tint tile--tall">
+        <p class="tile__k">Residence Life</p>
+        <h3 class="tile__h">95% live on campus.</h3>
+        <p class="tile__p">The tiny homes and the #6 Best College Dorms ranking.</p>
+      </div>
+      <div class="tile tile--white">
+        <p class="tile__k">Dining</p>
+        <h3 class="tile__h">20+ options.</h3>
+        <p class="tile__p">A 99% satisfaction rate. #18 Best Campus Food.</p>
+      </div>
+      <div class="tile tile--purple">
+        <p class="tile__k">Clubs &amp; Organizations</p>
+        <h3 class="tile__h">300+.</h3>
+      </div>
+      <div class="tile tile--gray">
+        <p class="tile__k">Fraternity &amp; Sorority Life</p>
+        <h3 class="tile__h">17 chapters.</h3>
+        <p class="tile__p">1,500+ members.</p>
+      </div>
+      <div class="tile tile--white">
+        <p class="tile__k">Outdoor Discovery</p>
+        <h3 class="tile__h">HPU Rec.</h3>
+        <p class="tile__p">The Estate, the ropes course, and the trails.</p>
+      </div>
+      <div class="tile tile--photo tile--wide" data-expandable aria-label="Campus Concierge, tap to expand">
+        <div class="ph ph--dark tile__bg"><span class="ph__label">existing concierge video &middot; Campus Concierge</span></div>
+        <p class="tile__k">Campus Concierge</p>
+        <h3 class="tile__h">The service that runs the place.</h3>
+        <span class="tile__expand">What concierge covers</span>
+        <div class="tile__more">From package pick-up to dry cleaning to a ride from the airport &mdash; the hospitality layer that lets students focus on the experience.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 13 · THE PROOF ===================== -->
+<section class="section" data-screen-label="The Proof">
+  <div class="container">
+    <div class="opener reveal">
+      <p class="eyebrow">The Proof</p>
+      <h2 class="h2" style="margin-top:0.4em;">The recognition is nice. The reason behind it is the point.</h2>
+    </div>
+    <div class="logosrow">
+      <div class="logocard">
+        <div class="logocard__mark">FORTUNE</div>
+        <p class="logocard__q">Coverage of the life-skills thesis &mdash; why the capabilities employers want most are the ones HPU built its curriculum around.</p>
+        <p class="logocard__src">Fortune</p>
+      </div>
+      <div class="logocard">
+        <div class="logocard__mark">Princeton Review</div>
+        <p class="logocard__q">#1 Best-Run College in the Nation, naming the operational discipline behind the experience.</p>
+        <p class="logocard__src">Princeton Review, Best 390 Colleges</p>
+      </div>
+      <div class="logocard">
+        <div class="logocard__mark">LinkedIn</div>
+        <p class="logocard__q">National Top 10 for the strongest alumni network &mdash; the proof that access compounds after graduation.</p>
+        <p class="logocard__src">LinkedIn</p>
+      </div>
+    </div>
+    <div class="ph ph--dark proofvideo reveal" style="margin-top:clamp(28px,3vw,40px);"><span class="ph__label">named graduate video testimonial &middot; outside voice leads</span></div>
+  </div>
+</section>
+
+<!-- ===================== 14 · THE VALUE (SPLIT, PARENT AUDIENCE) ===================== -->
+<section class="section bg-soft" data-screen-label="The Value">
+  <div class="container">
+    <div class="split">
+      <div class="split__text reveal">
+        <p class="eyebrow">For Families</p>
+        <h2 class="h2" style="margin-top:0.4em;">An education that returns more than it costs.</h2>
+        <p class="lead split__body" style="margin-top:22px;">A High Point University education is a lifelong return on investment. The total cost of attendance is $80,687, and <b>the average aid and scholarship package brings the average direct investment to $48,429</b>, roughly $11,000 less than peer private universities. HPU distributes more than $75 million in scholarship support every year. We will help you build a plan for your student.</p>
+        <div class="statcallout">
+          <div class="statcallout__fig">$48,429</div>
+          <p class="statcallout__lab">average direct investment after aid</p>
+        </div>
+        <div style="margin-top:26px;"><a href="#visit" class="link">See Financial Planning</a></div>
+      </div>
+      <div class="ph split__media reveal"><img src="uploads/Career Outcomes.jpg" alt="HPU Young Alumni Career and Graduate School Outcomes" style="width:100%;height:100%;object-fit:cover;object-position:center;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 15 · THE FORK ===================== -->
+<section class="section" data-screen-label="The Fork">
+  <div class="container">
+    <div class="center measure mx-auto reveal" style="margin-bottom:8px;">
+      <p class="eyebrow">Where to next</p>
+      <h2 class="h2" style="margin-top:0.4em;">Two ways in.</h2>
+    </div>
+    <div class="fork">
+      <div class="forkcol reveal">
+        <p class="forkcol__k">Students</p>
+        <h3 class="forkcol__h">Find your program.</h3>
+        <ul class="forkcol__list">
+          <li>Explore all 80+ programs across fourteen schools.</li>
+          <li>Meet your admissions counselor &mdash; an advocate, not a process.</li>
+          <li>Plan your visit and see the campus make its own case.</li>
+        </ul>
+        <div class="forkcol__cta"><a href="#visit" class="btn btn--primary">Find Your Program</a></div>
+      </div>
+      <div class="forkcol forkcol--alt reveal">
+        <p class="forkcol__k">Parents</p>
+        <h3 class="forkcol__h">See the value.</h3>
+        <ul class="forkcol__list">
+          <li>Understand the investment and the aid that shapes it.</li>
+          <li>Explore financial planning built around your student.</li>
+          <li>Read the outcomes &mdash; 99%, first in North Carolina.</li>
+        </ul>
+        <div class="forkcol__cta"><a href="#visit" class="btn btn--ghost">Explore Financial Planning</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 16 · THE DEPTH (ACCORDION + TABS) ===================== -->
+<section class="section bg-soft" data-screen-label="The Depth">
+  <div class="container">
+    <div class="center measure mx-auto reveal">
+      <p class="eyebrow">Go Deeper</p>
+      <h2 class="h2" style="margin-top:0.4em;">Everything else, when you want it.</h2>
+    </div>
+    <div class="depth faq reveal">
+      <details class="faq__item">
+        <summary>Programs by school</summary>
+        <div class="faq__a">
+          <div class="tabs" id="progTabs" role="tablist" aria-label="Programs by school">
+            <button class="tab" type="button" role="tab" data-panel="business" aria-selected="true">Business</button>
+            <button class="tab" type="button" role="tab" data-panel="comm" aria-selected="false">Communication</button>
+            <button class="tab" type="button" role="tab" data-panel="health" aria-selected="false">Health Sciences</button>
+            <button class="tab" type="button" role="tab" data-panel="eng" aria-selected="false">Engineering</button>
+          </div>
+          <div data-progpanel="business" class="tabpanel is-on">
+            <div class="proglist"><div>Finance</div><div>Marketing</div><div>Accounting</div><div>Management</div><div>Economics</div><div>International Business</div></div>
+          </div>
+          <div data-progpanel="comm" class="tabpanel">
+            <div class="proglist"><div>Strategic Communication</div><div>Journalism</div><div>Media Production</div><div>Sport Media</div><div>Game &amp; Interactive Media Design</div><div>Popular Culture</div></div>
+          </div>
+          <div data-progpanel="health" class="tabpanel">
+            <div class="proglist"><div>Exercise Science</div><div>Athletic Training</div><div>Physician Assistant Studies</div><div>Public Health</div><div>Neuroscience</div><div>Pre-Physical Therapy</div></div>
+          </div>
+          <div data-progpanel="eng" class="tabpanel">
+            <div class="proglist"><div>Computer Engineering</div><div>Electrical Engineering</div><div>Mechanical Engineering</div><div>Computer Science</div><div>Cybersecurity</div><div>Data Science</div></div>
+          </div>
+        </div>
+      </details>
+      <details class="faq__item">
+        <summary>Admissions requirements and deadlines</summary>
+        <div class="faq__a">HPU reviews applications holistically. Early Decision and Regular Decision pathways are available, with priority deadlines each cycle. Your counselor will walk you through what to submit and when. <a href="#visit" class="link">Find your counselor</a>.</div>
+      </details>
+      <details class="faq__item">
+        <summary>Tuition and financial planning</summary>
+        <div class="faq__a">Total cost of attendance is $80,687, with an average direct investment of $48,429 after aid &mdash; roughly $11,000 less than peer private universities. HPU distributes more than $75 million in scholarship support annually. <a href="#visit" class="link">See financial planning</a>.</div>
+      </details>
+      <details class="faq__item">
+        <summary>Frequently asked questions</summary>
+        <div class="faq__a">From majors and microcredentials to residence life and dining, the admissions team keeps a running list of what families ask most. <a href="#visit" class="link">Browse the full FAQ</a>.</div>
+      </details>
+      <details class="faq__item">
+        <summary>How to apply</summary>
+        <div class="faq__a">Begin your application, request information, or schedule a visit &mdash; whichever fits where you are. FAFSA 002933 &middot; SAT 5293 &middot; ACT 3108. <a href="#visit" class="link">Start your application</a>.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 17 · FINAL CTA (DRAMA BEAT 3) ===================== -->
+<section class="section bg-purple on-dark" id="visit" data-screen-label="Final CTA">
+  <div class="container ctastage reveal">
+    <p class="eyebrow">Visit</p>
+    <h2 class="statement__h" style="margin-top:0.3em;">Come see it for yourself.</h2>
+    <p class="statement__sub">The campus makes the case better than any page can. Schedule a visit.</p>
+    <div class="btn-row">
+      <a href="#" class="btn btn--primary">Schedule Your Visit</a>
+      <a href="#" class="btn btn--ghost">Request Info</a>
+      <a href="#" class="btn btn--ghost">Apply</a>
+    </div>
+    <p class="ctastage__foot">FAFSA 002933 &middot; SAT 5293 &middot; ACT 3108</p>
+  </div>
+</section>
+
+<!-- ===================== HPU SITE FOOTER (API) =====================
+     Replaced at runtime by the HPU Header/Footer API. The placeholder
+     content below shows before the API responds (or if it fails). -->
+<div class="hpu-api-template-part" data-part="footer">
+<footer class="footer">
+  <div class="container footer__inner">
+    <div>
+      <div class="footer__brand">High Point University</div>
+      <div class="footer__meta" style="margin-top:6px;">The Premier Life Skills University &middot; One University Parkway, High Point, NC 27268</div>
+    </div>
+    <div class="footer__meta" style="text-align:right;">Career outcomes verified to NACE First-Destination Survey standards &middot; Class of 2025</div>
+  </div>
+</footer>
+</div>
+
+<!-- HPU Header/Footer API — replaces the .hpu-api-template-part markers
+     with the live site header/footer. -->
+<script src="https://www.highpoint.edu/wp-content/themes/hpu/src/assets/js/template-api.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="hpu-home.js"></script>
+
+</body>
+</html>

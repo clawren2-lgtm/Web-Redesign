@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Life at HPU — What Is Student Life Like at High Point University?</title>
+<meta name="description" content="High Point University is a residential campus where most students live, eat, attend concerts, and go to the movies without leaving the property. 95% of students live on campus. A guide to what is actually here.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="life-at-hpu.css">
+
+<!-- FAQ schema. Every answer below is WORD-FOR-WORD identical to the
+     visible FAQ copy in Section 6. Matching signals trust. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is there to do for fun at High Point University?",
+      "acceptedAnswer": { "@type": "Answer", "text": "HPU students have access to a movie theater, arcade, six outdoor heated pools, a 5,000-seat arena that hosts national touring artists, and free weekly events through the Campus Activities Team, all on campus." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are on-campus events free for students?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Most Campus Activities Team events are free, including weekly food trucks. Concerts at the Qubein Arena, movies at the Extraordinaire Cinema, and recreational facilities are included in enrollment." }
+    },
+    {
+      "@type": "Question",
+      "name": "What concerts have been held at HPU?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Artists who have performed at the Qubein Arena for students include J. Cole, Maren Morris, Jason Derulo, T-Pain, and Flo Rida." }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the dorms like at HPU?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Princeton Review ranks HPU's residence halls second in the nation. About 95% of students live on campus." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does HPU have good food?",
+      "acceptedAnswer": { "@type": "Answer", "text": "HPU has more than 20 on-campus dining options, including three fine-dining restaurants where students can use a meal swipe." }
+    }
+  ]
+}
+</script>
+
+<script>
+  /* AEO-safe motion gate (same pattern as the rest of the site).
+     Hides about-to-animate elements before first paint, but ONLY when
+     JS runs with reduced-motion off. The page script reveals them; a
+     3s failsafe (and the no-JS / reduced-motion paths) keep all text
+     visible — every fact stays crawlable. */
+  (function () {
+    try {
+      var ok = window.matchMedia && window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
+      if (!ok) { return; }
+      var d = document.documentElement;
+      d.classList.add("js-anim");
+      setTimeout(function () {
+        if (!window.__motionReady) { d.classList.remove("js-anim"); }
+      }, 3000);
+    } catch (e) {}
+  })();
+</script>
+<style>
+  /* HPU API header overlays the hero with no layout height, so the hero
+     sits at the very top of the page (matches the Visit page). */
+  #hpuHeaderMount {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+  /* The injected HPU site stylesheet redefines `.container` and loads after
+     ours, knocking page content off-center. Re-assert OUR centered container
+     for page content (higher specificity), while letting the injected
+     header/footer keep the HPU site's own full-width container. */
+  body .container { max-width: var(--maxw-wide); margin-inline: auto; }
+  body .container--text { max-width: var(--maxw-text); }
+  #hpuHeaderMount .container,
+  .hpu-api-template-part .container { max-width: 100%; margin-inline: 0; }
+  /* Match Visit: HPU header CTA buttons in Poppins + 5px radius. */
+  #hpuHeaderMount .cta-button-link,
+  #hpuHeaderMount a.cta-button-link {
+    font-family: "Poppins", sans-serif !important;
+    font-weight: 600 !important;
+    border-radius: 5px !important;
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== HPU SITE HEADER (API) =====================
+     The API replaces the inner .hpu-api-template-part marker with the live
+     site header. The #hpuHeaderMount wrapper SURVIVES the swap and is
+     absolutely positioned so the header overlays the hero (zero layout
+     height) instead of pushing the page content down. -->
+<div id="hpuHeaderMount">
+  <div class="hpu-api-template-part" data-part="header">
+    <noscript>High Point University</noscript>
+  </div>
+</div>
+
+
+<!-- ===================== SECTION 1 · HERO =====================
+     One strong full-width campus photograph. The H1 is the largest
+     element on the page; the eyebrow sits above it; the answer copy
+     sits below, over a darkened version of the image. -->
+<header class="la-hero" id="top" data-screen-label="Hero">
+  <div class="la-hero__media">
+    <img src="uploads/High Point University at sunset copy (1).jpg" alt="Aerial view of High Point University at sunset, with the Roberts Hall clocktower lit against a colorful sky.">
+  </div>
+  <div class="la-hero__scrim" aria-hidden="true"></div>
+
+  <div class="la-hero__inner">
+    <p class="la-hero__kicker">Life at HPU</p>
+    <h1 class="la-hero__h1">
+      <span class="la-hero__lineMask"><span class="la-hero__line">What Is Student Life Like</span></span>
+      <span class="la-hero__lineMask"><span class="la-hero__line">at High Point University?</span></span>
+    </h1>
+    <div class="la-hero__prose">
+      <p>High Point University is a residential campus where most students live, eat, attend concerts, and go to the movies without leaving the property. This is a guide to what is actually here.</p>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== SECTION 2 · THE SHORT ANSWER (AEO anchor) =====================
+     The paragraph AI engines pull directly. Kept at the top, semantically
+     clean; the first sentence is the answer. Paragraph left, stat block right. -->
+<section class="la-answer section" id="answer" data-screen-label="The Short Answer">
+  <div class="container">
+    <div class="la-answer__grid">
+      <div class="la-answer__col">
+        <p class="eyebrow">The Short Answer</p>
+        <h2 class="la-answer__h" style="margin-top:0.4em;">What Does Student Life at HPU Look Like?</h2>
+        <p class="la-answer__p">HPU has put more than <b>$1 billion</b> into the campus since 2005, all of it for the students who live and learn here. State-of-the-art academic facilities, fine-dining restaurants on the meal plan, an arena that books national touring acts, and free events nearly every week. More than 6,500 students are enrolled, and <b>95%</b> of them live on campus.</p>
+      </div>
+      <div class="la-stats" aria-label="By the numbers">
+        <div class="la-stat">
+          <span class="la-stat__val" data-final="95%">95%</span>
+          <span class="la-stat__lab">Students living on campus</span>
+        </div>
+        <div class="la-stat">
+          <span class="la-stat__val" data-final="#2">#2</span>
+          <span class="la-stat__lab">Princeton Review, Best Dorms</span>
+        </div>
+        <div class="la-stat">
+          <span class="la-stat__val" data-final="$1B+">$1B+</span>
+          <span class="la-stat__lab">Campus investment since 2005</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SECTION 3 · CAMPUS-LIFE CARDS =====================
+     Tall full-bleed image cards (modeled on the site's .inres card): photo
+     fills the card, a scrim carries the category eyebrow + headline at the top,
+     and a "+" affordance sits bottom-right. Dining and Game Day use a solid
+     HPU-purple fill until their photos are sourced (also the graceful fallback
+     if any photo fails). The navigation layer as an experience, not a directory. -->
+<section class="la-cards section" id="spokes" data-screen-label="Campus Life">
+  <div class="container">
+    <div class="la-cards__head">
+      <p class="eyebrow">Welcome Home</p>
+      <h2 class="la-cards__h">There&rsquo;s Always Something Going On</h2>
+      <p class="la-cards__sub">From the food trucks on Wednesday to the ice rink in December, here&rsquo;s where your days fill up.</p>
+    </div>
+    <div class="la-cardgrid">
+
+      <a class="la-card" href="/life-at-hpu/dining/" data-screen-label="Dining">
+        <img class="la-card__bg" src="https://www.highpoint.edu/media/home/190913-Prime-Interviews-0051.jpg" alt="Students dining inside the 1924 PRIME restaurant at High Point University." loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.la-card').classList.add('la-card--fill');this.remove();">
+        <div class="la-card__text">
+          <p class="la-card__eyebrow">Dining</p>
+          <h3 class="la-card__title">Three chef-run restaurants, all on your meal plan.</h3>
+        </div>
+        <span class="la-card__plus" aria-hidden="true"><svg class="la-card__arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12h8"/><path d="M13 5.5 19.5 12 13 18.5"/></svg></span>
+      </a>
+
+      <a class="la-card" href="/life-at-hpu/housing/" data-screen-label="Where You'll Live">
+        <img class="la-card__bg" src="uploads/Panther Commons Lobby V1.jpg" alt="The Panther Commons lobby at High Point University." loading="lazy" referrerpolicy="no-referrer" style="top:0;bottom:auto;height:118%;object-position:center top;" onerror="this.closest('.la-card').classList.add('la-card--fill');this.remove();">
+        <div class="la-card__text">
+          <p class="la-card__eyebrow">Where You&rsquo;ll Live</p>
+          <h3 class="la-card__title">Some of the top-rated dorms in the country.</h3>
+        </div>
+        <span class="la-card__plus" aria-hidden="true"><svg class="la-card__arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12h8"/><path d="M13 5.5 19.5 12 13 18.5"/></svg></span>
+      </a>
+
+      <a class="la-card" href="/life-at-hpu/recreation/" data-screen-label="Pools &amp; Recreation">
+        <img class="la-card__bg" src="https://www.highpoint.edu/residencelife/files/2021/05/Greek-Village-scaled.jpg" alt="Aerial view of an outdoor pool and student residences at High Point University." loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.la-card').classList.add('la-card--fill');this.remove();">
+        <div class="la-card__text">
+          <p class="la-card__eyebrow">Pools &amp; Recreation</p>
+          <h3 class="la-card__title">Six heated pools and a gym that stays open till midnight.</h3>
+        </div>
+        <span class="la-card__plus" aria-hidden="true"><svg class="la-card__arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12h8"/><path d="M13 5.5 19.5 12 13 18.5"/></svg></span>
+      </a>
+
+      <a class="la-card" href="/life-at-hpu/campus-attractions/" data-screen-label="Around Campus">
+        <img class="la-card__bg" src="campus-arcade.jpg" alt="An air hockey table glowing pink and orange in the High Point University arcade." loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.la-card').classList.add('la-card--fill');this.remove();">
+        <div class="la-card__text">
+          <p class="la-card__eyebrow">Around Campus</p>
+          <h3 class="la-card__title">A movie theater, a planetarium, and an arcade.</h3>
+        </div>
+        <span class="la-card__plus" aria-hidden="true"><svg class="la-card__arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12h8"/><path d="M13 5.5 19.5 12 13 18.5"/></svg></span>
+      </a>
+
+      <a class="la-card" href="/life-at-hpu/events/" data-screen-label="Events">
+        <img class="la-card__bg" src="campus-fireworks.jpg" alt="Fireworks bursting over the stadium at night with a packed crowd of students at High Point University." loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.la-card').classList.add('la-card--fill');this.remove();">
+        <div class="la-card__text">
+          <p class="la-card__eyebrow">Events</p>
+          <h3 class="la-card__title">Something free most weeks, from movie nights to the December ice rink.</h3>
+        </div>
+        <span class="la-card__plus" aria-hidden="true"><svg class="la-card__arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12h8"/><path d="M13 5.5 19.5 12 13 18.5"/></svg></span>
+      </a>
+
+      <a class="la-card" href="/life-at-hpu/traditions/" data-screen-label="Traditions">
+        <img class="la-card__bg" src="https://www.highpoint.edu/community/files/2021/12/High-Point-University-Christmas-Drive-Through-Front-Gate-scaled.jpg" alt="The High Point University front gate lit up with holiday lights." loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.la-card').classList.add('la-card--fill');this.remove();">
+        <div class="la-card__text">
+          <p class="la-card__eyebrow">Traditions</p>
+          <h3 class="la-card__title">Campus traditions that turn a school year into the best four of your life.</h3>
+        </div>
+        <span class="la-card__plus" aria-hidden="true"><svg class="la-card__arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12h8"/><path d="M13 5.5 19.5 12 13 18.5"/></svg></span>
+      </a>
+
+      <a class="la-card" href="/life-at-hpu/sports/" data-screen-label="Game Day">
+        <img class="la-card__bg" src="https://www.highpoint.edu/media/home/students-go-crazy-in-the-stands-panther-pride-hpu-espnu-basketball-game.jpg" alt="High Point University students cheering in the stands at an ESPNU basketball game." loading="lazy" referrerpolicy="no-referrer" style="object-position:center 72%;" onerror="this.closest('.la-card').classList.add('la-card--fill');this.remove();">
+        <div class="la-card__text">
+          <p class="la-card__eyebrow">Game Day</p>
+          <h3 class="la-card__title">17 Division I teams and a student section that brings it every game.</h3>
+        </div>
+        <span class="la-card__plus" aria-hidden="true"><svg class="la-card__arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12h8"/><path d="M13 5.5 19.5 12 13 18.5"/></svg></span>
+      </a>
+
+      <a class="la-card" href="/life-at-hpu/venture-trips/" data-screen-label="Venture Trips">
+        <img class="la-card__bg" src="https://www.highpoint.edu/recreationservices/files/2024/09/adventure-trips-with-hpu-outdoor-discovery-nc.jpg" alt="Students on an outdoor adventure trip with HPU Outdoor Discovery." loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.la-card').classList.add('la-card--fill');this.remove();">
+        <div class="la-card__text">
+          <p class="la-card__eyebrow">Venture Trips</p>
+          <h3 class="la-card__title">Whitewater, climbing, and weekend trips, planned for you and free to join.</h3>
+        </div>
+        <span class="la-card__plus" aria-hidden="true"><svg class="la-card__arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12h8"/><path d="M13 5.5 19.5 12 13 18.5"/></svg></span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SECTION 4 · SIGNATURE MOMENTS =====================
+     Four named, specific things. The emotional proof layer. Desktop: a
+     scroll-linked horizontal strip. Mobile: a vertical stack that fades up. -->
+<section class="la-sig" id="signature" data-screen-label="Signature Moments">
+  <div class="la-sig__intro">
+    <p class="la-sig__eyebrow">Signature Moments</p>
+    <h2 class="la-sig__h">A Few Things Worth Knowing About</h2>
+  </div>
+  <div class="la-sig__viewport">
+    <div class="la-sig__track" id="laSigTrack">
+
+      <article class="la-sigcard" data-screen-label="Food Trucks">
+        <div class="la-sigcard__media">
+          <span class="la-sigcard__idx">1</span>
+          <img src="https://www.highpoint.edu/media/home/Food-Truck-Combo-3.jpg" alt="Students holding bowls at a food truck parked on the High Point University campus." loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="ph ph--dark" style="display:none"><span class="ph__label">Food trucks &middot; Kester Promenade</span></div>
+        </div>
+        <h3 class="la-sigcard__name">Free Food Trucks, Every Week</h3>
+        <p class="la-sigcard__cap">A rotating lineup parks on campus, <b>included for students</b>.</p>
+      </article>
+
+      <article class="la-sigcard" data-screen-label="Concerts">
+        <div class="la-sigcard__media">
+          <span class="la-sigcard__idx">2</span>
+          <img src="https://www.highpoint.edu/studentactivities/files/2023/08/241018-Jason-Derulo-0583.jpg" alt="The crowd inside the Nido and Mariana Qubein Arena during a concert at High Point University." loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="ph ph--dark" style="display:none"><span class="ph__label">Concert &middot; Qubein Arena</span></div>
+        </div>
+        <h3 class="la-sigcard__name">Concerts in the Qubein Arena</h3>
+        <p class="la-sigcard__cap">J. Cole, Maren Morris, T-Pain, and Jason Derulo have <b>performed here</b>.</p>
+      </article>
+
+      <article class="la-sigcard" data-screen-label="Winter Wonderland">
+        <div class="la-sigcard__media">
+          <span class="la-sigcard__idx">3</span>
+          <img src="https://www.highpoint.edu/media/home/211101-Ice-Skating-025.jpg" alt="Students skating under string lights at the Winter Wonderland ice rink below Millis at High Point University." loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="ph ph--dark" style="display:none"><span class="ph__label">Winter Wonderland &middot; ice rink below Millis</span></div>
+        </div>
+        <h3 class="la-sigcard__name">The Winter Wonderland</h3>
+        <p class="la-sigcard__cap">An outdoor ice rink below Millis, a walk-in snow globe, and a <b>hot cocoa bar</b> each December.</p>
+      </article>
+
+      <article class="la-sigcard" data-screen-label="Campus Concierge">
+        <div class="la-sigcard__media">
+          <span class="la-sigcard__idx">4</span>
+          <img src="https://www.highpoint.edu/concierge/files/160817-Concierge-0132-scaled.jpg" alt="A student being helped at the Campus Concierge desk, with world clocks on the wall, at High Point University." loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="ph ph--dark" style="display:none"><span class="ph__label">Campus Concierge desk</span></div>
+        </div>
+        <h3 class="la-sigcard__name">Campus Concierge</h3>
+        <p class="la-sigcard__cap">HPU runs the <b>first and longest-running</b> campus concierge in the country.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SECTION 5 · FAQ =====================
+     Visible copy is WORD-FOR-WORD identical to the JSON-LD in <head>. Answers
+     are always in the DOM (height animated, never display:none), so they stay
+     crawlable whether the row is open or closed. First question open by default. -->
+<section class="la-faqsec section" id="faq" data-screen-label="FAQ">
+  <div class="container">
+    <div class="center measure mx-auto">
+      <p class="eyebrow">Go Deeper</p>
+      <h2 class="h2" style="margin-top:0.4em;">Common Questions About Life at HPU</h2>
+    </div>
+    <div class="la-faq" id="laFaq">
+
+      <div class="la-faq__item">
+        <button class="la-faq__q" type="button" aria-expanded="false">What is there to do for fun at High Point University?</button>
+        <div class="la-faq__panel"><div class="la-faq__a">HPU students have access to a movie theater, arcade, six outdoor heated pools, a 5,000-seat arena that hosts national touring artists, and free weekly events through the Campus Activities Team, all on campus.</div></div>
+      </div>
+
+      <div class="la-faq__item">
+        <button class="la-faq__q" type="button" aria-expanded="false">Are on-campus events free for students?</button>
+        <div class="la-faq__panel"><div class="la-faq__a">Most Campus Activities Team events are free, including weekly food trucks. Concerts at the Qubein Arena, movies at the Extraordinaire Cinema, and recreational facilities are included in enrollment.</div></div>
+      </div>
+
+      <div class="la-faq__item">
+        <button class="la-faq__q" type="button" aria-expanded="false">What concerts have been held at HPU?</button>
+        <div class="la-faq__panel"><div class="la-faq__a">Artists who have performed at the Qubein Arena for students include J. Cole, Maren Morris, Jason Derulo, T-Pain, and Flo Rida.</div></div>
+      </div>
+
+      <div class="la-faq__item">
+        <button class="la-faq__q" type="button" aria-expanded="false">What are the dorms like at HPU?</button>
+        <div class="la-faq__panel"><div class="la-faq__a">Princeton Review ranks HPU&rsquo;s residence halls second in the nation. About 95% of students live on campus.</div></div>
+      </div>
+
+      <div class="la-faq__item">
+        <button class="la-faq__q" type="button" aria-expanded="false">Does HPU have good food?</button>
+        <div class="la-faq__panel"><div class="la-faq__a">HPU has more than 20 on-campus dining options, including three fine-dining restaurants where students can use a meal swipe.</div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SECTION 6 · CTA =====================
+     One action. This audience is close to a decision. A breath after the
+     density above: no image, one button, one text link. -->
+<section class="la-cta section bg-pdeep on-dark" id="visit" data-screen-label="Come See It">
+  <div class="container">
+    <div class="la-cta__inner">
+      <p class="eyebrow">Come See It</p>
+      <h2 class="la-cta__h">Come See It for Yourself</h2>
+      <p class="la-cta__sub">The best way to understand the campus is to walk it.</p>
+      <div class="la-cta__actions">
+        <a class="btn btn--primary btn--lg" href="/visit/">Schedule a Visit</a>
+        <a class="la-cta__apply" href="/apply/">Ready to apply? Start your application</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== HPU SITE FOOTER (API) =====================
+     Replaced at runtime by the HPU Header/Footer API. The placeholder
+     content below shows before the API responds (or if it fails). -->
+<div class="hpu-api-template-part" data-part="footer">
+<footer class="footer">
+  <div class="container footer__inner">
+    <div>
+      <div class="footer__brand">High Point University</div>
+      <div class="footer__meta" style="margin-top:6px;">Life at HPU &middot; One University Parkway, High Point, NC 27268</div>
+    </div>
+    <div class="footer__meta" style="text-align:right;">95% of students live on campus &middot; 6,500+ students &middot; Go Panthers.</div>
+  </div>
+</footer>
+</div>
+
+<!-- HPU Header/Footer API — replaces the .hpu-api-template-part markers
+     with the live site header/footer. -->
+<script src="https://www.highpoint.edu/wp-content/themes/hpu/src/assets/js/template-api.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="life-at-hpu.js"></script>
+
+</body>
+</html>
